@@ -10,7 +10,6 @@ import '../styles/Cart.css'
 import { GooglePay } from './common/GooglePay'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-//blalblbabla
 toast.configure();
 
 export const Cart = ({ user }) => {
