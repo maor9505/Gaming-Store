@@ -1,0 +1,33 @@
+.hero-section{
+  background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)),url("../images/feature-img.jpg");
+  height: 40vh;
+}
+
+.photo{
+  width: 80px;
+  height: 80px;
+}
+
+.hero-text{
+  padding-top: 5%;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: 'Montserrat' ,sans-serif;
+  text-shadow: 0px 8px 10px #000;
+  text-align: center;
+}
+
+.hero-header-p1{
+  letter-spacing: -2px;
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+.hero-header-p2{
+  letter-spacing: -2px;
+  font-size: 3rem;
+  display: inline-block;
+  font-weight: 300;
+}
