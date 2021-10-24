@@ -3,7 +3,7 @@ import { Navbar } from "./Components/common/Navbar";
 
 import { ProductsContextProvider } from './Global/ProductsContext'
 import { Home } from './Components/Home'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import {Switch, Route, Redirect } from 'react-router-dom'
 import { Signup } from './Components/auth/Signup'
 import { Login } from './Components/auth/Login';
 import { NotFound } from './Components/NotFound';
@@ -16,7 +16,6 @@ import { AddCatagory } from "./Components/admin/AddCatagory";
 import { Products } from './Components/Products';
 import { ViewsProducts } from './Components/ViewsProducts';
 import { Footer } from './Components/Footer';
-import { LoadingPage } from './Components/loading-page/LoadingPage';
 import { useHistory } from 'react-router-dom';
 import { UserProfile } from './Components/UserProfile';
 import { isEmpty } from 'lodash';
@@ -25,7 +24,6 @@ export const App = () => {
 
   const [user, setUser] = useState();
   //   // { uid: "", email: "", displayName: "", type: "", phone: "",},
-  const [spinner, setSpinner] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -51,21 +49,15 @@ export const App = () => {
         setUser(null)
       }
     })
-    setTimeout(() => { setSpinner(false) }, 4000);
     history.push('/');
-    setTimeout(() => { setSpinner(false) }, 4000);
-
   }, []);
 
 
   return (
-
     <React.Fragment>
       <ProductsContextProvider>
         <CartContextProvider>
-          {spinner && <LoadingPage />}
-          {!spinner && <div><Navbar user={user} />
-
+          <Navbar user={user} />
             <Switch>
               {/* home */}
               <Route exact path='/' component={() => <Home user={user} />} />
@@ -92,8 +84,7 @@ export const App = () => {
               <Redirect from="/" exact to="/" />
               <Redirect to="/not-found" />
             </Switch>
-            <Footer />
-          </div>}
+          <Footer />
         </CartContextProvider>
       </ProductsContextProvider>
     </React.Fragment>

@@ -66,7 +66,7 @@ console.log(user.providerId)
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                    <div class="card h-75 w-100" >
+                    <div class="card h-100 w-100" >
                         <div class="card-body">
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
