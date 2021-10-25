@@ -5,7 +5,7 @@ import { Home } from './Components/Home'
 import {Switch, Route, Redirect } from 'react-router-dom'
 import { Signup } from './Components/auth/Signup'
 import { Login } from './Components/auth/Login';
-import { NotFound } from './Components/NotFound';
+import { NotFound } from './Components/common/NotFound';
 import { Cart } from './Components/Cart';
 import { CartContextProvider } from './Global/CartContext'
 import { AddProducts } from './Components/admin/AddProducts';

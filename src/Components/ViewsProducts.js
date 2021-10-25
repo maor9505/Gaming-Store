@@ -4,8 +4,8 @@ import { ProductsContext } from '../Global/ProductsContext'
 import { useHistory } from 'react-router-dom';
 import '../styles/Product.css'
 import { db } from '../Config/Config'
-import { Pagination } from './Pagiantion'
-import { paginate } from './paginat';
+import { Pagination } from './common/Pagiantion'
+import { paginate } from './common/paginat';
 
 export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);
