@@ -15,6 +15,7 @@
         if(fieldValue.length != 10 ){
         return "invalid mobile number";
         }
+          break;
     }
     return true;
  }
