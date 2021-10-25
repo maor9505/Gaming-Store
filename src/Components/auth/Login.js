@@ -31,7 +31,8 @@ export const Login = () => {
                 <br />
                 <h2>Login</h2>
                 <h1></h1>
-                <div>
+                <div class='top'>
+                <div >
                     <form autoComplete="off" className='form-group' onSubmit={LoginEmail_Pass}>
                         <label htmlFor="email">Email</label>
                         <input type="email" className='form-control' required
@@ -58,7 +59,7 @@ export const Login = () => {
                 <br />
 
             </div>
-
+</div>
         </>
     )
 }

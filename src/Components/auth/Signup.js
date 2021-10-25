@@ -2,22 +2,26 @@ import React, { useState } from 'react'
 import { auth, db ,googleProvider} from '../../Config/Config'
 import { Link,useHistory } from 'react-router-dom'
 import './Login.css'
+import { formValidation} from '../../Utils/ValidForm';
+import { ToastAlert } from '../../Utils/Toast';
 
 
-export const Signup = (props) => {
+
+export const Signup = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [displayName, setdisplayName] = useState('');
     const [phone, setPhone] = useState('');
     const history = useHistory();
-
-
     const [error, setError] = useState('');
 
     // signup
     const signup = (e) => {
         e.preventDefault();
+          let vaildName = formValidation('name',displayName)
+          let vaildPhone = formValidation('phone',phone);
+          if(vaildName==true && vaildPhone==true){
         auth.createUserWithEmailAndPassword(email, password).then((cred) => {
             db.collection('users').doc(cred.user.uid).set({
                 Email: email,
@@ -32,13 +36,18 @@ export const Signup = (props) => {
                 setdisplayName('');
                 setError('');
                 history.push('/login');
+                ToastAlert('Succes User create')
             }).catch(err => setError(err.message));
         }).catch(err => setError(err.message));
+    }
+    else{
+        setError((vaildName==true)?vaildPhone:vaildName)
+
+    }
     }
     //Google auth 
     const signInWithGoogle = () => {
         auth.signInWithPopup(googleProvider).then((res) => {
-            console.log(res);
             db.collection('users').doc(res.user.uid).set({
                 Email: res.user.email,
                 Type: "not-admin",
@@ -80,7 +89,7 @@ export const Signup = (props) => {
                 <br />
                 <button type="submit" className=' btn btn-lg text-uppercase btn-outline-success'>SUBMIT</button>
             </form>
-            {error && <span className='error-msg'>{error}</span>}
+            {error && <span className='error-msg bg-warning'>{error}</span>}
             <br />
             <div class="col-sm-12"> <a onClick={signInWithGoogle} class="btn btn-lg btn-google btn-block text-uppercase btn-outline-success" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png" /> Signup Using Google</a>
             </div>
