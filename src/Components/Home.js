@@ -8,11 +8,7 @@ import { LoadingPage } from './loading-page/LoadingPage'
 
 export const Home = () => {
 
-    const { products,spinner } = useContext(ProductsContext);
-    const [filterProduct, setFilterProduct] = useState([...products]);
-    //sort
-    let sortProductsByviews = filterProduct.sort((a, b) => b.Views - a.Views);
-     sortProductsByviews = sortProductsByviews.slice(0, 4);
+    const {spinner } = useContext(ProductsContext);
 
     return (
         <div>
@@ -23,10 +19,10 @@ export const Home = () => {
                 {spinner && <div><LoadingPage /></div>}
                 {!spinner && <div>
                 <h1> Views Products</h1>
-                <HomeProducts products={sortProductsByviews}/>
+                <HomeProducts />
                 <h1></h1>
                 {/* //Order */}
-                <Products products={products} />
+                <Products  />
                 </div>}
             </div>
             </div>

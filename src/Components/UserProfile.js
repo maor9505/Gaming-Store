@@ -1,17 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { db} from '../Config/Config'
 import '../styles/UserProfile.css'
-import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom'
+import { UserContext } from '../Global/UserContext';
+import {ToastAlert} from '../Utils/Toast'
+import { isEmpty } from 'lodash';
 
-toast.configure();
+export const UserProfile = () => {
+    const { user } = useContext(UserContext);
 
-export const UserProfile = ({user}) => {
-console.log(user.providerId)
+    useEffect(() => {
+        if (isEmpty(user)) {
+            history.push('/');
+        }
+    }, []);
+
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState('');
     const [displayName, setdisplayName] = useState(user.name);
     const [phone, setPhone] = useState(user.phone);
     const [error, setError] = useState('');
+    const history = useHistory();
 
     const handleUpdateDetails = () => {
         db.collection('users').doc(user.uid).update({
@@ -23,15 +32,7 @@ console.log(user.providerId)
             setPhone('');
             setdisplayName('');
             setError('');
-            toast.info('Update User Details Succes', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                progress: undefined,
-            });
+            ToastAlert('Update User Details Succes');
         }).catch(err => setError(err.message));
         if(password != '' && user.providerId=='password'){
             db.collection('users').doc(user.uid).update({

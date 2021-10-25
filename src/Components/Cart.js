@@ -9,10 +9,14 @@ import {db} from '../Config/Config'
 import '../styles/Cart.css'
 import { GooglePay } from './common/GooglePay'
 import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
-toast.configure();
+import { UserContext } from '../Global/UserContext'
+import { ToastAlert } from '../Utils/Toast'
+import { isEmpty } from 'lodash'
 
-export const Cart = ({ user }) => {
+
+export const Cart = () => {
+    const { user } = useContext(UserContext);
+
     const {dispatch} = useContext(CartContext);
     const [cartProduct, setcartProduct] = useState([]);
     const history = useHistory();
@@ -32,7 +36,8 @@ export const Cart = ({ user }) => {
     const totalQty = CalcTotalQty();
 
     useEffect(() => {
-            if (!user) {
+        //check if user == is empty ther is no user login in 
+            if (isEmpty(user)) {
                 history.push('/login');
              }
              else{
@@ -69,16 +74,7 @@ export const Cart = ({ user }) => {
                 });
             });
         }).catch(err => console.log(err.message));
-
-        toast.info('Order Success', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-        });
+        ToastAlert('Order Success');
     }
 
     

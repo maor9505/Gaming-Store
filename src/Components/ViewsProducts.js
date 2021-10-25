@@ -12,7 +12,6 @@ export const ViewsProducts = () => {
     const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
 
-
     //sort
     let sortProductsByviews = [...products]
     sortProductsByviews = sortProductsByviews.sort((a,b)=> b.Views - a.Views);

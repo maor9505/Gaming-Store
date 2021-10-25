@@ -1,12 +1,17 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import { useHistory } from 'react-router-dom';
 
 import '../styles/Product.css'
 import { CartContext } from '../Global/CartContext'
 import { db } from '../Config/Config'
+import { ProductsContext } from '../Global/ProductsContext';
 
 
-export const HomeProducts = ({ products}) => {
+export const HomeProducts = () => {
+     const { products} = useContext(ProductsContext);
+    const [filterProduct, setFilterProduct] = useState([...products]);
+    let sortProductsByviews = filterProduct.sort((a, b) => b.Views - a.Views);
+     sortProductsByviews = sortProductsByviews.slice(0, 4);
     const { dispatch } = useContext(CartContext);
     const history = useHistory();
 
@@ -22,8 +27,8 @@ export const HomeProducts = ({ products}) => {
     return (
 
         <div class="container d-flex justify-content-center">
-            {products.length === 0 && <div>No Products To Display...</div>}
-            {products.map(product => (
+            {sortProductsByviews.length === 0 && <div>No Products To Display...</div>}
+            {sortProductsByviews.map(product => (
 
                 <figure class="card card-product-grid card-lg mt-4">
                     <a href="#" class="img-wrap" data-abc="true">

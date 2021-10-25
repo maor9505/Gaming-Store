@@ -1,9 +1,6 @@
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from '../Config/Config'
-
-
-toast.configure();
+import { ToastAlert } from '../Utils/Toast'
 
 export const CartReducer = (state, action) => {
     const uid = auth.currentUser.uid;
@@ -16,18 +13,7 @@ export const CartReducer = (state, action) => {
                 product['qty'] = 1;
                 db.collection('Cart').doc('Cart '+ uid).collection('CartProducts').doc(product.ProductID).set(product).then(() => { 
                     console.log("success uplode to cart user")})
-                    
-                toast.info('this product is Add to Cart', {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: false,
-                    progress: undefined,
-                });
-               
-            
+                    ToastAlert('this product is Add to Cart')
             break;
 
         case 'INC':

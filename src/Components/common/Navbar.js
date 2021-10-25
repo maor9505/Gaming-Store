@@ -9,11 +9,13 @@ import { useHistory } from 'react-router-dom'
 import "../../styles/Navbar.css";
 import { SearchBar } from '../Search/SearchBar';
 import { ProductsContext } from '../../Global/ProductsContext'
+import { UserContext } from '../../Global/UserContext';
 
 
 
-export const Navbar = ({ user }) => {
+export const Navbar = () => {
     const { products } = useContext(ProductsContext);
+    const {user}=useContext(UserContext);
     const ifAdmin = ( user && user.type == "admin") ? true : false;
     const history = useHistory();
     
