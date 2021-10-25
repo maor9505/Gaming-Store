@@ -13,7 +13,6 @@ export const Home = () => {
     return (
         <div>
             <HeroMain/>
-            <div>
             <div className='container'>
                 <h1></h1>
                 {spinner && <div><LoadingPage /></div>}
@@ -24,7 +23,6 @@ export const Home = () => {
                 {/* //Order */}
                 <Products  />
                 </div>}
-            </div>
             </div>
         </div>
     

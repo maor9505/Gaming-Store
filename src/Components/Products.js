@@ -155,6 +155,7 @@ export const Products = () => {
                     currentPage={currentPage}
                     onPageChange={handlePagechange}/>
                 </div>
+
  </>
     )
 }

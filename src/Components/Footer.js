@@ -6,7 +6,6 @@ import { Link, NavLink } from 'react-router-dom';
 
 export const Footer = () => {
     return (
-    <div>
             <div class="footer">
                     <section class=""> 
                      <footer class="text-center text-white "> 
@@ -26,7 +25,6 @@ export const Footer = () => {
                 </section>
               
             </div>
-    </div> 
     );
 }
 
