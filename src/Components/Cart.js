@@ -55,7 +55,7 @@ export const Cart = () => {
     const handleOrderToDb = (paymentRequest)=>{
         const  date= new Date();
         const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        db.collection('Orders').doc(user.uid + ' Orders').collection('OrderDetails').doc('Order ' + date.getTime()).set({
+        db.collection('Orders').doc(user.uid + ' Orders').collection('OrderDetails').add({
             userID: user.uid,
             OrderDetails: cartProduct,
             TotalPrice:totalPrice,

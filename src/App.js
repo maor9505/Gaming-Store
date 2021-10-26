@@ -17,6 +17,7 @@ import { Footer } from './Components/Footer';
 import { UserProfile } from './Components/UserProfile';
 import { UserContextProvider } from './Global/UserContext';
 import { Contact } from './Components/common/Contact';
+import { Orders } from './Components/Orders';
 
 export const App = () => {
 
@@ -49,6 +50,8 @@ export const App = () => {
               <Route path="/addcatagory" component={AddCatagory} />
               {/* Contact */}
               <Route path="/contact" component={Contact} />
+              {/* Contact */}
+              <Route path="/orders" component={Orders} />
               {/* not-found */}
               <Route path="/not-found" component={NotFound} />
               <Redirect from="/" exact to="/" />

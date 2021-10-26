@@ -117,8 +117,12 @@ export const Navbar = () => {
                   >
                     <li>
                       <a class="dropdown-item ">
-                        {" "}
-                    Orders
+                        <Link
+                          to="orders"
+                          class="navlink  btn-outline-success btn-lg"
+                        >
+                          Orders
+                        </Link>
                       </a>
                     </li>
                     <li>
@@ -127,7 +131,7 @@ export const Navbar = () => {
                           to="userprofile"
                           class="navlink  btn-outline-success btn-lg"
                         >
-                        Profile
+                          Profile
                         </Link>
                       </a>
                     </li>
@@ -135,7 +139,8 @@ export const Navbar = () => {
                       <a class="dropdown-item ">
                         <Link
                           to="contact"
-                          class="navlink  btn-outline-success btn-lg" >
+                          class="navlink  btn-outline-success btn-lg"
+                        >
                           Contact
                         </Link>
                       </a>
