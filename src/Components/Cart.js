@@ -62,7 +62,8 @@ export const Cart = () => {
             TotalQty:totalQty,
             ShippingAddress:paymentRequest.shippingAddress,
             DateCreate: date,
-            DateTime: time
+            DateTime: time,
+            Status:false
         }).then(() => {
             console.log("success Order to db");
             // Delete cart user after order succes

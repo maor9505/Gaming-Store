@@ -11,20 +11,16 @@ import { set } from 'lodash';
 
 export const Products = () => {
     const { products } = useContext(ProductsContext);
-
     const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
     const [filterProduct, setFilterProduct] = useState([...products]);
-
     const [priceFilter, setpriceFilter] = useState();
     const [catagoryFilter, setCatagoryFilter] = useState("");
     const [catagoryAgeFilter, setCatagoryAgeFilter] = useState("");
-
     const productsP = paginate(filterProduct, currentPage, pageSize);
     const { dispatch } = useContext(CartContext);
     const history = useHistory();
 
-    
     // function the handle the page change
     const handlePagechange = page => {
         setcurrentPage(page);

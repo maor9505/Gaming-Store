@@ -70,7 +70,7 @@ export const Signup = () => {
                 <Link to="login"> Here</Link>
             </span>
             <h1></h1>
-            <form autoComplete="off" className='form-group' onSubmit={signup}>
+            <form className='form-group' onSubmit={signup}>
                 <label htmlFor="email">Email</label>
                 <input type="email" className='form-control' required
                     onChange={(e) => setEmail(e.target.value)} value={email} />

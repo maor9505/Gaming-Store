@@ -16,18 +16,19 @@ import { ViewsProducts } from './Components/ViewsProducts';
 import { Footer } from './Components/Footer';
 import { UserProfile } from './Components/UserProfile';
 import { UserContextProvider } from './Global/UserContext';
+import { Contact } from './Components/common/Contact';
 
 export const App = () => {
 
   return (
     <React.Fragment>
       <UserContextProvider>
-      <ProductsContextProvider>
-        <CartContextProvider>
-          <Navbar  />
+        <ProductsContextProvider>
+          <CartContextProvider>
+            <Navbar />
             <Switch>
               {/* home */}
-              <Route exact path='/' component={Home} />
+              <Route exact path="/" component={Home} />
               {/* signup */}
               <Route path="/signup" component={Signup} />
               {/* login */}
@@ -41,22 +42,24 @@ export const App = () => {
               {/*  Views Products } */}
               <Route path="/viewsproducts" component={ViewsProducts}></Route>
               {/*  User Profile} */}
-              <Route path="/userprofile" component={UserProfile} ></Route>
+              <Route path="/userprofile" component={UserProfile}></Route>
               {/* add products */}
               <Route path="/addproducts" component={AddProducts} />
               {/* add products */}
               <Route path="/addcatagory" component={AddCatagory} />
+              {/* Contact */}
+              <Route path="/contact" component={Contact} />
               {/* not-found */}
               <Route path="/not-found" component={NotFound} />
               <Redirect from="/" exact to="/" />
               <Redirect to="/not-found" />
             </Switch>
-          <Footer />
-        </CartContextProvider>
-      </ProductsContextProvider>
-        </UserContextProvider>
+            <Footer />
+          </CartContextProvider>
+        </ProductsContextProvider>
+      </UserContextProvider>
     </React.Fragment>
-  )
+  );
 }
 
 
