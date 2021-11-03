@@ -11,7 +11,6 @@ import { GooglePay } from './common/GooglePay'
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../Global/UserContext'
 import { ToastAlert } from '../Utils/Toast'
-import { isEmpty } from 'lodash'
 
 
 export const Cart = () => {
@@ -37,7 +36,7 @@ export const Cart = () => {
 
     useEffect(() => {
         //check if user == is empty ther is no user login in 
-            if (isEmpty(user)) {
+            if (!user) {
                 history.push('/login');
              }
              else{
@@ -56,8 +55,8 @@ export const Cart = () => {
         const  date= new Date();
         const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         db.collection('Orders').doc(user.uid + ' Orders').collection('OrderDetails').add({
-            userID: user.uid,
-            OrderDetails: cartProduct,
+            UserID: user.uid,
+            Products: cartProduct,
             TotalPrice:totalPrice,
             TotalQty:totalQty,
             ShippingAddress:paymentRequest.shippingAddress,

@@ -15,7 +15,7 @@ export const Home = () => {
       <div className="container">
         <h1></h1>
         {spinner && (
-          <div>
+          <div class="top">
             <LoadingPage />
           </div>
         )}

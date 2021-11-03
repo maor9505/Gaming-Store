@@ -35,32 +35,37 @@ export const ProductColumn = () => {
 export const OrdersColumn = () => {
   return [
     {
+      path: "OrderID",
+      label: "Order ID",
+      content: (order) => (
+        <Link
+          to={{
+            pathname: `/orders/${order.OrderID}`,
+          }}
+        >
+          {order.OrderID}
+        </Link>
+      ),
+    },
+    {
       path: "DateCreate",
       label: "Date Order:",
       content: (order) => <span>{order.DateCreate}</span>,
     },
     {
-      path: "ID",
-      label: "ID",
-      content: (order) => (
-        <Link
-          to={{
-            pathname: `/orders/${order.ID}`,
-          }}
-        >
-          {order.ID}
-        </Link>
-      ),
-    },
-    {
-      path: "ToTalPrice",
-      label: "ToTal Price",
+      path: "TotalPrice",
+      label: "Total Price",
       content: (order) => <span>{order.TotalPrice}</span>,
     },
     {
-      path: "ToTalQty",
-      label: "ToTal Qty",
-      content: (order) => <span>{order.ToTalQty}</span>,
+      path: "TotalQty",
+      label: "Total Qty",
+      content: (order) => <span>{order.TotalQty}</span>,
+    },
+    {
+      path: "Status",
+      label: "Status",
+      content: (order) => <span>{(!order.Status)? ' In Process': 'On the way'}</span>,
     },
   ];
 };

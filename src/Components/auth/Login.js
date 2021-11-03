@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import { auth, googleProvider, db } from '../../Config/Config'
 import { Link, useHistory } from 'react-router-dom'
 import './Login.css'
+import { UserContext } from '../../Global/UserContext'
 export const Login = () => {
+    const { user } = useContext(UserContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const history = useHistory();
 
+useEffect(() => {
+  if(user){
+      history.push("/");
+  }
+}, [user]);
 
     const LoginEmail_Pass = (e) => {
         e.preventDefault();

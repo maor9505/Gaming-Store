@@ -3,7 +3,7 @@ import { db } from '../../Config/Config'
 
 
 export const HeaderProducts = (props) => {
-    const {hanldeChangeFilterOption}= props;
+    const {hanldeChangeFilterOption} = props;
     const [catagoryOption, setcatagoryOption] = useState([]);
     
 

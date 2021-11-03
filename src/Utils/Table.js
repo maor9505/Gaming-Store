@@ -1,40 +1,39 @@
-import React,{useContext,useState,} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ProductsContext } from "../Global/ProductsContext";
-import { ProductColumn } from "./TableColumn";
 import { TableBody } from "./TableBody";
 import { TableHeader } from "./TableHeader";
 import _ from "lodash";
 
-export const Table = ({ Columns }) => {
-  const { products } = useContext(ProductsContext);
+export const Table = ({ data, Columns }) => {
+  const [arrayData, setarrayData] = useState([]);
   const [sortColumn, setsortColumn] = useState({ path: "title", order: "asc" });
   const [columns, setcolumns] = useState(Columns);
-  const [productP, setproductP] = useState([...products]);
+  useEffect(() => {
+    setarrayData(data);
+  }, [data]);
 
   const onSort = (newColumn) => {
     console.log("sort good");
     console.log(newColumn);
     setsortColumn(newColumn);
-    setproductP(_.orderBy(productP, [sortColumn.path], [sortColumn.order]));
+    setarrayData(_.orderBy(arrayData, [sortColumn.path], [sortColumn.order]));
   };
-
   return (
-    <div class='top'>
-      {productP.length === 0 && (
+    <div class="top">
+      {arrayData.length === 0 && (
         <div class="container d-flex justify-content-center bg-warning">
-          No Orders To Display...Or your opttion search id not Correct
+          No Orders To Display...
         </div>
       )}
 
-      <table className="table">
+      <table className="table table-hover table-bordered">
         <TableHeader
           columns={columns}
           sortColumn={sortColumn}
           onSort={onSort}
         />
-        <TableBody data={productP} columns={columns} />
+        <TableBody data={arrayData} columns={columns} />
       </table>
     </div>
   );
 };
-

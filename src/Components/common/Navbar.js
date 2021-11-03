@@ -15,14 +15,16 @@ import { UserContext } from '../../Global/UserContext';
 
 export const Navbar = () => {
     const { products } = useContext(ProductsContext);
-    const {user}=useContext(UserContext);
+    const {user,setUser}=useContext(UserContext);
     const ifAdmin = ( user && user.type == "admin") ? true : false;
     const history = useHistory();
     
     // handle logout
     const handleLogout = () => {
         auth.signOut().then(() => {
+            setUser()
             history.push('/');
+
         })
     }
 

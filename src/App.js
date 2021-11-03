@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{} from 'react'
 import { Navbar } from "./Components/common/Navbar";
 import { ProductsContextProvider } from './Global/ProductsContext'
 import { Home } from './Components/Home'
@@ -20,7 +20,7 @@ import { Contact } from './Components/common/Contact';
 import { Orders } from './Components/Orders';
 
 export const App = () => {
-
+  
   return (
     <React.Fragment>
       <UserContextProvider>

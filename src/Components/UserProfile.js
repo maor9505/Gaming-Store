@@ -4,7 +4,6 @@ import '../styles/UserProfile.css'
 import { useHistory } from 'react-router-dom'
 import { UserContext } from '../Global/UserContext';
 import {ToastAlert} from '../Utils/Toast'
-import { isEmpty } from 'lodash';
 import { formValidation} from '../Utils/ValidForm';
 
 export const UserProfile = () => {
@@ -18,7 +17,7 @@ export const UserProfile = () => {
     const history = useHistory();
 
      useEffect(() => {
-        if (isEmpty(user)) {
+        if (!user) {
             history.push('/');
         }
     }, []);
