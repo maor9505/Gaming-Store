@@ -1,15 +1,19 @@
 import React, {useEffect,useContext,useState } from "react";
 
 import { useParams, useHistory } from "react-router-dom";
+import { db } from "../Config/Config";
 import { OrderContext } from "../Global/OrderContext";
 import { UserContext } from "../Global/UserContext";
 import "../styles/OrderPage.css";
+import { ToastAlert } from "../Utils/Toast";
 
 
 export const OrderPage = () => {
   const {user}= useContext(UserContext);
 const { orders } = useContext(OrderContext);
 const [order, setOrder] = useState();
+    const history = useHistory();
+
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -17,18 +21,30 @@ const [order, setOrder] = useState();
       console.log(order);
       setOrder(order)
   },[orders]);
-
+ const CancleOrder =()=>{
+   
+        db.collection("Orders")
+          .doc(user.uid + " Orders")
+          .collection("OrderDetails")
+          .doc(order.OrderID)
+          .delete()
+          .then(() => {
+            ToastAlert('Delete Order Success')
+            history.push('/orders')
+          })
+    
+ }
   return (
-    <div class="top">
-      {!order && <div class="center">slow internet...no order to display</div>}
-
+    <div>
+      
+      {!order && <div class="top">slow internet...no order to display</div>}
       {order && (
         <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
           <div class="card">
             <div class="p-4">
               <div class="float-right">
                 <h3 class="mb-0">Order-Number: {order.OrderID}</h3>
-                Date: {order.DateCreate}
+                Date-Order: {order.DateCreate}
               </div>
             </div>
             <div class="card-body">
@@ -65,7 +81,6 @@ const [order, setOrder] = useState();
                         <td class="center">{p.qty}</td>
                       </tr>
                     ))}
-
                   </tbody>
                 </table>
               </div>
@@ -93,9 +108,15 @@ const [order, setOrder] = useState();
                 </div>
               </div>
             </div>
+            {!order.Status && (
+              <button className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
+              onClick={CancleOrder}>
+                Cancle Order....
+              </button>
+            )}
           </div>
         </div>
       )}
-    </div>
+      </div>
   );
 };

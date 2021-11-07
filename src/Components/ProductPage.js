@@ -1,6 +1,6 @@
-import React, { Component, useContext, useEffect,useState  } from 'react'
+import React, {useContext, useEffect,useState  } from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../styles/ProductPage.css'
 import { CartContext } from '../Global/CartContext'
 import { HomeProducts } from './HomeProducts';

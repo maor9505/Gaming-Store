@@ -7,7 +7,6 @@ import { db } from '../Config/Config'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
 import { HeaderProducts } from './common/HeaderProducts';
-import { set } from 'lodash';
 
 export const Products = () => {
     const { products } = useContext(ProductsContext);

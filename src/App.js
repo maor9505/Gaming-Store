@@ -20,10 +20,12 @@ import { Contact } from "./Components/common/Contact";
 import { Orders } from "./Components/Orders";
 import { OrderPage } from "./Components/OrderPage";
 import { OrderContextProvider } from "./Global/OrderContext";
+import ScrollToTop from "./Utils/ScrollToTop";
 
 export const App = () => {
   return (
     <React.Fragment>
+      <ScrollToTop/>
       <UserContextProvider>
         <ProductsContextProvider>
           <CartContextProvider>
