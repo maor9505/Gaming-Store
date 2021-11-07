@@ -1,3 +1,5 @@
+import { getProductArray } from "./Product";
+
 export const getOrder = (doc) => {
   return {
     OrderID: doc.id,
@@ -5,7 +7,7 @@ export const getOrder = (doc) => {
     TotalPrice: doc.data().TotalPrice,
     TotalQty: doc.data().TotalQty,
     Products: doc.data().Products,
-    ShippingAddres: doc.data().ShippingAddres,
+    ShippingAddress: doc.data().ShippingAddress,
     UserID: doc.data().UserID,
     Status: doc.data().Status,
   };

@@ -69,13 +69,13 @@ export const Navbar = () => {
           {!user && (
             <div>
               <span>
-                <Link to="signup" class="navlink mr-4 btn btn-outline-success">
+                <Link to="/signup" class="navlink mr-4 btn btn-outline-success">
                   SIGN UP
                 </Link>
               </span>
 
               <span>
-                <Link to="login" class="navlink m-2 btn btn-outline-success">
+                <Link to="/login" class="navlink m-2 btn btn-outline-success">
                   LOGIN
                 </Link>
               </span>
@@ -120,7 +120,7 @@ export const Navbar = () => {
                     <li>
                       <a class="dropdown-item ">
                         <Link
-                          to="orders"
+                          to="/orders"
                           class="navlink  btn-outline-success btn-lg"
                         >
                           Orders
@@ -130,7 +130,7 @@ export const Navbar = () => {
                     <li>
                       <a class="dropdown-item ">
                         <Link
-                          to="userprofile"
+                          to="/userprofile"
                           class="navlink  btn-outline-success btn-lg"
                         >
                           Profile
@@ -140,7 +140,7 @@ export const Navbar = () => {
                     <li>
                       <a class="dropdown-item ">
                         <Link
-                          to="contact"
+                          to="/contact"
                           class="navlink  btn-outline-success btn-lg"
                         >
                           Contact

@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect  } from 'react'
+import React, { Component, useContext, useEffect,useState  } from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
 import { useParams, useHistory } from 'react-router-dom';
 import '../styles/ProductPage.css'
@@ -6,27 +6,14 @@ import { CartContext } from '../Global/CartContext'
 import { HomeProducts } from './HomeProducts';
 
 export const ProductPage = () => {
-    const history = useHistory();
     const { dispatch } = useContext(CartContext);
     const { products } = useContext(ProductsContext);
-    console.table(products)
-   
+    const [product, setproduct] = useState();
     const {id}= useParams();
-    console.log(id);
-    const product = products.find(product => product.ProductID == id);
-    console.log(product)
-
-    let filterProductsByCatagory = products.filter(pro => pro.Catagory == product.Catagory)
-    filterProductsByCatagory = filterProductsByCatagory.slice(0, 4);
-    console.log('filter')
-    console.log(filterProductsByCatagory);
-
-
     useEffect(() => {
-        if (!product) {
-            history.push('/');
-        }
-    })
+        const product = products.find((product) => product.ProductID == id);
+        setproduct(product) 
+    },[products])
         return (
             <>
             <>
@@ -71,8 +58,8 @@ export const ProductPage = () => {
             </>
             <h1></h1>
                 <div className='container'>
-                    <h1>Same Catagory...</h1>
-                    <HomeProducts products={filterProductsByCatagory} />
+                    <h1>More Products...</h1>
+                    <HomeProducts />
                 </div>
             </>
         );

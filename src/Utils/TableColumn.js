@@ -19,7 +19,7 @@ export const ProductColumn = () => {
       content: (product) => (
         <Link
           to={{
-            pathname: `/products/${product.ProductID}`,
+            pathname: `${product.ProductID}`,
           }}
         >
           {product.ProductName}
@@ -30,8 +30,6 @@ export const ProductColumn = () => {
   ];
 };
 
-
-
 export const OrdersColumn = () => {
   return [
     {
@@ -40,7 +38,7 @@ export const OrdersColumn = () => {
       content: (order) => (
         <Link
           to={{
-            pathname: `/orders/${order.OrderID}`,
+            pathname: `/OrderPage/${order.OrderID}`,
           }}
         >
           {order.OrderID}
@@ -65,7 +63,9 @@ export const OrdersColumn = () => {
     {
       path: "Status",
       label: "Status",
-      content: (order) => <span>{(!order.Status)? ' In Process': 'On the way'}</span>,
+      content: (order) => (
+        <span>{!order.Status ? " In Process" : "On the way"}</span>
+      ),
     },
   ];
 };
