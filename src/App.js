@@ -25,45 +25,54 @@ import ScrollToTop from "./Utils/ScrollToTop";
 export const App = () => {
   return (
     <React.Fragment>
-      <ScrollToTop/>
+      <ScrollToTop />
       <UserContextProvider>
         <ProductsContextProvider>
           <CartContextProvider>
             <OrderContextProvider>
+                <div id="container">
+
               <Navbar />
-              <Switch>
-                {/* home */}
-                <Route exact path="/" component={Home} />
-                {/* signup */}
-                <Route path="/signup" component={Signup} />
-                {/* login */}
-                <Route path="/login" component={Login} />
-                {/* cart products} */}
-                <Route path="/cart" component={Cart} />
-                {/*  ProductPage  } */}
-                <Route path="/products/:id" component={ProductPage}></Route>
-                {/*  Order Page  } */}
-                <Route path="/OrderPage/:id" component={OrderPage}></Route>
-                {/*  Products } */}
-                <Route path="/products" component={Products}></Route>
-                {/*  Views Products } */}
-                <Route path="/viewsproducts" component={ViewsProducts}></Route>
-                {/*  User Profile} */}
-                <Route path="/userprofile" component={UserProfile}></Route>
-                {/* add products */}
-                <Route path="/addproducts" component={AddProducts} />
-                {/* add products */}
-                <Route path="/addcatagory" component={AddCatagory} />
-                {/* Contact */}
-                <Route path="/contact" component={Contact} />
-                {/* Contact */}
-                <Route path="/orders" component={Orders} />
-                {/* not-found */}
-                <Route path="/not-found" component={NotFound} />
-                <Redirect from="/" exact to="/" />
-                <Redirect to="/not-found" />
-              </Switch>
+                  <div id="main-content">
+
+                <Switch>
+                  {/* home */}
+                  <Route exact path="/" component={Home} />
+                  {/* signup */}
+                  <Route path="/signup" component={Signup} />
+                  {/* login */}
+                  <Route path="/login" component={Login} />
+                  {/* cart products} */}
+                  <Route path="/cart" component={Cart} />
+                  {/*  ProductPage  } */}
+                  <Route path="/products/:id" component={ProductPage}></Route>
+                  {/*  Order Page  } */}
+                  <Route path="/OrderPage/:id" component={OrderPage}></Route>
+                  {/*  Products } */}
+                  <Route path="/products" component={Products}></Route>
+                  {/*  Views Products } */}
+                  <Route
+                    path="/viewsproducts"
+                    component={ViewsProducts}
+                  ></Route>
+                  {/*  User Profile} */}
+                  <Route path="/userprofile" component={UserProfile}></Route>
+                  {/* add products */}
+                  <Route path="/addproducts" component={AddProducts} />
+                  {/* add products */}
+                  <Route path="/addcatagory" component={AddCatagory} />
+                  {/* Contact */}
+                  <Route path="/contact" component={Contact} />
+                  {/* Contact */}
+                  <Route path="/orders" component={Orders} />
+                  {/* not-found */}
+                  <Route path="/not-found" component={NotFound} />
+                  <Redirect from="/" exact to="/" />
+                  <Redirect to="/not-found" />
+                </Switch>
+                </div>
               <Footer />
+              </div>
             </OrderContextProvider>
           </CartContextProvider>
         </ProductsContextProvider>

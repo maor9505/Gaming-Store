@@ -64,7 +64,7 @@ export const OrdersColumn = () => {
       path: "Status",
       label: "Status",
       content: (order) => (
-        <span>{!order.Status ? " In Process" : "On the way"}</span>
+        <span>{!order.Status ? " In Process" : "Process Complete..."}</span>
       ),
     },
   ];

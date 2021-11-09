@@ -148,8 +148,13 @@ export const Navbar = () => {
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" onClick={handleLogout}>
-                        Logout
+                      <a class="dropdown-item ">
+                        <Link
+                          class="navlink  btn-outline-success btn-lg"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </Link>
                       </a>
                     </li>
                   </ul>

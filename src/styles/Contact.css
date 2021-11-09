@@ -27,3 +27,16 @@
     text-align: center;
     color: #0062cc;
 }
+@media(max-width: 1400px) {
+    .contact-form{
+    background: #fff;
+    margin-top: 100px;
+    width: 100%;
+    
+}
+.contact-form form{
+    padding: 75px;
+}
+
+
+}

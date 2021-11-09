@@ -2,19 +2,14 @@ import React ,{useContext}from 'react'
 import '../styles/Footer.css'
 import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../Global/UserContext';
-import { isEmpty, isError } from 'lodash';
-
-
-
 export const Footer = () => {
     const { user } = useContext(UserContext);
 
 
     return (
       <div class="footer">
-        <section class="">
           <footer class="text-center text-white ">
-            <div class="container p-4 pb-0">
+            <div class="container  mt-2">
               <section class="">
                 {!user && (
                   <p class="d-flex justify-content-center align-items-center">
@@ -34,14 +29,13 @@ export const Footer = () => {
                     <span class="me-3">Hi! {user.name}</span>
                   </p>
                 )}
+                <div class="text-center p-3 name">
+                  © 2021 Copyright:
+                  <a class="text-white"> Maor Elimelech</a>
+                </div>
               </section>
             </div>
-            <div class="text-center p-3 name">
-              © 2021 Copyright:
-              <a class="text-white"> Maor Elimelech</a>
-            </div>
           </footer>
-        </section>
       </div>
     );
 }

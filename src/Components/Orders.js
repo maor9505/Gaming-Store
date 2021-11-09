@@ -1,15 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { getOrder } from "../DbModal/Order";
 import { UserContext } from "../Global/UserContext";
 import { OrdersColumn } from "../Utils/TableColumn";
 import { Table } from "../Utils/Table";
-import { db } from "../Config/Config";
 import { useHistory } from "react-router-dom";
 import { LoadingPage } from "./loading-page/LoadingPage";
 import { Pagination } from "./common/Pagiantion";
 import { paginate } from "./common/paginat";
 import { OrderContext } from "../Global/OrderContext";
-
 
 export const Orders = () => {
   const { user } = useContext(UserContext);
@@ -20,27 +17,29 @@ export const Orders = () => {
   const history = useHistory();
   console.log(ordersP)
 
-  useEffect(() => {
-    if (!user) {
-      history.push("/");
-    } 
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.push("/");
+  //   } 
+  // }, [user]);
+
+
   // function the handle the page change
   const handlePagechange = (page) => {
     setcurrentPage(page);
   };
   return (
-    <div class="container">
+    <div class="container-fluid">
+      <h1></h1>
       {spinner && (
-        <div class="top">
+        <div class="container">
           <LoadingPage />
         </div>
       )}
       {!spinner && (
-        <div>
-          <div>
+    <div class="container">
+        <div >
           <Table data={ordersP} Columns={OrdersColumn}></Table>
-                  </div>
           <div className="d-flex justify-content-center mt-4">
             <Pagination
               itemsCount={orders.length}
@@ -49,8 +48,8 @@ export const Orders = () => {
               onPageChange={handlePagechange}
             />
           </div>
-            </div>
-
+        </div>
+        </div>
       )}
     </div>
   );

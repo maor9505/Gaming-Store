@@ -8,19 +8,21 @@ import { formValidation} from '../Utils/ValidForm';
 
 export const UserProfile = () => {
     const { user } = useContext(UserContext);
-    const [email, setEmail] = useState(user.email);
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
-    const [displayName, setdisplayName] = useState(user.name);
-    const [phone, setPhone] = useState(user.phone);
+    const [displayName, setdisplayName] = useState("");
+    const [phone, setPhone] = useState("");
     const [error, setError] = useState('');
     const [errorp, setErrorp] = useState('');
     const history = useHistory();
 
      useEffect(() => {
-        if (!user) {
-            history.push('/');
-        }
-    }, []);
+         if(user){
+            setEmail(user.email)
+            setdisplayName(user.name)
+            setPhone(user.phone)
+         }
+    }, [user]);
 
       const handleUpdatePersonalDetails = () => {
           let vaildName = formValidation('name',displayName)
@@ -62,7 +64,8 @@ export const UserProfile = () => {
 
     return (
         <>
-        <div class="container top">
+        {!user && <h1>User-Profile</h1>}
+        {user && <div class="container">
             <div class="row gutters">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                     <div class="card h-100 w-75">
@@ -148,7 +151,7 @@ export const UserProfile = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>}
         </>
     )
 }

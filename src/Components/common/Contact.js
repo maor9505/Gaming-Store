@@ -77,13 +77,6 @@ export const Contact = () => {
                 required
               />
             </div>
-            <div class="form-group">
-              <input
-                type="submit"
-                class="btn btn-lg btn-outline-success mt-2 text-dark  border-success"
-                value="Send"
-              />
-            </div>
           </div>
           {error && <span className="error-msg bg-warning">{error}</span>}
           <div class="col-md-6">
@@ -96,6 +89,13 @@ export const Contact = () => {
                 required
               ></textarea>
             </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="submit"
+              class="btn btn-lg btn-outline-success mt-2 text-dark  border-success"
+              value="Send"
+            />
           </div>
         </div>
       </form>

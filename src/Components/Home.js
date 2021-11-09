@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, {useContext, useEffect } from "react";
 import { ProductsContext } from "../Global/ProductsContext";
 import { Products } from "./Products";
 import { HeroMain } from "./common/HeroMain";
@@ -10,12 +10,12 @@ export const Home = () => {
   const { spinner } = useContext(ProductsContext);
 
   return (
-    <div>
+    <div className="container-fluid">
       <HeroMain />
       <div className="container">
         <h1></h1>
         {spinner && (
-          <div class="top">
+          <div>
             <LoadingPage />
           </div>
         )}
@@ -27,6 +27,7 @@ export const Home = () => {
             <Products />
             <h1></h1>
             <Contact />
+            <h1></h1>
           </div>
         )}
       </div>
