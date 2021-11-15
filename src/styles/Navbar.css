@@ -1,9 +1,11 @@
-
-
+@media(max-width: 1024px){
+    
+    
+}
 
 
 /* navbar */
-.navbox {
+/*.navbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -65,4 +67,4 @@
     border: hidden;
     background-color: #2eca8b;
     margin-left: 10px;
-}
+} */

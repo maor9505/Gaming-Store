@@ -62,39 +62,73 @@ export const Signup = () => {
 
 
     return (
-        <div className='container'>
-            <br />
-            <h2>Sign up</h2>
-            <br />
-            <span>Already have an account Or Google account? Login
-                <Link to="login"> Here</Link>
-            </span>
-            <h1></h1>
-            <form className='form-group' onSubmit={signup}>
-                <label htmlFor="email">Email</label>
-                <input type="email" className='form-control' required
-                    onChange={(e) => setEmail(e.target.value)} value={email} />
-                <br />
-                <label htmlFor="passowrd">Password</label>
-                <input type="password" className='form-control' required
-                    onChange={(e) => setPassword(e.target.value)} value={password} />
-                <br />
-                <label htmlFor="text">Full Name</label>
-                <input type="text" className='form-control' required
-                    onChange={(e) => setdisplayName(e.target.value)} value={displayName} />
-                <br />
-                <label htmlFor="phone">Phone-Number</label>
-                <input type="text" className='form-control' required
-                    onChange={(e) => setPhone(e.target.value)} value={phone} />
-                <br />
-                <button type="submit" className=' btn btn-lg text-uppercase btn-outline-success'>SUBMIT</button>
-            </form>
-            {error && <span className='error-msg bg-warning'>{error}</span>}
-            <br />
-            <div class="col-sm-12"> <a onClick={signInWithGoogle} class="btn btn-lg btn-google btn-block text-uppercase btn-outline-success" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png" /> Signup Using Google</a>
-            </div>
-            <br />
-
+      <div className="container">
+        <br />
+        <h2>Sign up</h2>
+        <br />
+        <span>
+          Already have an account Or Google account? Login
+          <Link to="login"> Here</Link>
+        </span>
+        <div class="col-sm-12">
+            <br/>
+          <a
+            onClick={signInWithGoogle}
+            class="btn btn-lg btn-google btn-block text-uppercase btn-outline-success"
+            href="#"
+          >
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" />{" "}
+            Signup Using Google
+          </a>
         </div>
-    )
+
+        <h1></h1>
+        <form className="form-group" onSubmit={signup}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            className="form-control"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <br />
+          <label htmlFor="passowrd">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <br />
+          <label htmlFor="text">Full Name</label>
+          <input
+            type="text"
+            className="form-control"
+            required
+            onChange={(e) => setdisplayName(e.target.value)}
+            value={displayName}
+          />
+          <br />
+          <label htmlFor="phone">Phone-Number</label>
+          <input
+            type="text"
+            className="form-control"
+            required
+            onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+          />
+          <br />
+          <button
+            type="submit"
+            className=" btn btn-lg text-uppercase btn-outline-success"
+          >
+            SUBMIT
+          </button>
+        </form>
+        {error && <span className="error-msg bg-warning">{error}</span>}
+        <br />
+      </div>
+    );
 }

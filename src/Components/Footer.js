@@ -29,7 +29,7 @@ export const Footer = () => {
                     <span class="me-3">Hi! {user.name}</span>
                   </p>
                 )}
-                <div class="text-center p-3 name">
+                <div class="text-center p-2 name">
                   © 2021 Copyright:
                   <a class="text-white"> Maor Elimelech</a>
                 </div>

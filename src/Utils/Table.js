@@ -19,7 +19,7 @@ export const Table = ({ data, Columns }) => {
     setarrayData(_.orderBy(arrayData, [sortColumn.path], [sortColumn.order]));
   };
   return (
-    <div class="top">
+    <div class="container">
       {arrayData.length === 0 && (
         <div class="container d-flex justify-content-center bg-warning">
           No Orders To Display...

@@ -17,11 +17,11 @@ export const Orders = () => {
   const history = useHistory();
   console.log(ordersP)
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     history.push("/");
-  //   } 
-  // }, [user]);
+  useEffect(() => {
+    if (!user) {
+      history.push("/login");
+    } 
+  }, [user]);
 
 
   // function the handle the page change

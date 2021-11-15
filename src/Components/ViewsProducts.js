@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { CartContext } from '../Global/CartContext'
 import { ProductsContext } from '../Global/ProductsContext'
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 import '../styles/Product.css'
 import { db } from '../Config/Config'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
+import { UserContext } from '../Global/UserContext';
 
 export const ViewsProducts = () => {
+    const { user } = useContext(UserContext);
     const { products } = useContext(ProductsContext);
     const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
@@ -24,54 +26,84 @@ export const ViewsProducts = () => {
     const handlePagechange = page => {
         setcurrentPage(page);
     }
+
     const { dispatch } = useContext(CartContext);
-    const history = useHistory();
-
-    const UpdateViewInDb = (product) => {
-        product.Views += 1;
-        db.collection('Products').doc(product.ProductID).update(product);
-        history.push(`/products/${product.ProductID}`);
-
-    }
-
     return (
-        <>
-            {productsP.length !== 0 && <h1>  Views Products</h1>}
+      <>
+        {productsP.length !== 0 && <h1> Views Products</h1>}
 
-            <div class="container d-flex justify-content-center">
-                {productsP.length === 0 && <div>No Products To Display...</div>}
-                {productsP.map(product => (
+        <div class="container d-flex justify-content-center">
+          {productsP.length === 0 && <div>No Products To Display...</div>}
+          {productsP.map((product) => (
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div class="image-flip">
+                <div class="mainflip flip-0">
+                  <Link
+                    class="nav-link text-dark img-wrap"
+                    to={`/products/${product.ProductID}`}
+                  >
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p>
+                            <img
+                              class=" img-fluid"
+                              src={product.ProductImg}
+                              alt="card image"
+                            />
+                          </p>
+                          <h4 class="card-title">{product.ProductName}</h4>
+                          <p class="card-text">{product.Catagory}</p>
+                          <p class="card-text">
+                            Price: {product.ProductPrice}$$
+                          </p>
+                          <p class="card-text">Views: {product.Views}</p>
 
-                    <figure class="card card-product-grid card-lg mt-4">
-                        <a href="#" class="img-wrap" data-abc="true">
-                            <img src={product.ProductImg} /> </a>
-                        <figcaption class="info-wrap">
-                            <div class="row">
-                                <div class="col-md-9 col-xs-9"> <a  >{product.ProductName}</a><br /> <span class="rated">{product.Catagory}</span> </div>
-                            </div>
-                        </figcaption>
-                        <div class="bottom-wrap-payment">
-                            <figcaption class="info-wrap">
-                                <div class="row">
-                                    <div > <a >Price:  {product.ProductPrice}$$</a></div>
-                                    <div class="rating "><span class="rated">Views:  </span><span class="rated">{product.Views}</span> </div>
-                                </div>
-                            </figcaption>
+                          <a
+                            href="https://www.fiverr.com/share/qb8D02"
+                            class="btn btn-success btn-sm"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </a>
                         </div>
-                        <div class="bottom-wrap">
-                            <button onClick={() => UpdateViewInDb(product)} className='btn btn-outline-danger'>View</button>
-                            <button className='btn btn-outline-success' onClick={() => dispatch({ type: 'ADD_TO_CART', id: product.ProductID, product })}>ADD TO CART</button>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">{product.ProductName}</h4>
+                          <p class="card-text">{product.Description}</p>
+                          {user && (
+                            <button
+                              className="btn btn-outline-danger"
+                              onClick={() =>
+                                dispatch({
+                                  type: "ADD_TO_CART",
+                                  id: product.ProductID,
+                                  product,
+                                })
+                              }
+                            >
+                              ADD TO CART
+                            </button>
+                          )}
                         </div>
-                    </figure>
-                ))}
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className='d-flex justify-content-center mt-4'>
-                <Pagination
-                    itemsCount={products.length}
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    onPageChange={handlePagechange} />
-            </div>
-        </>
-    )
+          ))}
+        </div>
+        <div className="d-flex justify-content-center mt-4">
+          <Pagination
+            itemsCount={products.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={handlePagechange}
+          />
+        </div>
+      </>
+    );
 }
