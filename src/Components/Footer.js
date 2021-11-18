@@ -9,7 +9,6 @@ export const Footer = () => {
     return (
       <div class="footer">
           <footer class="text-center text-white ">
-            <div class="container  mt-2">
               <section class="">
                 {!user && (
                   <p class="d-flex justify-content-center align-items-center">
@@ -29,12 +28,11 @@ export const Footer = () => {
                     <span class="me-3">Hi! {user.name}</span>
                   </p>
                 )}
-                <div class="text-center p-2 name">
+                <div class="text-center  name">
                   © 2021 Copyright:
                   <a class="text-white"> Maor Elimelech</a>
                 </div>
               </section>
-            </div>
           </footer>
       </div>
     );

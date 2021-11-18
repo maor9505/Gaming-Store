@@ -5,10 +5,14 @@ import { useHistory } from "react-router-dom";
 import { SearchBar } from "../Search/SearchBar";
 import { ProductsContext } from "../../Global/ProductsContext";
 import { UserContext } from "../../Global/UserContext";
+import { CartContext } from "../../Global/CartContext";
 
 export const Navbar = () => {
   const { products } = useContext(ProductsContext);
   const { user, setUser } = useContext(UserContext);
+    const { cartUser } = useContext(CartContext);
+    console.log('cart')
+console.log(cartUser)
   const ifAdmin = user && user.type == "admin" ? true : false;
   const history = useHistory();
 
@@ -82,7 +86,9 @@ export const Navbar = () => {
               <a class="text-reset " href="#">
                 <Link class="nav-link text-dark" to="/cart">
                   <i class="fa fa-shopping-cart fa-3x mr-2"></i>
-                  <div class="badge badge-primary ml-2"></div>
+                  <span class="badge badge-secondary text-success mt-2">
+                    {cartUser.length}
+                  </span>
                 </Link>
               </a>
               {user && ifAdmin && (

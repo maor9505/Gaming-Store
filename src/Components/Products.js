@@ -12,7 +12,7 @@ import { UserContext } from '../Global/UserContext';
 export const Products = () => {
       const { user } = useContext(UserContext);
     const { products } = useContext(ProductsContext);
-    const [pageSize, setpageSize] = useState(4);
+    const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);
     const [filterProduct, setFilterProduct] = useState([]);
     const [priceFilter, setpriceFilter] = useState();
@@ -121,67 +121,70 @@ useEffect(() => {
               No Products To Display...Or your opttion search id not Correct
             </div>
           )}
-          {productsP.map((product) => (
-            <div class="col-xs-12 col-sm-6 col-md-4">
-              <div class="image-flip">
-                <div class="mainflip flip-0">
-                  <Link
-                    class="nav-link text-dark img-wrap"
-                    to={`/products/${product.ProductID}`}
-                  >
-                    <div class="frontside">
-                      <div class="card">
-                        <div class="card-body text-center">
-                          <p>
-                            <img
-                              class=" img-fluid"
-                              src={product.ProductImg}
-                              alt="card image"
-                            />
-                          </p>
-                          <h4 class="card-title">{product.ProductName}</h4>
-                          <p class="card-text">{product.Catagory}</p>
-                          <p class="card-text">
-                            Price: {product.ProductPrice}$$
-                          </p>
-                          <p class="card-text">Views: {product.Views}</p>
+          <div class="container d-flex justify-content-center">
+            {productsP.map((product) => (
+              <div class="col-xs-12 col-xs-6 col-md-4 ">
+                <div class="image-flip">
+                  <div class="mainflip flip-0">
+                    <Link
+                      class="nav-link text-dark img-wrap"
+                      to={`/products/${product.ProductID}`}
+                    >
+                      <div class="frontside">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <p>
+                              <img
+                                class=" img-fluid"
+                                src={product.ProductImg}
+                                alt="card image"
+                              />
+                            </p>
+                            <h4 class="card-title">{product.ProductName}</h4>
+                            <p class="card-text">{product.Catagory}</p>
+                            <p class="card-text">
+                              Price: {product.ProductPrice}$$
+                            </p>
+                            <p class="card-text">Views: {product.Views}</p>
 
-                          <a
-                            href="https://www.fiverr.com/share/qb8D02"
-                            class="btn btn-success btn-sm"
-                          >
-                            <i class="fa fa-plus"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="backside">
-                      <div class="card">
-                        <div class="card-body text-center mt-4">
-                          <h4 class="card-title">{product.ProductName}</h4>
-                          <p class="card-text">{product.Description}</p>
-                          {user && (
-                            <button
-                              className="btn btn-outline-danger"
-                              onClick={() =>
-                                dispatch({
-                                  type: "ADD_TO_CART",
-                                  id: product.ProductID,
-                                  product,
-                                })
-                              }
+                            <a
+                              href="https://www.fiverr.com/share/qb8D02"
+                              class="btn btn-success btn-sm"
                             >
-                              ADD TO CART
-                            </button>
-                          )}
+                              <i class="fa fa-plus"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                      <div class="backside">
+                        <div class="card">
+                          <div class="card-body text-center mt-4 d-flex flex-column">
+                            <h4 class="card-title">{product.ProductName}</h4>
+                            <p class="card-text">{product.Description}</p>
+                            {user && (
+
+                              <button
+                                className="btn btn-outline-danger mt-auto "
+                                onClick={() =>
+                                  dispatch({
+                                    type: "ADD_TO_CART",
+                                    id: product.ProductID,
+                                    product,
+                                  })
+                                }
+                              >
+                                ADD TO CART
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <div className="d-flex justify-content-center mt-4">
           <Pagination

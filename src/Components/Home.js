@@ -9,6 +9,7 @@ import { Contact } from "./common/Contact";
 export const Home = () => {
   const { spinner } = useContext(ProductsContext);
 
+
   return (
     <div className="container-fluid">
       <HeroMain />

@@ -20,7 +20,7 @@ useEffect(() => {
 
 useEffect(() => {
   let sortProductsByviews = productsP.sort((a, b) => b.Views - a.Views);
-  sortProductsByviews = sortProductsByviews.slice(0, 4);
+  sortProductsByviews = sortProductsByviews.slice(0, 3);
   setFilterProduct(sortProductsByviews);
 }, [productsP]);
 
@@ -61,12 +61,12 @@ useEffect(() => {
                   </div>
                   <div class="backside">
                     <div class="card">
-                      <div class="card-body text-center mt-4">
+                      <div class="card-body text-center mt-4  d-flex flex-column">
                         <h4 class="card-title">{product.ProductName}</h4>
                         <p class="card-text">{product.Description}</p>
                         {user && (
                           <button
-                            className="btn btn-outline-danger"
+                            className="btn btn-outline-danger mt-auto"
                             onClick={() =>
                               dispatch({
                                 type: "ADD_TO_CART",

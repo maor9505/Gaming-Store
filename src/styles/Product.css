@@ -1,5 +1,5 @@
 
- @media(max-width: 1300px) {
+ @media(max-width: 1408px) {
     h1 {
         text-align: center;
         padding: 10px;
@@ -126,10 +126,11 @@ section .section-title {
 .frontside .card,
 .backside .card {
     min-height: 312px;
+    width: auto;
 }
 
 .backside .card a {
-    font-size: 18px;
+    font-size: 14px;
     color: #007b5e !important;
 }
 

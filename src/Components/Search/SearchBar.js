@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
-import { Link, NavLink } from 'react-router-dom';
-
-// import SearchIcon from "@material-ui/icons/Search";
-// import CloseIcon from "@material-ui/icons/Close";
+import { Link} from 'react-router-dom';
 
 export const SearchBar = ({ placeholder, data }) => {
     const [filteredData, setFilteredData] = useState([]);
@@ -31,34 +28,38 @@ export const SearchBar = ({ placeholder, data }) => {
     };
 
     return (
-        <div className="search">
-            <div className="searchInputs">
-                <input
-                    type="text"
-                    placeholder={placeholder}
-                    value={wordEntered}
-                    onChange={handleFilter}
-                />
-                <div className="searchIcon">
-                    {filteredData.length === 0 ? (
-                        <i className="fa fa-search fa-2x"></i>
-                    ) : (
-                            <i onClick={clearInput} className="fa fa-times-circle fa-2x"></i>
-
-                    )}
-                </div>
-            
-            {filteredData.length != 0 && (
-                <div className="dataResult">
-                    {filteredData.slice(0, 15).map((value, key) => {
-                        return (
-                            <NavLink className=" dataItem nav-link text-dark" to={`/products/${value.ProductID}`}>{value.ProductName}</NavLink>
-                        );
-                    })}
-                </div>
+      <div className="search">
+        <div className="searchInputs">
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={wordEntered}
+            onChange={handleFilter}
+          />
+          <div className="searchIcon">
+            {filteredData.length === 0 ? (
+              <i className="fa fa-search fa-2x"></i>
+            ) : (
+              <i onClick={clearInput} className="fa fa-times-circle fa-2x"></i>
             )}
+          </div>
+
+          {filteredData.length != 0 && (
+            <div className="dataResult">
+              {filteredData.slice(0, 15).map((value, key) => {
+                return (
+                  <Link
+                    className=" dataItem nav-link text-dark"
+                    to={`/products/${value.ProductID}`}
+                  >
+                    {value.ProductName}
+                  </Link>
+                );
+              })}
             </div>
+          )}
         </div>
+      </div>
     );
 }
 

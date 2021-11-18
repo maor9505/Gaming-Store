@@ -11,7 +11,7 @@ import { UserContext } from '../Global/UserContext';
 export const ViewsProducts = () => {
     const { user } = useContext(UserContext);
     const { products } = useContext(ProductsContext);
-    const [pageSize, setpageSize] = useState(4);
+    const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);
 
     //sort
@@ -70,12 +70,12 @@ export const ViewsProducts = () => {
                     </div>
                     <div class="backside">
                       <div class="card">
-                        <div class="card-body text-center mt-4">
+                        <div class="card-body text-center mt-4  d-flex flex-column">
                           <h4 class="card-title">{product.ProductName}</h4>
                           <p class="card-text">{product.Description}</p>
                           {user && (
                             <button
-                              className="btn btn-outline-danger"
+                              className="btn btn-outline-danger mt-auto"
                               onClick={() =>
                                 dispatch({
                                   type: "ADD_TO_CART",
