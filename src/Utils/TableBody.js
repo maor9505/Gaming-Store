@@ -9,9 +9,9 @@ export const TableBody = ({ data, columns }) => {
   return (
     <tbody>
       {data.map((item) => (
-        <tr key={item.OrderID}>
+        <tr key={item.ID}>
           {columns.map((col) => (
-            <td key={item.OrderID + (col.path || col.key)}>
+            <td key={item.ID + (col.path || col.key)}>
               {renderCell(item, col)}
             </td>
           ))}

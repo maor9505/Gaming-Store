@@ -111,7 +111,7 @@ export const UserProfile = () => {
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
-                          <label class="p-2" for="phone">
+                          <label class="p-2">
                             Phone
                           </label>
                           <input

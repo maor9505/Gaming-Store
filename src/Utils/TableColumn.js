@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+
+import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline";
+import { db } from "../Config/Config";
+
+import { Icon } from "react-icons-kit";
+import { ProductsContext } from "../Global/ProductsContext";
+import { set } from "lodash";
+
 
 export const ProductColumn = () => {
+       const { dispatch } = useContext(ProductsContext);
+
+   const DeleteProduct = (product) => {
+     db.collection("Products")
+       .doc(product.ProductID)
+       .delete()
+       
+   };
+   
   return [
     {
       path: "ProductImg",
@@ -19,36 +37,71 @@ export const ProductColumn = () => {
       content: (product) => (
         <Link
           to={{
-            pathname: `${product.ProductID}`,
+            pathname: `/products/${product.ID}`,
           }}
         >
           {product.ProductName}
         </Link>
       ),
     },
-    { path: "category.name", label: "Category" },
+    {
+      path: "category.name",
+      label: "Category",
+      content: (product) => <span>{product.Catagory}</span>,
+    },
+    {
+      path: "ProductPrice",
+      label: "Price",
+      content: (product) => <span>{product.ProductPrice}</span>,
+    },
+    {
+      path: "Views",
+      label: "Views",
+      content: (product) => <span>{product.Views}</span>,
+    },
+    {
+      path: "",
+      label: "",
+      content: (product) => (
+        <button
+          className="delete-btn"
+          onClick={() =>
+            DeleteProduct(product)
+          }
+        >
+          <Icon icon={iosTrashOutline} size={24} />
+        </button>
+      ),
+    },
   ];
 };
 
 export const OrdersColumn = () => {
   return [
     {
-      path: "OrderID",
+      path: "UserID",
+      label: "User ID",
+      content: (order) => <span>{order.UserID}</span>,
+    },
+    {
+      path: "ID",
       label: "Order ID",
       content: (order) => (
         <Link
           to={{
-            pathname: `/OrderPage/${order.OrderID}`,
+            pathname: `/OrderPage/${order.ID}`,
           }}
         >
-          {order.OrderID}
+          {order.ID}
         </Link>
       ),
     },
     {
       path: "DateCreate",
       label: "Date Order:",
-      content: (order) => <span>{order.DateCreate}</span>,
+      content: (order) => (
+        <span>{new Date(order.DateCreate).toLocaleString("en-GB")}</span>
+      ),
     },
     {
       path: "TotalPrice",
@@ -63,8 +116,41 @@ export const OrdersColumn = () => {
     {
       path: "Status",
       label: "Status",
-      content: (order) => (
-        <span>{!order.Status ? " In Process" : "Process Complete..."}</span>
+      content: (order) =>
+        order.Status == "Order Cancled" ? (
+          <span class="text-danger">{order.Status}</span>
+        ) : (
+          <span class="text-primary">{order.Status}</span>
+        ),
+    },
+  ];
+};
+export const CatagoryColumn = () => {
+
+
+   const DeleteCatagory = (catagory) => {
+     db.collection("Catagories").doc(catagory.ID).delete();
+   };
+   
+
+  return [
+    {
+      path: "ID",
+      label: "ID",
+      content: (catagory) => <span>{catagory.ID}</span>,
+    },
+    {
+      path: "catagory",
+      label: "Catagory Name",
+      content: (catagory) => <span>{catagory.Catagory_Name}</span>,
+    },
+    {
+      path: "",
+      label: "",
+      content: (catagory) => (
+        <button className="delete-btn" onClick={() => DeleteCatagory(catagory)}>
+          <Icon icon={iosTrashOutline} size={24} />
+        </button>
       ),
     },
   ];

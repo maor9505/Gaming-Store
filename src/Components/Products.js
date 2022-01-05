@@ -15,9 +15,6 @@ export const Products = () => {
     const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);
     const [filterProduct, setFilterProduct] = useState([]);
-    const [priceFilter, setpriceFilter] = useState();
-    const [catagoryFilter, setCatagoryFilter] = useState("");
-    const [catagoryAgeFilter, setCatagoryAgeFilter] = useState("");
     const productsP = paginate(filterProduct, currentPage, pageSize);
     const { dispatch } = useContext(CartContext);
     const history = useHistory();
@@ -30,89 +27,89 @@ useEffect(() => {
         setcurrentPage(page);
     }
 
- const hanldeChangeFilterOption=(type,value)=>{
-     let productFilter = [];
-     switch(type){
-         case 'Catagory':
-             setCatagoryFilter(value);
-             if (value != '0') {
-                 productFilter = products.filter(pro => pro.Catagory == value)
-                 if (catagoryAgeFilter)
-                     productFilter = productFilter.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
-                 if (priceFilter)
-                     productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
-             }
-             else {
-                 setCatagoryFilter("")
-                 setCatagoryAgeFilter("")
-                 setpriceFilter("")
-                 productFilter = [...products]
-             }
-            break;
-         case 'Age':
-             if (value != '0') {
-                 setCatagoryAgeFilter(value)
-                 if (catagoryFilter) {
-                     productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
-                     productFilter = productFilter.filter(pro => pro.CatagoryAge == value)
-                     if (priceFilter)
-                         productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
-                 }
-                 else {
-                     productFilter = products.filter(pro => pro.CatagoryAge == value)
-                     if (priceFilter)
-                         productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
-                 }
-             }
-             else {
-                 if (catagoryFilter) {
-                     productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
-                     if (priceFilter)
-                         productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
-                     setCatagoryAgeFilter("")
-                 }
-                 else {
-                     productFilter = [...products]
-                     setCatagoryFilter("")
-                     setCatagoryAgeFilter("")
-                 }
+//  const hanldeChangeFilterOption=(type,value)=>{
+//      let productFilter = [];
+//      switch(type){
+//          case 'Catagory':
+//              setCatagoryFilter(value);
+//              if (value != '0') {
+//                  productFilter = products.filter(pro => pro.Catagory == value)
+//                  if (catagoryAgeFilter)
+//                      productFilter = productFilter.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
+//                  if (priceFilter)
+//                      productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
+//              }
+//              else {
+//                  setCatagoryFilter("")
+//                  setCatagoryAgeFilter("")
+//                  setpriceFilter("")
+//                  productFilter = [...products]
+//              }
+//             break;
+//          case 'Age':
+//              if (value != '0') {
+//                  setCatagoryAgeFilter(value)
+//                  if (catagoryFilter) {
+//                      productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
+//                      productFilter = productFilter.filter(pro => pro.CatagoryAge == value)
+//                      if (priceFilter)
+//                          productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
+//                  }
+//                  else {
+//                      productFilter = products.filter(pro => pro.CatagoryAge == value)
+//                      if (priceFilter)
+//                          productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
+//                  }
+//              }
+//              else {
+//                  if (catagoryFilter) {
+//                      productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
+//                      if (priceFilter)
+//                          productFilter = productFilter.filter(pro => pro.ProductPrice <= priceFilter)
+//                      setCatagoryAgeFilter("")
+//                  }
+//                  else {
+//                      productFilter = [...products]
+//                      setCatagoryFilter("")
+//                      setCatagoryAgeFilter("")
+//                  }
 
-             }
-             break;
-         case 'Price':
-             setpriceFilter(value)
-             if (catagoryFilter) {
-                 productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
-                 if (catagoryAgeFilter)
-                     productFilter = productFilter.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
-                 if (value)
-                     productFilter = productFilter.filter(pro => pro.ProductPrice <= value)
-             }
-             else if (catagoryAgeFilter && !catagoryFilter) {
-                 productFilter = products.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
-                 if (value)
-                     productFilter = productFilter.filter(pro => pro.ProductPrice <= value)
-             }
-             else if (value && !catagoryAgeFilter && !catagoryFilter) {
-                 productFilter = products.filter(pro => pro.ProductPrice <= value)
+//              }
+//              break;
+//          case 'Price':
+//              setpriceFilter(value)
+//              if (catagoryFilter) {
+//                  productFilter = products.filter(pro => pro.Catagory == catagoryFilter)
+//                  if (catagoryAgeFilter)
+//                      productFilter = productFilter.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
+//                  if (value)
+//                      productFilter = productFilter.filter(pro => pro.ProductPrice <= value)
+//              }
+//              else if (catagoryAgeFilter && !catagoryFilter) {
+//                  productFilter = products.filter(pro => pro.CatagoryAge == catagoryAgeFilter)
+//                  if (value)
+//                      productFilter = productFilter.filter(pro => pro.ProductPrice <= value)
+//              }
+//              else if (value && !catagoryAgeFilter && !catagoryFilter) {
+//                  productFilter = products.filter(pro => pro.ProductPrice <= value)
 
-             } else {
-                 productFilter = [...products]
+//              } else {
+//                  productFilter = [...products]
 
-             }
-             break;
-         default:
-             productFilter = [...products]
+//              }
+//              break;
+//          default:
+//              productFilter = [...products]
 
-     }
-     setFilterProduct(productFilter)
+//      }
+//      setFilterProduct(productFilter)
 
- }
+//  }
     return (
       <>
         {productsP.length !== 0 && <h1> Products</h1>}
         <div class="container">
-          <HeaderProducts hanldeChangeFilterOption={hanldeChangeFilterOption} />
+          <HeaderProducts data={products} setFilterProduct={setFilterProduct} />
         </div>
 
         <div class="container d-flex justify-content-center">
@@ -123,12 +120,12 @@ useEffect(() => {
           )}
           <div class="container d-flex justify-content-center">
             {productsP.map((product) => (
-              <div class="col-xs-12 col-xs-6 col-md-4 ">
+              <div class="col-xs-12 col-xs-6 col-md-4 " key={product.ID}>
                 <div class="image-flip">
                   <div class="mainflip flip-0">
                     <Link
                       class="nav-link text-dark img-wrap"
-                      to={`/products/${product.ProductID}`}
+                      to={`/products/${product.ID}`}
                     >
                       <div class="frontside">
                         <div class="card">
@@ -146,13 +143,14 @@ useEffect(() => {
                               Price: {product.ProductPrice}$$
                             </p>
                             <p class="card-text">Views: {product.Views}</p>
+                            <p class="card-text">Sales: {product.Sales}</p>
 
-                            <a
+                            <span
                               href="https://www.fiverr.com/share/qb8D02"
                               class="btn btn-success btn-sm"
                             >
                               <i class="fa fa-plus"></i>
-                            </a>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -161,8 +159,7 @@ useEffect(() => {
                           <div class="card-body text-center mt-4 d-flex flex-column">
                             <h4 class="card-title">{product.ProductName}</h4>
                             <p class="card-text">{product.Description}</p>
-                            {user && (
-
+                            {/* {user && (
                               <button
                                 className="btn btn-outline-danger mt-auto "
                                 onClick={() =>
@@ -175,7 +172,7 @@ useEffect(() => {
                               >
                                 ADD TO CART
                               </button>
-                            )}
+                            )} */}
                           </div>
                         </div>
                       </div>

@@ -27,7 +27,6 @@ export const ViewsProducts = () => {
         setcurrentPage(page);
     }
 
-    const { dispatch } = useContext(CartContext);
     return (
       <>
         {productsP.length !== 0 && <h1> Views Products</h1>}
@@ -35,7 +34,7 @@ export const ViewsProducts = () => {
         <div class="container d-flex justify-content-center">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div  key={ product.ID } class="col-xs-12 col-sm-6 col-md-4">
               <div class="image-flip">
                 <div class="mainflip flip-0">
                   <Link
@@ -58,13 +57,14 @@ export const ViewsProducts = () => {
                             Price: {product.ProductPrice}$$
                           </p>
                           <p class="card-text">Views: {product.Views}</p>
+                          <p class="card-text">Sales: {product.Sales}</p>
 
-                          <a
+                          <span
                             href="https://www.fiverr.com/share/qb8D02"
                             class="btn btn-success btn-sm"
                           >
                             <i class="fa fa-plus"></i>
-                          </a>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -73,20 +73,7 @@ export const ViewsProducts = () => {
                         <div class="card-body text-center mt-4  d-flex flex-column">
                           <h4 class="card-title">{product.ProductName}</h4>
                           <p class="card-text">{product.Description}</p>
-                          {user && (
-                            <button
-                              className="btn btn-outline-danger mt-auto"
-                              onClick={() =>
-                                dispatch({
-                                  type: "ADD_TO_CART",
-                                  id: product.ProductID,
-                                  product,
-                                })
-                              }
-                            >
-                              ADD TO CART
-                            </button>
-                          )}
+                         
                         </div>
                       </div>
                     </div>

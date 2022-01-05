@@ -11,8 +11,7 @@ export const Navbar = () => {
   const { products } = useContext(ProductsContext);
   const { user, setUser } = useContext(UserContext);
     const { cartUser } = useContext(CartContext);
-    console.log('cart')
-console.log(cartUser)
+
   const ifAdmin = user && user.type == "admin" ? true : false;
   const history = useHistory();
 
@@ -47,15 +46,15 @@ console.log(cartUser)
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link text-dark" to="/products">
+              <Link className="nav-link text-dark" to="/products">
                 Products
-              </NavLink>
+              </Link>
             </li>
             <li class="nav-item">
-              <NavLink className="nav-link text-dark" to="/viewsproducts">
+              <Link className="nav-link text-dark" to="/viewsproducts">
                 {" "}
                 Views Products
-              </NavLink>
+              </Link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
@@ -83,25 +82,21 @@ console.log(cartUser)
           {/* //// */}
           {user && (
             <div class="d-flex align-items-center">
-              <a class="text-reset " href="#">
-                <Link class="nav-link text-dark" to="/cart">
-                  <i class="fa fa-shopping-cart fa-3x mr-2"></i>
-                  <span class="badge badge-secondary text-success mt-2">
-                    {cartUser.length}
-                  </span>
-                </Link>
-              </a>
+              <Link class="nav-link text-dark  position-relative" to="/cart">
+                <i class="fa fa-shopping-cart fa-3x mr-2"></i>
+                <span class="position-absolute top-3 start-100 translate-middle badge rounded-pill bg-danger">
+                  {cartUser.length}
+                </span>
+              </Link>
               {user && ifAdmin && (
-                <a class="text-reset " href="#">
-                  <Link class="nav-link text-dark" to="/">
-                    <button
-                      type="button"
-                      class="btn btn-outline-danger  border-danger"
-                    >
-                      Dashboard
-                    </button>
-                  </Link>
-                </a>
+                <Link class="nav-link text-dark" to="/dashboard">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger  border-danger"
+                  >
+                    Dashboard
+                  </button>
+                </Link>
               )}
               <div class="dropdown">
                 <button
@@ -117,45 +112,38 @@ console.log(cartUser)
                   class="dropdown-menu dropdown-menu-dark"
                   aria-labelledby="dropdownMenuButton2"
                 >
-                  <li>
-                    <a class="dropdown-item ">
-                      <Link
-                        to="/orders"
-                        class="navlink  btn-outline-success btn-lg"
-                      >
-                        Orders
-                      </Link>
-                    </a>
+                  <li >
+                    <Link
+                      to="/orders"
+                      class="navlink  btn-outline-success btn-lg"
+                    >
+                      Orders
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item ">
-                      <Link
-                        to="/userprofile"
-                        class="navlink  btn-outline-success btn-lg"
-                      >
-                        Profile
-                      </Link>
-                    </a>
+                    <Link
+                      to="/userprofile"
+                      class="navlink  btn-outline-success btn-lg"
+                    >
+                      Profile
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item ">
-                      <Link
-                        to="/contact"
-                        class="navlink  btn-outline-success btn-lg"
-                      >
-                        Contact
-                      </Link>
-                    </a>
+                    <Link
+                      to="/contact"
+                      class="navlink  btn-outline-success btn-lg"
+                    >
+                      Contact
+                    </Link>
                   </li>
-                  <li>
-                    <a class="dropdown-item ">
-                      <Link
-                        class="navlink  btn-outline-success btn-lg"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </Link>
-                    </a>
+                  <li >
+                    <Link
+                      class="navlink  btn-outline-success btn-lg"
+                      onClick={handleLogout}
+                      to="/"
+                    >
+                      Logout
+                    </Link>
                   </li>
                 </ul>
               </div>

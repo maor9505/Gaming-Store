@@ -1,6 +1,6 @@
-import React, { createContext,useEffect,useState } from 'react'
+import React, { createContext,useEffect,useState,useReducer } from 'react'
 import { db } from '../Config/Config'
-import { getProduct } from '../DbModal/Product';
+import {getProduct} from '../DbModal/Product'
 export const ProductsContext = createContext();
 
 export const ProductsContextProvider = (props) => {
@@ -8,19 +8,30 @@ export const ProductsContextProvider = (props) => {
     const [spinner, setSpinner] = useState(true);
 
     useEffect(() => {
-        const prevProducts = [];
-        db.collection('Products').onSnapshot(snapshot => {
-            snapshot.docs.map( (doc) => (
-                    prevProducts.push(getProduct(doc))
-            ))
-                setProducts(prevProducts)
-                setSpinner(false);
-            })
-    }, [])
+      
+     const getP = () => {
+        db.collection("Products").onSnapshot((snapshot) => {
+        let prevProducts = [];
+         snapshot.docs.map((doc) => prevProducts.push(getProduct(doc)));
+         setProducts([...prevProducts]);
+         setSpinner(false);
+       });
+     };
+     
+     getP();
+    },[])
 
+   
     return (
-        <ProductsContext.Provider value={{ products: [...products],spinner:spinner }}>
-            {props.children}
-        </ProductsContext.Provider>
-    )
+      <ProductsContext.Provider
+        value={{
+          products: [...products],
+          spinner: spinner,
+        }}
+        
+      >
+        {props.children}
+      </ProductsContext.Provider>
+    );
 }
+ 

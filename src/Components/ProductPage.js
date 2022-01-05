@@ -17,12 +17,12 @@ export const ProductPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const product = products.find((product) => product.ProductID == id);
+    const product = products.find((product) => product.ID == id);
     setproduct(product);
   }, [products]);
 
   useEffect(() => {
-    const p = products.find((element) => element.ProductID === id);
+    const p = products.find((element) => element.ID === id);
     if (p) {
       p.Views += 1;
       db.collection("Products").doc(id).update(p);
@@ -70,6 +70,7 @@ export const ProductPage = () => {
                         <hr className="singleline" />
                         <h3>Views:&ensp;{product.Views}</h3>
                         <hr className="singleline" />
+                        <h3>Sales:&ensp;{product.Sales}</h3>
                       </div>
                       {user && (
                         <button

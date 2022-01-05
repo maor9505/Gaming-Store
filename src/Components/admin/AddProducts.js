@@ -59,6 +59,7 @@ export const AddProducts = () => {
                         Catagory:catagory,
                         CatagoryAge: catagoryAge,
                         Views:0,
+                        Sales:0,
                         DateCreate: date,
                         UplodeDate: date.getTime()
                     }).then(() => {
@@ -83,6 +84,7 @@ export const AddProducts = () => {
                     }).catch(err => setError(err.message))
                 })
             })
+            
     }
 
     return (
@@ -108,7 +110,7 @@ export const AddProducts = () => {
                 <select class="form-select" aria-label="Default select example"
                     onChange={(e) => setCatagory(e.target.value)} value={catagory} >
                     <option selected>Choose Catagory</option>
-                    {catagoryOption.map(ca => <option value={ca.name}>{ca.name}</option>)}
+                    {catagoryOption.map(ca => <option  key={ca.name}value={ca.name}>{ca.name}</option>)}
                 </select>
                 <br />
                 <select class="form-select" aria-label="Default select example"

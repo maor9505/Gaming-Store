@@ -17,7 +17,7 @@ const [order, setOrder] = useState();
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
-      const order = orders.find((order) => order.OrderID == id);
+      const order = orders.find((order) => order.ID == id);
       console.log(order);
       setOrder(order)
   },[orders]);
@@ -26,17 +26,17 @@ const [order, setOrder] = useState();
         db.collection("Orders")
           .doc(user.uid + " Orders")
           .collection("OrderDetails")
-          .doc(order.OrderID)
-          .delete()
+          .doc(order.ID)
+          .update({
+            Status:'Order Cancled'
+          })
           .then(() => {
-            ToastAlert('Delete Order Success')
-            history.push('/orders')
+            ToastAlert('Cancle Order Success')
           })
     
  }
   return (
     <div>
-      
       {!order && <div class="top">slow internet...no order to display</div>}
       {order && (
         <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
@@ -74,8 +74,8 @@ const [order, setOrder] = useState();
                   </thead>
                   <tbody>
                     {order.Products.map((p) => (
-                      <tr>
-                        <td class="left strong">{p.ProductID}</td>
+                      <tr key={p.ID}>
+                        <td class="left strong">{p.ID}</td>
                         <td class="left">{p.ProductName}</td>
                         <td class="right">{p.ProductPrice}</td>
                         <td class="center">{p.qty}</td>
@@ -105,18 +105,28 @@ const [order, setOrder] = useState();
                       </tr>
                     </tbody>
                   </table>
+                  {order.Status == "In Procces..." && (
+                    <button
+                      className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
+                      onClick={CancleOrder}
+                    >
+                      Cancle Order....
+                    </button>
+                  )}
+                  {order.Status == "Order Cancled" && (
+                    <h1>
+                      {" "}
+                      <span class="badge bg-light text-danger">
+                        Order Cancled
+                      </span>
+                    </h1>
+                  )}
                 </div>
               </div>
             </div>
-            {!order.Status && (
-              <button className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
-              onClick={CancleOrder}>
-                Cancle Order....
-              </button>
-            )}
           </div>
         </div>
       )}
-      </div>
+    </div>
   );
 };

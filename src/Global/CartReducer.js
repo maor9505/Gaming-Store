@@ -6,7 +6,7 @@ import { ToastAlert } from "../Utils/Toast";
 import { UserContext } from "./UserContext";
 
 export const CartReducer = (state, action) => {
-  const uid = auth.currentUser.uid;
+    let uid = auth.currentUser.uid;
   let product;
 
   switch (action.type) {
@@ -16,12 +16,13 @@ export const CartReducer = (state, action) => {
       db.collection("Cart")
         .doc("Cart " + uid)
         .collection("CartProducts")
-        .doc(product.ProductID)
+        .doc(product.ID)
         .set(product)
         .then(() => {
           console.log("success uplode to cart user");
-        });
-      ToastAlert("this product is Add to Cart");
+          ToastAlert("this product is Add to Cart");
+        })
+        .catch((err) => console.log(err.message));
     
       break;
 
@@ -31,7 +32,7 @@ export const CartReducer = (state, action) => {
       db.collection("Cart")
         .doc("Cart " + uid)
         .collection("CartProducts")
-        .doc(product.ProductID)
+        .doc(product.ID)
         .update(product);
       break;
 
@@ -42,7 +43,7 @@ export const CartReducer = (state, action) => {
         db.collection("Cart")
           .doc("Cart " + uid)
           .collection("CartProducts")
-          .doc(product.ProductID)
+          .doc(product.ID)
           .update(product);
       } else {
         return state;
@@ -50,11 +51,14 @@ export const CartReducer = (state, action) => {
       break;
 
     case "DELETE":
+      console.log('delte')
       product = action.cart;
+            console.log(product.ID);
+
       db.collection("Cart")
         .doc("Cart " + uid)
         .collection("CartProducts")
-        .doc(product.ProductID)
+        .doc(product.ID)
         .delete();
 
       break;

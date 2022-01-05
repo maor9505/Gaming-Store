@@ -15,7 +15,7 @@ export const Contact = () => {
     const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     e.preventDefault();
     db.collection("Contact")
-      .doc(name + " " + time)
+      .doc()
       .set({
         Name: name,
         Email: email,
@@ -100,5 +100,6 @@ export const Contact = () => {
         </div>
       </form>
     </div>
+
   );
 };

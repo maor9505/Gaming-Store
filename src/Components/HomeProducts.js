@@ -13,27 +13,27 @@ export const HomeProducts = () => {
      const [productsP, setproductsP] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
     const { dispatch } = useContext(CartContext);
-
 useEffect(() => {
-    setproductsP([...products]);
+  setproductsP([...products]);
 }, [products]);
 
 useEffect(() => {
-  let sortProductsByviews = productsP.sort((a, b) => b.Views - a.Views);
+  let sortProductsByviews = productsP.sort((a, b) => b.Sales - a.Sales);
   sortProductsByviews = sortProductsByviews.slice(0, 3);
   setFilterProduct(sortProductsByviews);
 }, [productsP]);
+
 
     return (
       <div class="container d-flex justify-content-center">
         {filterProduct.length === 0 && <div>No Products To Display...</div>}
         {filterProduct.map((product) => (
-          <div class="col-xs-12 col-sm-6 col-md-4">
+          <div  key={product.ID}class="col-xs-12 col-sm-6 col-md-4">
             <div class="image-flip">
               <div class="mainflip flip-0">
                 <Link
                   class="nav-link text-dark img-wrap"
-                  to={`/products/${product.ProductID}`}
+                  to={`/products/${product.ID}`}
                 >
                   <div class="frontside">
                     <div class="card">
@@ -49,13 +49,14 @@ useEffect(() => {
                         <p class="card-text">{product.Catagory}</p>
                         <p class="card-text">Price: {product.ProductPrice}$$</p>
                         <p class="card-text">Views: {product.Views}</p>
+                        <p class="card-text">Sales: {product.Sales}</p>
 
-                        <a
+                        <span
                           href="https://www.fiverr.com/share/qb8D02"
                           class="btn btn-success btn-sm"
                         >
                           <i class="fa fa-plus"></i>
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -64,20 +65,7 @@ useEffect(() => {
                       <div class="card-body text-center mt-4  d-flex flex-column">
                         <h4 class="card-title">{product.ProductName}</h4>
                         <p class="card-text">{product.Description}</p>
-                        {user && (
-                          <button
-                            className="btn btn-outline-danger mt-auto"
-                            onClick={() =>
-                              dispatch({
-                                type: "ADD_TO_CART",
-                                id: product.ProductID,
-                                product,
-                              })
-                            }
-                          >
-                            ADD TO CART
-                          </button>
-                        )}
+                       
                       </div>
                     </div>
                   </div>

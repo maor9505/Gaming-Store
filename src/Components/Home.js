@@ -1,14 +1,20 @@
-import React, {useContext, useEffect } from "react";
+import React, {useContext, useEffect,useState } from "react";
 import { ProductsContext } from "../Global/ProductsContext";
 import { Products } from "./Products";
 import { HeroMain } from "./common/HeroMain";
 import { HomeProducts } from "./HomeProducts";
 import { LoadingPage } from "./loading-page/LoadingPage";
 import { Contact } from "./common/Contact";
+import { AdminOrderContext } from "../Global/AdminOrdersContext";
 
 export const Home = () => {
-  const { spinner } = useContext(ProductsContext);
-
+  const { products, spinner } = useContext(ProductsContext);
+   const { AllOrderUsers } = useContext(AdminOrderContext);
+    // useEffect(() => {
+    //   // setViewDashboard(<HomeView />);
+    //   console.log("home");
+    //   console.log(AllOrderUsers);
+    // }, [AllOrderUsers]);
 
   return (
     <div className="container-fluid">
@@ -22,8 +28,9 @@ export const Home = () => {
         )}
         {!spinner && (
           <div>
-            <h1> Views Products</h1>
+            <h1> Sales Products</h1>
             <HomeProducts />
+            
             <h1></h1>
             <Products />
             <h1></h1>

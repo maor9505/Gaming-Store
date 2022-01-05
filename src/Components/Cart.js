@@ -53,30 +53,36 @@ export const Cart = () => {
             ShippingAddress: paymentRequest.shippingAddress,
             DateCreate: date,
             DateTime: time,
-            Status: false,
+            Status: 'In Procces...',
           })
           .then(() => {
+            cartUser.map((p) =>
+              db.collection("Products")
+                .doc(p.ProductID)
+                .update({
+                  Sales: p.Sales + 1,
+                })
+            );
             console.log("success Order to db");
             // Delete cart user after order succes
             db.collection("Cart")
               .doc("Cart " + user.uid)
               .collection("CartProducts")
-              .onSnapshot((snapshot) => {
+              .get()
+              .then((snapshot) => {
                 snapshot.docs.map((doc) => {
                   db.collection("Cart")
                     .doc("Cart " + user.uid)
                     .collection("CartProducts")
                     .doc(doc.id)
                     .delete()
-                    .then(() => {
-                      console.log("Delete Cart user");
-                    })
                     .catch((err) => console.log(err.message));
                 });
               });
+             ToastAlert("Order Success");
+             history.push('/orders')
           })
           .catch((err) => console.log(err.message));
-        ToastAlert('Order Success');
     }
 
     
@@ -98,14 +104,14 @@ export const Cart = () => {
           )}
           {cartUser &&
             cartUser.map((cart) => (
-              <div className="cart-card" key={cart.ProductID}>
+              <div className="cart-card" key={cart.ID}>
                 <div className="cart-img">
                   <img src={cart.ProductImg} alt="not found" />
                 </div>
                 <div>
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
-                    to={{ pathname: `/products/${cart.ProductID}` }}
+                    to={{ pathname: `/products/${cart.ID}` }}
                   >
                     {cart.ProductName}
                   </Link>
@@ -118,7 +124,7 @@ export const Cart = () => {
                 <div
                   className="inc"
                   onClick={() =>
-                    dispatch({ type: "INC", id: cart.ProductID, cart })
+                    dispatch({ type: "INC", id: cart.ID, cart })
                   }
                 >
                   <Icon icon={ic_add} size={24} />
@@ -129,7 +135,7 @@ export const Cart = () => {
                 <div
                   className="dec"
                   onClick={() =>
-                    dispatch({ type: "DEC", id: cart.ProductID, cart })
+                    dispatch({ type: "DEC", id: cart.ID, cart })
                   }
                 >
                   <Icon icon={ic_remove} size={24} />
@@ -142,7 +148,7 @@ export const Cart = () => {
                 <button
                   className="delete-btn"
                   onClick={() =>
-                    dispatch({ type: "DELETE", id: cart.ProductID, cart })
+                    dispatch({ type: "DELETE", id: cart.ID, cart })
                   }
                 >
                   <Icon icon={iosTrashOutline} size={24} />

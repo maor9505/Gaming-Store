@@ -21,6 +21,9 @@ import { Orders } from "./Components/Orders";
 import { OrderPage } from "./Components/OrderPage";
 import { OrderContextProvider } from "./Global/OrderContext";
 import ScrollToTop from "./Utils/ScrollToTop";
+import { Dashboard } from "./Components/admin/Dashboard";
+import { AdminOrdersContextProvider } from "./Global/AdminOrdersContext";
+import { HomeView } from "./Components/admin/HomeView";
 
 export const App = () => {
   return (
@@ -30,49 +33,60 @@ export const App = () => {
         <ProductsContextProvider>
           <CartContextProvider>
             <OrderContextProvider>
+              <AdminOrdersContextProvider>
                 <div id="container">
-
-              <Navbar />
+                  <Navbar />
                   <div id="main-content">
-
-                <Switch>
-                  {/* home */}
-                  <Route exact path="/" component={Home} />
-                  {/* signup */}
-                  <Route path="/signup" component={Signup} />
-                  {/* login */}
-                  <Route path="/login" component={Login} />
-                  {/* cart products} */}
-                  <Route path="/cart" component={Cart} />
-                  {/*  ProductPage  } */}
-                  <Route path="/products/:id" component={ProductPage}></Route>
-                  {/*  Order Page  } */}
-                  <Route path="/OrderPage/:id" component={OrderPage}></Route>
-                  {/*  Products } */}
-                  <Route path="/products" component={Products}></Route>
-                  {/*  Views Products } */}
-                  <Route
-                    path="/viewsproducts"
-                    component={ViewsProducts}
-                  ></Route>
-                  {/*  User Profile} */}
-                  <Route path="/userprofile" component={UserProfile}></Route>
-                  {/* add products */}
-                  <Route path="/addproducts" component={AddProducts} />
-                  {/* add products */}
-                  <Route path="/addcatagory" component={AddCatagory} />
-                  {/* Contact */}
-                  <Route path="/contact" component={Contact} />
-                  {/* Contact */}
-                  <Route path="/orders" component={Orders} />
-                  {/* not-found */}
-                  <Route path="/not-found" component={NotFound} />
-                  <Redirect from="/" exact to="/" />
-                  <Redirect to="/not-found" />
-                </Switch>
+                    <Switch>
+                      {/* home */}
+                      <Route exact path="/" component={Home} />
+                      {/* signup */}
+                      <Route path="/signup" component={Signup} />
+                      {/* login */}
+                      <Route path="/login" component={Login} />
+                      {/* cart products} */}
+                      <Route path="/cart" component={Cart} />
+                      {/*  ProductPage  } */}
+                      <Route
+                        path="/products/:id"
+                        component={ProductPage}
+                      ></Route>
+                      {/*  Order Page  } */}
+                      <Route
+                        path="/OrderPage/:id"
+                        component={OrderPage}
+                      ></Route>
+                      {/*  Products } */}
+                      <Route path="/products" component={Products}></Route>
+                      {/*  Views Products } */}
+                      <Route
+                        path="/viewsproducts"
+                        component={ViewsProducts}
+                      ></Route>
+                      {/*  User Profile} */}
+                      <Route
+                        path="/userprofile"
+                        component={UserProfile}
+                      ></Route>
+                      {/* add products */}
+                      <Route path="/addproducts" component={AddProducts} />
+                      {/* add products */}
+                      <Route path="/addcatagory" component={AddCatagory} />
+                      {/* Contact */}
+                      <Route path="/contact" component={Contact} />
+                      {/* Contact */}
+                      <Route path="/orders" component={Orders} />
+                      {/* Dashboard */}
+                      <Route path="/dashboard" component={Dashboard} />
+                      {/* not-found */}
+                      <Route path="/not-found" component={NotFound} />
+                      <Redirect from="/" exact to="/" />
+                      <Redirect to="/not-found" />
+                    </Switch>
+                  </div>
+                  <Footer />
                 </div>
-              <Footer />
-              </div>
+              </AdminOrdersContextProvider>
             </OrderContextProvider>
           </CartContextProvider>
         </ProductsContextProvider>

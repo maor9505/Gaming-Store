@@ -1,9 +1,9 @@
-import { getProductArray } from "./Product";
+import { db } from "../Config/Config";
 
 export const getOrder = (doc) => {
   return {
-    OrderID: doc.id,
-    DateCreate: doc.data().DateCreate.toDate().toString(),
+    ID: doc.id,
+    DateCreate: doc.data().DateCreate.toMillis(),
     TotalPrice: doc.data().TotalPrice,
     TotalQty: doc.data().TotalQty,
     Products: doc.data().Products,

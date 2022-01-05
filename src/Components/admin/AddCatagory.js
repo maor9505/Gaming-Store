@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {db } from '../../Config/Config'
  import { useHistory } from 'react-router-dom'
+import { ToastAlert } from '../../Utils/Toast';
 
 export const AddCatagory = () => {
      const history = useHistory();
@@ -17,13 +18,14 @@ export const AddCatagory = () => {
                     }).then(() => {
                         setCatagoryName('');
                         setError('');
+                        ToastAlert('Add Catagory success')
                     }).catch(err => setError(err.message))
         
                 }
     
 const handleBack=()=>{
     //handle to admin dashboard
- history.push('/');
+ history.push('/dashboard');
 }
     return (
         <div className='container'>
