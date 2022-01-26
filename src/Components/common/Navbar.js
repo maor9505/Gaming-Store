@@ -57,9 +57,10 @@ export const Navbar = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                ??
-              </a>
+              <Link className="nav-link text-dark" to="/about">
+                {" "}
+                About Us
+              </Link>
             </li>
           </ul>
 
@@ -112,7 +113,7 @@ export const Navbar = () => {
                   class="dropdown-menu dropdown-menu-dark"
                   aria-labelledby="dropdownMenuButton2"
                 >
-                  <li >
+                  <li>
                     <Link
                       to="/orders"
                       class="navlink  btn-outline-success btn-lg"
@@ -136,7 +137,7 @@ export const Navbar = () => {
                       Contact
                     </Link>
                   </li>
-                  <li >
+                  <li>
                     <Link
                       class="navlink  btn-outline-success btn-lg"
                       onClick={handleLogout}

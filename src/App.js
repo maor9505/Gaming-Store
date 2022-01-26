@@ -24,6 +24,7 @@ import ScrollToTop from "./Utils/ScrollToTop";
 import { Dashboard } from "./Components/admin/Dashboard";
 import { AdminOrdersContextProvider } from "./Global/AdminOrdersContext";
 import { HomeView } from "./Components/admin/HomeView";
+import { AboutMe } from "./Components/AboutMe";
 
 export const App = () => {
   return (
@@ -62,6 +63,11 @@ export const App = () => {
                       <Route
                         path="/viewsproducts"
                         component={ViewsProducts}
+                      ></Route>
+                      {/*  About Me } */}
+                      <Route
+                        path="/about"
+                        component={AboutMe}
                       ></Route>
                       {/*  User Profile} */}
                       <Route
