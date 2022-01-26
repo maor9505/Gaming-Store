@@ -10,7 +10,7 @@ export const Table = ({ data, Columns }) => {
   const [arrayData, setarrayData] = useState([]);
   const [sortColumn, setsortColumn] = useState({ path: "title", order: "asc" });
   const [columns, setcolumns] = useState([]);
-  const [pageSize, setpageSize] = useState(10);
+  const [pageSize, setpageSize] = useState(8);
   const [currentPage, setcurrentPage] = useState(1);
   const ordersP = paginate(arrayData, currentPage, pageSize);
   

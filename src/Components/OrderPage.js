@@ -21,8 +21,8 @@ const [order, setOrder] = useState();
       console.log(order);
       setOrder(order)
   },[orders]);
+
  const CancleOrder =()=>{
-   
         db.collection("Orders")
           .doc(user.uid + " Orders")
           .collection("OrderDetails")
@@ -44,7 +44,7 @@ const [order, setOrder] = useState();
             <div class="p-4">
               <div class="float-right">
                 <h3 class="mb-0">Order-Number: {order.OrderID}</h3>
-                Date-Order: {order.DateCreate}
+                Date-Order: {new Date(order.DateCreate).toLocaleString("en-GB")}
               </div>
             </div>
             <div class="card-body">

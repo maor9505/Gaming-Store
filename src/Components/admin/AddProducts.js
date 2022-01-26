@@ -92,7 +92,7 @@ export const AddProducts = () => {
         <div className='container'>
             <br />
             {/* <button onClick={getCatgories}>????</button> */}
-            <h2>ADD PRODUCTS</h2>
+            <h2>Add Product:</h2>
             <hr />
             <form autoComplete="off" className='form-group' onSubmit={addProduct}>
                 <label htmlFor="product-name">Product Name</label>

@@ -30,7 +30,7 @@ export const Orders = () => {
       {!spinner && (
         <div class="container">
           <div>
-            <span>total:{orders.length}</span>
+            <span class='text-success'>Total:{orders.length}</span>
             <Table data={[...orders]} Columns={OrdersColumn}></Table>
           </div>
         </div>

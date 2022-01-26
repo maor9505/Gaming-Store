@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 
 import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline";
+import { ic_mode_edit } from "react-icons-kit/md/ic_mode_edit";
 import { db } from "../Config/Config";
-
 import { Icon } from "react-icons-kit";
 import { ProductsContext } from "../Global/ProductsContext";
 import { set } from "lodash";
+import { EditProductModal } from "../Components/admin/EditProductModal";
 
 
 export const ProductColumn = () => {
@@ -63,14 +64,19 @@ export const ProductColumn = () => {
       path: "",
       label: "",
       content: (product) => (
-        <button
-          className="delete-btn"
-          onClick={() =>
-            DeleteProduct(product)
-          }
-        >
+        <button className="delete-btn" onClick={() => DeleteProduct(product)}>
           <Icon icon={iosTrashOutline} size={24} />
         </button>
+      ),
+    },
+    {
+      path: "",
+      label: "",
+      content: (product) => (
+        // <button className="delete-btn" onClick={() => }>
+        //   <Icon icon={ic_mode_edit} size={24} />
+        // </button>
+        <EditProductModal product={product}/>
       ),
     },
   ];

@@ -64,7 +64,7 @@ export const HomeView = () => {
       </h3>
       <PanelView
         cardOne={ordersTotal}
-        cardOneText={"Order Total..."}
+        cardOneText={"Total Orders..."}
         cardTwo={incomeTotal+"$"}
         cardTwoText={"Total Income..."}
         cardThree={waitOrders}
@@ -78,11 +78,11 @@ export const HomeView = () => {
       </h3>
       <PanelView
         cardOne={productsTotal}
-        cardOneText={"Products Total..."}
+        cardOneText={"Total Products..."}
         cardTwo={viewsTotal}
-        cardTwoText={"Views Total..."}
+        cardTwoText={"Total Views..."}
         cardThree={mostViewProducts}
-        cardThreeText={"Most view Product..."}
+        cardThreeText={"Most View Product..."}
         cardFor={"?"}
         cardForText={"???"}
       />

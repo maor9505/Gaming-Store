@@ -88,7 +88,7 @@ export const Cart = () => {
     
     return (
       <>
-        {cartUser.length !== 0 && <h1>Cart</h1>}
+        {cartUser.length !== 0 && <h1 class='text-success'>Cart</h1>}
 
         <div className="cart-container">
           {cartUser.length === 0 && (
