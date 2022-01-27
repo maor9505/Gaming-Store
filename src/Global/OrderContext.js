@@ -9,6 +9,7 @@ export const OrderContextProvider = (props) => {
   const [orders, setOrders] = useState([]);
   const [spinner, setSpinner] = useState(true);
 
+  // get user order if his login 
   useEffect(() => {
       if(user){
    getOrders();

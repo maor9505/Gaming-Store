@@ -12,6 +12,8 @@ export const ContactsView = () => {
   const [contactsTotal, setcontactsTotal] = useState(0);
   const [contactsUnread, setcontactsUnread] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
+
+  //get contacts values from db
   useEffect(() => {
     db.collection("Contact").onSnapshot((snapshot) => {
       let prevContacts = [];
@@ -27,6 +29,8 @@ export const ContactsView = () => {
     });
   }, []);
 
+
+  // filter contacts data UNRead.lenth - Filter Desc
   useEffect(() => {
     if (contactsData.length != 0) {
       setcontactsTotal(contactsData.length);
@@ -38,10 +42,12 @@ export const ContactsView = () => {
     }
   }, [contactsData]);
 
+  // return filter data-Desc
   const filterContactsDesc = () => {
     return orderBy(contactsData, "DateCreate", "desc");
   };
 
+  // filter data By Date
   const filterArrayByDate = (value) => {
     setdateFilter(value);
     const arr = [];
@@ -63,16 +69,19 @@ export const ContactsView = () => {
     });
     setfilterContacts(arr);
   };
+
   const cancleDateB = () => {
     setdateFilter("");
     setfilterContacts(filterContactsDesc());
   };
+  // update in db the message to Read
   const UpdateReadContact = (contact) =>
   {
     db.collection('Contact').doc(contact.ID).update({
         IsRead:true
     })
   }
+  // delete contact from db 
   const DeleteContact = (contact) => {
     db.collection("Contact").doc(contact.ID).delete();
   };

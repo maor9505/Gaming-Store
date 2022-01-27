@@ -1,6 +1,5 @@
 import React, { useState, useContext,useEffect } from 'react'
 import { db } from '../../Config/Config'
-import { ProductsContext } from '../../Global/ProductsContext';
 
 
 export const HeaderProducts = ({ data, setFilterProduct }) => {

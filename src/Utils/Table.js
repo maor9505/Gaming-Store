@@ -18,10 +18,8 @@ export const Table = ({ data, Columns }) => {
     setarrayData([...data]);
     setcolumns(Columns);
   }, [data]);
-
-  // useMemo(() => {setarrayData([...data]);
-  // setcolumns(Columns);}, data)
   
+  // sort date by column name 
   const onSort = (newColumn) => {
     setsortColumn(newColumn);
     const sortarray = _.orderBy(data, [sortColumn.path], [sortColumn.order]);

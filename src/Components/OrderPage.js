@@ -12,16 +12,17 @@ export const OrderPage = () => {
   const {user}= useContext(UserContext);
 const { orders } = useContext(OrderContext);
 const [order, setOrder] = useState();
-    const history = useHistory();
-
   const { id } = useParams();
   console.log(id);
+
+  // find the order by id param
   useEffect(() => {
       const order = orders.find((order) => order.ID == id);
       console.log(order);
       setOrder(order)
   },[orders]);
 
+  // update order to cancle Status 
  const CancleOrder =()=>{
         db.collection("Orders")
           .doc(user.uid + " Orders")

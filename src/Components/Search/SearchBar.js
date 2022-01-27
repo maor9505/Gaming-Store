@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
 import { Link} from 'react-router-dom';
-
+// Search bar in navbar to search products by name
 export const SearchBar = ({ placeholder, data }) => {
     const [filteredData, setFilteredData] = useState([]);
     const [wordEntered, setWordEntered] = useState("");

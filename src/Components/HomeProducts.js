@@ -17,6 +17,7 @@ useEffect(() => {
   setproductsP([...products]);
 }, [products]);
 
+// sort by Views to Desc products views
 useEffect(() => {
   let sortProductsByviews = productsP.sort((a, b) => b.Sales - a.Sales);
   sortProductsByviews = sortProductsByviews.slice(0, 3);

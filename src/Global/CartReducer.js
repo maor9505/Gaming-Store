@@ -8,7 +8,7 @@ import { UserContext } from "./UserContext";
 export const CartReducer = (state, action) => {
     let uid = auth.currentUser.uid;
   let product;
-
+// cart option
   switch (action.type) {
     case "ADD_TO_CART":
       product = action.product;

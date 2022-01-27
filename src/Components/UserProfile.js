@@ -16,6 +16,7 @@ export const UserProfile = () => {
     const [errorp, setErrorp] = useState('');
     const history = useHistory();
 
+    // if user set data/ if not send to login page
      useEffect(() => {
          if(user){
             setEmail(user.email)
@@ -26,6 +27,7 @@ export const UserProfile = () => {
          }
     }, [user]);
 
+    // check valid inputs and updade in db 
       const handleUpdatePersonalDetails = () => {
           let vaildName = formValidation('name',displayName)
           let vaildPhone = formValidation('phone',phone);

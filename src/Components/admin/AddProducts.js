@@ -18,6 +18,7 @@ export const AddProducts = () => {
     const [error, setError] = useState('');
     const types = ['image/png', 'image/jpeg']; // image types
 
+    // get catagories from db
     useEffect(() => {
         db.collection('Catagories').onSnapshot(snapshot => {
             setcatagoryOption(snapshot.docs.map(doc => ({name: doc.data().Catagory_Name })))
@@ -27,6 +28,8 @@ export const AddProducts = () => {
     const handleBack = () => {
         history.push('/');
     }
+
+    // image handler check if photo uplode is success
     const productImgHandler = (e) => {
         let selectedFile = e.target.files[0];
         if (selectedFile && types.includes(selectedFile.type)) {
@@ -39,11 +42,10 @@ export const AddProducts = () => {
         }
     }
 
-    // add product
+    // add product to db
     const addProduct = (e) => {
         e.preventDefault();
         const date = new Date();
-
         const uploadTask = storage.ref(`product-images/${productImg.name}`).put(productImg);
         uploadTask.on('state_changed', snapshot => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;

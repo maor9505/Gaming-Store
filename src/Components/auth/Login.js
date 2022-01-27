@@ -5,7 +5,6 @@ import './Login.css'
 import { UserContext } from '../../Global/UserContext'
 export const Login = () => {
     const { user } = useContext(UserContext);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,6 +16,7 @@ useEffect(() => {
   }
 }, [user]);
 
+// email && pass login 
     const LoginEmail_Pass = (e) => {
         e.preventDefault();
         auth.signInWithEmailAndPassword(email, password).then(() => {

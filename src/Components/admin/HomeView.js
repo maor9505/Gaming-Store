@@ -10,17 +10,18 @@ import { ProductsContext } from "../../Global/ProductsContext";
 
 
 export const HomeView = () => {
-  const { AllOrderUsers} = useContext(AdminOrderContext);
+  const { AllOrderUsers } = useContext(AdminOrderContext);
   const [ordersTotal, setordersTotal] = useState(0);
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [waitOrders, setWaitOrders] = useState(0);
   const [cancleOrders, setCancleOrders] = useState(0);
-   const { products, spinner } = useContext(ProductsContext);
-   const [filterProduct, setFilterProduct] = useState([]);
-   const [productsTotal, setproductsTotal] = useState(0);
-   const [viewsTotal, setviewsTotal] = useState(0);
-   const [mostViewProducts, setmostViewProducts] = useState("");
-   
+  const { products, spinner } = useContext(ProductsContext);
+  const [filterProduct, setFilterProduct] = useState([]);
+  const [productsTotal, setproductsTotal] = useState(0);
+  const [viewsTotal, setviewsTotal] = useState(0);
+  const [mostViewProducts, setmostViewProducts] = useState("");
+  
+  // update  products details productsTotal/viewsTotal/mostViewProducts
   useEffect(() => {
     if (products.length != 0) {
       setproductsTotal(products.length);
@@ -38,6 +39,8 @@ export const HomeView = () => {
       setmostViewProducts(mostViewProduct.ProductName);
     }
   }, [products]);
+
+  // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
     if (AllOrderUsers.length != 0) {
       setordersTotal(AllOrderUsers.length);
@@ -65,7 +68,7 @@ export const HomeView = () => {
       <PanelView
         cardOne={ordersTotal}
         cardOneText={"Total Orders..."}
-        cardTwo={incomeTotal+"$"}
+        cardTwo={incomeTotal + "$"}
         cardTwoText={"Total Income..."}
         cardThree={waitOrders}
         cardThreeText={"Waiting Orders..."}
@@ -86,9 +89,9 @@ export const HomeView = () => {
         cardFor={"?"}
         cardForText={"???"}
       />
-      {/* <div className="">
+      <div className="">
         <Table data={AllOrderUsers} Columns={OrdersColumn}></Table>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -10,18 +10,16 @@ import {HeaderProducts} from "../common/HeaderProducts";
 
 export const ProductsView = () => {
   const { products, spinner } = useContext(ProductsContext);
-      const [filterProduct, setFilterProduct] = useState([]);
+  const [filterProduct, setFilterProduct] = useState([]);
   const [productsTotal, setproductsTotal] = useState(0);
   const [viewsTotal, setviewsTotal] = useState(0);
   const [mostViewProducts, setmostViewProducts] = useState("");
-  
-useEffect(() => {
-  setFilterProduct([...products]);
-}, [products]);
-// useMemo(() => {
-//   setFilterProduct([...products]);
-// }, products);
 
+  useEffect(() => {
+    setFilterProduct([...products]);
+  }, [products]);
+
+  // update  products details productsTotal/viewsTotal/mostViewProducts
   useEffect(() => {
     if (products.length != 0) {
       setproductsTotal(products.length);

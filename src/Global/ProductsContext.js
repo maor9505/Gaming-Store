@@ -7,8 +7,7 @@ export const ProductsContextProvider = (props) => {
     const [products, setProducts] = useState([])
     const [spinner, setSpinner] = useState(true);
 
-    useEffect(() => {
-      
+    useEffect(() => { 
      const getP = () => {
         db.collection("Products").onSnapshot((snapshot) => {
         let prevProducts = [];

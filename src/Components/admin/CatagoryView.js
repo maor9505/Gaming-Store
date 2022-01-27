@@ -12,6 +12,8 @@ import { db } from "../../Config/Config";
 export const CatagoryView = () => {
   const [catagoryData, setcatagoryData] = useState([]);
  
+
+  //get catagories from db
   useEffect(() => {
         db.collection("Catagories")
           .onSnapshot((snapshot) => {
@@ -26,10 +28,6 @@ export const CatagoryView = () => {
         })
 
   }, []);
-  // useMemo(() => {
-  //   setFilterProduct([...products]);
-  // }, products);
-
 
   return (
     <div class="container ">

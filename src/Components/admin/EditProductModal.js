@@ -1,8 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 import { ic_mode_edit } from "react-icons-kit/md/ic_mode_edit";
-
 import { Icon } from "react-icons-kit";
-import {AddProducts} from './AddProducts'
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,6 +33,7 @@ export  const EditProductModal= ({product}) => {
     </>
   );
 };
+// edit product from Modal and update in db 
 const EditProducts = ({ product }) => {
   const history = useHistory();
   const [productName, setProductName] = useState(product.ProductName);
@@ -72,7 +71,7 @@ const EditProducts = ({ product }) => {
     }
   };
 
-  // add product
+  // edit product
   const EditProduct = (e) => {
     e.preventDefault();
     const date = new Date();

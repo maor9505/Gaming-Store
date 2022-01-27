@@ -7,7 +7,6 @@ import { paginate } from './common/paginat';
 import { UserContext } from '../Global/UserContext';
 
 export const ViewsProducts = () => {
-    const { user } = useContext(UserContext);
     const { products } = useContext(ProductsContext);
     const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);

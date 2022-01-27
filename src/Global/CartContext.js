@@ -10,13 +10,15 @@ export const CartContextProvider = (props) => {
       const { user } = useContext(UserContext);
 const [cart, dispatch] = useReducer(CartReducer)
 const [cartUser, setCart] = useState([]);
+
+// if user is login get cart from db 
 useEffect(() => {
   if (user) {
-getCart() 
+  getCart() 
  }
 }, [user]);
 
-
+// get cart from db 
 const getCart=  ()=>{
     db.collection("Cart")
     .doc("Cart " + user.uid)

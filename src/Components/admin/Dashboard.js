@@ -20,13 +20,14 @@ export const Dashboard = () => {
   const history = useHistory();
   const [viewDashboard, setViewDashboard] = useState(<HomeView />);
 
-  // useEffect(() => {
-  //   if (!user || user.type !== 'admin') {
-  //     history.push("/login");
-  //   }
-  // }, [user]);
 
+  useEffect(() => {
+    if (!user || user.type !== 'admin') {
+      history.push("/login");
+    }
+  }, [user]);
 
+// controll the view thet present in main view page
   const SideBarLinks = (path) => {
     switch (path) {
       case "Dashboard":

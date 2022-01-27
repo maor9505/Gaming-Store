@@ -10,9 +10,10 @@ export const AdminOrdersContextProvider = (props) => {
   const [AllOrderUsers, setAllOrdersUser] = useState([]);
   const [spinner, setSpinner] = useState(true);
 
-     useEffect( function getOrders(){
+     useEffect( 
+       function getOrders(){
        if (user && user.type == "admin") {
-        const AllOrders = [];
+        var AllOrders = [];
    db.collection("users").get().then((snapshot) => {
       snapshot.docs.map((doc) =>
         db
@@ -20,44 +21,27 @@ export const AdminOrdersContextProvider = (props) => {
           .doc(doc.id + " Orders")
           .collection("OrderDetails")
           .onSnapshot((snapshot) => {
-            snapshot.docs.map((doc) => {
-                AllOrders.push(getOrder(doc));
-                setAllOrdersUser([...AllOrders]);
+            snapshot.docChanges().forEach( ( change ) => {
+              if (change.type === "added") {
+                AllOrders.push(getOrder(change.doc));
+              }
+              if (change.type === "modified") {
+                   AllOrders = AllOrders.filter(
+                     (item) => item.ID !== change.doc.id
+                   );
+                    AllOrders.push(getOrder(change.doc));   
+              }
                 setSpinner(false);
-            });
-          })
-      );
+                setAllOrdersUser([...AllOrders]);
+            })
+
+        }));
+
     });   
       }
      }, [user]);
 
-    //   const getOrders = () => {
-    //         const AllOrders = [];
-
-    //  db.collection("users").onSnapshot((snapshot) => {
-    //     snapshot.docs.map((doc) =>
-    //       db
-    //         .collection("Orders")
-    //         .doc(doc.id + " Orders")
-    //         .collection("OrderDetails")
-    //         .onSnapshot((snapshot) => {
-    //           snapshot.docChanges().forEach((snap)=>{
-
-    //             if(snap.type=="added")
-    //             {
-    //              AllOrders.push(getOrder(snap.doc));
-    //             console.log(AllOrders);
-    //             setAllOrdersUser([...AllOrders]);
-    //             setSpinner(false);
-    //            }
-    //           })
-            
-    //         })
-    //     );
-
-    //   })
-    // };
- 
+  
   return (
     <AdminOrderContext.Provider
       value={{ AllOrderUsers: [...AllOrderUsers], spinner: spinner }}

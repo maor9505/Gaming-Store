@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
-import React, { useContext } from "react";
+import React
+ from "react";
 
-import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline";
-import { ic_mode_edit } from "react-icons-kit/md/ic_mode_edit";
+import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline"
 import { db } from "../Config/Config";
-import { Icon } from "react-icons-kit";
-import { ProductsContext } from "../Global/ProductsContext";
-import { set } from "lodash";
+import { Icon } from "react-icons-kit"
 import { EditProductModal } from "../Components/admin/EditProductModal";
 
 
 export const ProductColumn = () => {
-       const { dispatch } = useContext(ProductsContext);
-
    const DeleteProduct = (product) => {
      db.collection("Products")
        .doc(product.ProductID)
@@ -73,9 +69,6 @@ export const ProductColumn = () => {
       path: "",
       label: "",
       content: (product) => (
-        // <button className="delete-btn" onClick={() => }>
-        //   <Icon icon={ic_mode_edit} size={24} />
-        // </button>
         <EditProductModal product={product}/>
       ),
     },
@@ -83,6 +76,16 @@ export const ProductColumn = () => {
 };
 
 export const OrdersColumn = () => {
+
+   const updateStatusOrder = (order) => {
+     db.collection("Orders")
+       .doc(order.UserID + " Orders")
+       .collection("OrderDetails")
+       .doc(order.ID)
+       .update({
+         Status: "Order Was accepted and delivered",
+       });
+   };
   return [
     {
       path: "UserID",
@@ -132,8 +135,6 @@ export const OrdersColumn = () => {
   ];
 };
 export const CatagoryColumn = () => {
-
-
    const DeleteCatagory = (catagory) => {
      db.collection("Catagories").doc(catagory.ID).delete();
    };

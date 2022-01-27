@@ -10,14 +10,12 @@ import { HeaderProducts } from './common/HeaderProducts';
 import { UserContext } from '../Global/UserContext';
 
 export const Products = () => {
-      const { user } = useContext(UserContext);
     const { products } = useContext(ProductsContext);
     const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);
     const [filterProduct, setFilterProduct] = useState([]);
     const productsP = paginate(filterProduct, currentPage, pageSize);
-    const { dispatch } = useContext(CartContext);
-    const history = useHistory();
+    
 useEffect(() => {
    setFilterProduct([...products])
 }, [products])
