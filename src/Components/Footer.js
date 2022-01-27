@@ -7,16 +7,16 @@ export const Footer = () => {
 
 
     return (
-      <div class="footer">
-          <footer class="text-center text-white ">
-              <section class="">
+      <div className="footer">
+          <footer className="text-center text-white ">
+              <section className="">
                 {!user && (
-                  <p class="d-flex justify-content-center align-items-center">
-                    <span class="me-3">Register for free</span>
+                  <p className="d-flex justify-content-center align-items-center">
+                    <span className="me-3">Register for free</span>
                     <span>
                       <Link
                         to="signup"
-                        class="navlink mr-4 btn btn-outline-success text-white"
+                        className="navlink mr-4 btn btn-outline-success text-white"
                       >
                         SIGN UP
                       </Link>
@@ -24,13 +24,13 @@ export const Footer = () => {
                   </p>
                 )}
                 {user && (
-                  <p class="d-flex justify-content-center align-items-center">
-                    <span class="me-3">Hi! {user.name}</span>
+                  <p className="d-flex justify-content-center align-items-center">
+                    <span className="me-3">Hi! {user.name}</span>
                   </p>
                 )}
-                <div class="text-center  name">
+                <div className="text-center  name">
                   © 2021 Copyright:
-                  <a class="text-white"> Maor Elimelech</a>
+                  <a className="text-white"> Maor Elimelech</a>
                 </div>
               </section>
           </footer>

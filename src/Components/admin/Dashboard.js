@@ -58,21 +58,21 @@ export const Dashboard = () => {
 
   return (
     <div className="container-fluid">
-      <div class="row flex-nowrap">
+      <div className="row flex-nowrap">
         {/* //Sidebar */}
         <SideBar SideBarLinks={SideBarLinks} />
-        <div class="col">
+        <div className="col">
           <h1>
             {" "}
-            <span class="badge bg-light text-danger">Dashboard-Admin</span>
+            <span className="badge bg-light text-danger">Dashboard-Admin</span>
           </h1>
-          <div id="main" class="col px-5">
+          <div id="main" className="col px-5">
             {spinner && (
-              <div class="container">
+              <div className="container">
                 <LoadingPage />
               </div>
             )}
-            {!spinner && <div class="">{viewDashboard}</div>}
+            {!spinner && <div className="">{viewDashboard}</div>}
           </div>
         </div>
       </div>

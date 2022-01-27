@@ -70,11 +70,11 @@ export const Signup = () => {
           Already have an account Or Google account? Login
           <Link to="login"> Here</Link>
         </span>
-        <div class="col-sm-12">
+        <div className="col-sm-12">
             <br/>
           <a
             onClick={signInWithGoogle}
-            class="btn btn-lg btn-google btn-block text-uppercase btn-outline-success"
+            className="btn btn-lg btn-google btn-block text-uppercase btn-outline-success"
             href="#"
           >
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" />{" "}

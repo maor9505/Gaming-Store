@@ -16,10 +16,10 @@ export const TableHeader = ({ columns, sortColumn, onSort }) => {
   };
 
   return (
-    <thead class="table-success">
-      <tr >
+    <thead className="table-success">
+      <tr>
         {columns.map((col) => (
-          <th key={col.label} onClick={() => raiseSort(col.path)}>
+          <th key={col.path} onClick={() => raiseSort(col.path)}>
             {col.label}
           </th>
         ))}

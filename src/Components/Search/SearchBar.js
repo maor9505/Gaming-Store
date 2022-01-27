@@ -50,7 +50,8 @@ export const SearchBar = ({ placeholder, data }) => {
                 return (
                   <Link
                     className=" dataItem nav-link text-dark"
-                    to={`/products/${value.ProductID}`}
+                    to={`/products/${value.ID}`}
+                    key={value.ID}
                   >
                     {value.ProductName}
                   </Link>

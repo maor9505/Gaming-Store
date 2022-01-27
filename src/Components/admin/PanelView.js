@@ -10,39 +10,39 @@ export const PanelView = ({
   cardForText,
 }) => {
   return (
-    <div class="row">
-        <div class="col-sm-3">
-          <div class="card text-white bg-primary">
-            <div class="card-body">
-              <h5 class="card-title text-white">{cardOneText}</h5>
-              <p class="card-text fs-2">{cardOne}</p>
+    <div className="row">
+        <div className="col-sm-3">
+          <div className="card text-white bg-primary">
+            <div className="card-body">
+              <h5 className="card-title text-white">{cardOneText}</h5>
+              <p className="card-text fs-2">{cardOne}</p>
             </div>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="card text-white bg-success ">
-            <div class="card-body">
-              <h5 class="card-title">{cardTwoText}</h5>
-              <p class="card-text fs-2">{cardTwo}</p>
+        <div className="col-sm-3">
+          <div className="card text-white bg-success ">
+            <div className="card-body">
+              <h5 className="card-title">{cardTwoText}</h5>
+              <p className="card-text fs-2">{cardTwo}</p>
             </div>
           </div>
         </div>
       {cardThree != "?" && (
-               <div class="col-sm-3">
-          <div class="card text-white bg-warning">
-            <div class="card-body">
-              <h5 class="card-title">{cardThreeText}</h5>
-              <p class="card-text fs-2">{cardThree}</p>
+               <div className="col-sm-3">
+          <div className="card text-white bg-warning">
+            <div className="card-body">
+              <h5 className="card-title">{cardThreeText}</h5>
+              <p className="card-text fs-2">{cardThree}</p>
             </div>
           </div>
           </div>
       )}
       {cardFor != "?" && (
-        <div class="col-sm-3">
-          <div class="card text-white bg-danger">
-            <div class="card-body">
-              <h5 class="card-title">{cardForText}</h5>
-              <p class="card-text fs-2">{cardFor}</p>
+        <div className="col-sm-3">
+          <div className="card text-white bg-danger">
+            <div className="card-body">
+              <h5 className="card-title">{cardForText}</h5>
+              <p className="card-text fs-2">{cardFor}</p>
             </div>
           </div>
         </div>

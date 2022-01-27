@@ -61,9 +61,9 @@ export const HomeView = () => {
   }, [AllOrderUsers]);
 
   return (
-    <div class="container">
+    <div className="container">
       <h3>
-        <span class="badge bg-light text-success p-4">Orders Details:</span>
+        <span className="badge bg-light text-success p-4">Orders Details:</span>
       </h3>
       <PanelView
         cardOne={ordersTotal}
@@ -77,7 +77,7 @@ export const HomeView = () => {
       />
       <h1></h1>
       <h3>
-        <span class="badge bg-light text-success p-4">Products Details:</span>
+        <span className="badge bg-light text-success p-4">Products Details:</span>
       </h3>
       <PanelView
         cardOne={productsTotal}

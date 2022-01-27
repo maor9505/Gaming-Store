@@ -30,9 +30,9 @@ export const CatagoryView = () => {
   }, []);
 
   return (
-    <div class="container ">
+    <div className="container ">
       <h3>
-        <span class="badge bg-light text-success">Catagories</span>
+        <span className="badge bg-light text-success">Catagories</span>
       </h3>
       <div className="">
         <Table data={catagoryData} Columns={CatagoryColumn}></Table>

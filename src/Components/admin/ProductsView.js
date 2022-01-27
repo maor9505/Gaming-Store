@@ -39,9 +39,9 @@ export const ProductsView = () => {
   }, [products]);
 
   return (
-    <div class="container ">
+    <div className="container ">
       <h3>
-        <span class="badge bg-light text-success p-4">Products Details:</span>
+        <span className="badge bg-light text-success p-4">Products Details:</span>
       </h3>
       <PanelView
         cardOne={productsTotal}
@@ -56,7 +56,7 @@ export const ProductsView = () => {
       <h1></h1>
       <h3>
         {" "}
-        <span class="badge bg-light text-success">Products:</span>
+        <span className="badge bg-light text-success">Products:</span>
       </h3>
 
       <div className="">

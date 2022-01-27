@@ -97,9 +97,9 @@ orderColumn.push({
     setfilterOrders(filterOrderDesc());
   };
   return (
-    <div class="container ">
+    <div className="container ">
       <h3>
-        <span class="badge bg-light text-success p-4">Orders Details:</span>
+        <span className="badge bg-light text-success p-4">Orders Details:</span>
       </h3>
       <PanelView
         cardOne={ordersTotal}
@@ -114,10 +114,10 @@ orderColumn.push({
       <h1></h1>
       <h3>
         {" "}
-        <span class="badge bg-light text-success p-4">Orders:</span>
+        <span className="badge bg-light text-success p-4">Orders:</span>
       </h3>
       <label className="m-3 p-3 text-success">Filter Orders By Date...</label>
-      <div class="d-inline">
+      <div className="d-inline">
         <input
           type="date"
           className=" col-3 p-2"
@@ -128,7 +128,7 @@ orderColumn.push({
           className="btn btn-success btn-md m-3 "
           onClick={() => cancleDateB()}
         >
-          <i class="fa fa-window-close"></i>
+          <i className="fa fa-window-close"></i>
         </button>
       </div>
       <br />

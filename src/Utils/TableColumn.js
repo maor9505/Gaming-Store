@@ -6,13 +6,16 @@ import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline"
 import { db } from "../Config/Config";
 import { Icon } from "react-icons-kit"
 import { EditProductModal } from "../Components/admin/EditProductModal";
+import { ToastAlert } from "./Toast";
 
 
 export const ProductColumn = () => {
    const DeleteProduct = (product) => {
      db.collection("Products")
-       .doc(product.ProductID)
-       .delete()
+       .doc(product.ID)
+       .delete().then(()=>{
+         ToastAlert("Product Delete")
+       })
        
    };
    
@@ -57,7 +60,7 @@ export const ProductColumn = () => {
       content: (product) => <span>{product.Views}</span>,
     },
     {
-      path: "",
+      path: "Delete",
       label: "",
       content: (product) => (
         <button className="delete-btn" onClick={() => DeleteProduct(product)}>
@@ -66,7 +69,7 @@ export const ProductColumn = () => {
       ),
     },
     {
-      path: "",
+      path: "Edit",
       label: "",
       content: (product) => (
         <EditProductModal product={product}/>
@@ -127,9 +130,9 @@ export const OrdersColumn = () => {
       label: "Status",
       content: (order) =>
         order.Status == "Order Cancled" ? (
-          <span class="text-danger">{order.Status}</span>
+          <span className="text-danger">{order.Status}</span>
         ) : (
-          <span class="text-primary">{order.Status}</span>
+          <span className="text-primary">{order.Status}</span>
         ),
     },
   ];

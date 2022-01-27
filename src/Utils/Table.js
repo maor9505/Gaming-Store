@@ -34,7 +34,7 @@ export const Table = ({ data, Columns }) => {
   return (
     <div>
       {arrayData.length === 0 && (
-        <div class="container d-flex justify-content-center bg-warning">
+        <div className="container d-flex justify-content-center bg-warning">
           No Orders To Display...
         </div>
       )}

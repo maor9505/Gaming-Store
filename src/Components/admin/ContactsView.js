@@ -86,9 +86,9 @@ export const ContactsView = () => {
     db.collection("Contact").doc(contact.ID).delete();
   };
   return (
-    <div class="container ">
+    <div className="container ">
       <h3>
-        <span class="badge bg-light text-success p-4">Orders Details:</span>
+        <span className="badge bg-light text-success p-4">Orders Details:</span>
       </h3>
       <PanelView
         cardOne={contactsTotal}
@@ -103,10 +103,10 @@ export const ContactsView = () => {
       <h1></h1>
       <h3>
         {" "}
-        <span class="badge bg-light text-success p-4">Contacts:</span>
+        <span className="badge bg-light text-success p-4">Contacts:</span>
       </h3>
       <label className="m-3 p-3 text-success">Filter Contacts By Date...</label>
-      <div class="d-inline">
+      <div className="d-inline">
         <input
           type="date"
           className=" col-3 p-2"
@@ -114,19 +114,18 @@ export const ContactsView = () => {
           value={dateFilter}
         />
         <button
-          className="btn btn-success btn-md m-3 "
+          className="btn btn-success btn-md m-3 fa fa-window-close "
           onClick={() => cancleDateB()}
         >
-          <i class="fa fa-window-close"></i>
         </button>
       </div>
       <br />
-      <div class="accordion" id="accordionExample">
+      <div className="accordion" id="accordionExample">
         {filterContacts.map((con) => (
-          <div class="accordion-item" key={con.ID}>
-            <h2 class="accordion-header" id="headingOne">
+          <div className="accordion-item" key={con.ID}>
+            <h2 className="accordion-header" id="headingOne">
               <button
-                class="accordion-button"
+                className="accordion-button"
                 data-bs-toggle="collapse"
                 data-bs-target={"#a" + con.ID}
                 aria-expanded="true"
@@ -135,19 +134,15 @@ export const ContactsView = () => {
                 <button
                   className={
                     con.IsRead == true
-                      ? "btn btn-outline-success m-2"
-                      : "btn btn-outline-danger m-2"
+                      ? "btn btn-outline-success m-2 fa fa-bookmark"
+                      : "btn btn-outline-danger m-2 fa fa-bookmark"
                   }
                   onClick={() => UpdateReadContact(con)}
-                >
-                  <i class="fa fa-bookmark"></i>
-                </button>
+                ></button>
                 <button
-                  className="btn btn-outline-danger m-2"
+                  className="btn btn-outline-danger m-2 fa fa-trash"
                   onClick={() => DeleteContact(con)}
-                >
-                  <i class="fa fa-trash"></i>
-                </button>
+                ></button>
                 <span
                   className={
                     con.IsRead == true ? "text-success p-3" : "text-danger p-3"
@@ -162,11 +157,11 @@ export const ContactsView = () => {
 
             <div
               id={"a" + con.ID}
-              class="accordion-collapse collapse"
+              className="accordion-collapse collapse"
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
-              <div class="accordion-body">
+              <div className="accordion-body">
                 <span>{con.Message}</span>
               </div>
             </div>

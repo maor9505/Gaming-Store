@@ -38,21 +38,21 @@ const [order, setOrder] = useState();
  }
   return (
     <div>
-      {!order && <div class="top">slow internet...no order to display</div>}
+      {!order && <div className="top">slow internet...no order to display</div>}
       {order && (
-        <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
-          <div class="card">
-            <div class="p-4">
-              <div class="float-right">
-                <h3 class="mb-0">Order-Number: {order.OrderID}</h3>
+        <div className="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+          <div className="card">
+            <div className="p-4">
+              <div className="float-right">
+                <h3 className="mb-0">Order-Number: {order.OrderID}</h3>
                 Date-Order: {new Date(order.DateCreate).toLocaleString("en-GB")}
               </div>
             </div>
-            <div class="card-body">
-              <div class="row mb-4">
-                <div class="col-sm-6 ">
-                  <h5 class="mb-3">To:</h5>
-                  <h3 class="text-dark mb-1">{order.ShippingAddress.name}</h3>
+            <div className="card-body">
+              <div className="row mb-4">
+                <div className="col-sm-6 ">
+                  <h5 className="mb-3">To:</h5>
+                  <h3 className="text-dark mb-1">{order.ShippingAddress.name}</h3>
                   <div>{order.ShippingAddress.postalCode}</div>
                   <div>
                     {order.ShippingAddress.countryCode}{" "}
@@ -63,45 +63,45 @@ const [order, setOrder] = useState();
                   <div>Phone: {user.phone}</div>
                 </div>
               </div>
-              <div class="table-responsive-sm">
-                <table class="table table-striped">
+              <div className="table-responsive-sm">
+                <table className="table table-striped">
                   <thead>
                     <tr>
-                      <th class="center">#</th>
+                      <th className="center">#</th>
                       <th>Item</th>
-                      <th class="right">Price</th>
-                      <th class="center">Qty</th>
+                      <th className="right">Price</th>
+                      <th className="center">Qty</th>
                     </tr>
                   </thead>
                   <tbody>
                     {order.Products.map((p) => (
                       <tr key={p.ID}>
-                        <td class="left strong">{p.ID}</td>
-                        <td class="left">{p.ProductName}</td>
-                        <td class="right">{p.ProductPrice}</td>
-                        <td class="center">{p.qty}</td>
+                        <td className="left strong">{p.ID}</td>
+                        <td className="left">{p.ProductName}</td>
+                        <td className="right">{p.ProductPrice}</td>
+                        <td className="center">{p.qty}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div class="row">
-                <div class="col-lg-4 col-sm-5"></div>
-                <div class="col-lg-4 col-sm-5 ml-auto">
-                  <table class="table table-clear">
+              <div className="row">
+                <div className="col-lg-4 col-sm-5"></div>
+                <div className="col-lg-4 col-sm-5 ml-auto">
+                  <table className="table table-clear">
                     <tbody>
                       <tr>
-                        <td class="left">
-                          <strong class="text-dark">Total Price:</strong>{" "}
+                        <td className="left">
+                          <strong className="text-dark">Total Price:</strong>{" "}
                         </td>
-                        <td class="right">
-                          <strong class="text-dark">{order.TotalPrice}</strong>
+                        <td className="right">
+                          <strong className="text-dark">{order.TotalPrice}</strong>
                         </td>
-                        <td class="left">
-                          <strong class="text-dark">Total Qty:</strong>{" "}
+                        <td className="left">
+                          <strong className="text-dark">Total Qty:</strong>{" "}
                         </td>
-                        <td class="right">
-                          <strong class="text-dark">{order.TotalQty}</strong>
+                        <td className="right">
+                          <strong className="text-dark">{order.TotalQty}</strong>
                         </td>
                       </tr>
                     </tbody>
@@ -117,7 +117,7 @@ const [order, setOrder] = useState();
                   {order.Status == "Order Cancled" && (
                     <h1>
                       {" "}
-                      <span class="badge bg-light text-danger">
+                      <span className="badge bg-light text-danger">
                         Order Cancled
                       </span>
                     </h1>

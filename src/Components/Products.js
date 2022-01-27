@@ -29,57 +29,57 @@ useEffect(() => {
     return (
       <>
         {productsP.length !== 0 && <h1> Products</h1>}
-        <div class="container">
+        <div className="container">
           <HeaderProducts data={products} setFilterProduct={setFilterProduct} />
         </div>
 
-        <div class="container d-flex justify-content-center">
+        <div className="container d-flex justify-content-center">
           {productsP.length === 0 && (
             <div>
               No Products To Display...Or your opttion search id not Correct
             </div>
           )}
-          <div class="container d-flex justify-content-center">
+          <div className="container d-flex justify-content-center">
             {productsP.map((product) => (
-              <div class="col-xs-12 col-xs-6 col-md-4 " key={product.ID}>
-                <div class="image-flip">
-                  <div class="mainflip flip-0">
+              <div className="col-xs-12 col-xs-6 col-md-4 " key={product.ID}>
+                <div className="image-flip">
+                  <div className="mainflip flip-0">
                     <Link
-                      class="nav-link text-dark img-wrap"
+                      className="nav-link text-dark img-wrap"
                       to={`/products/${product.ID}`}
                     >
-                      <div class="frontside">
-                        <div class="card">
-                          <div class="card-body text-center">
+                      <div className="frontside">
+                        <div className="card">
+                          <div className="card-body text-center">
                             <p>
                               <img
-                                class=" img-fluid"
+                                className=" img-fluid"
                                 src={product.ProductImg}
                                 alt="card image"
                               />
                             </p>
-                            <h4 class="card-title">{product.ProductName}</h4>
-                            <p class="card-text">{product.Catagory}</p>
-                            <p class="card-text">
+                            <h4 className="card-title">{product.ProductName}</h4>
+                            <p className="card-text">{product.Catagory}</p>
+                            <p className="card-text">
                               Price: {product.ProductPrice}$$
                             </p>
-                            <p class="card-text">Views: {product.Views}</p>
-                            <p class="card-text">Sales: {product.Sales}</p>
+                            <p className="card-text">Views: {product.Views}</p>
+                            <p className="card-text">Sales: {product.Sales}</p>
 
                             <span
                               href="https://www.fiverr.com/share/qb8D02"
-                              class="btn btn-success btn-sm"
+                              className="btn btn-success btn-sm"
                             >
-                              <i class="fa fa-plus"></i>
+                              <i className="fa fa-plus"></i>
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div class="backside">
-                        <div class="card">
-                          <div class="card-body text-center mt-4 d-flex flex-column">
-                            <h4 class="card-title">{product.ProductName}</h4>
-                            <p class="card-text">{product.Description}</p>
+                      <div className="backside">
+                        <div className="card">
+                          <div className="card-body text-center mt-4 d-flex flex-column">
+                            <h4 className="card-title">{product.ProductName}</h4>
+                            <p className="card-text">{product.Description}</p>
                             {/* {user && (
                               <button
                                 className="btn btn-outline-danger mt-auto "

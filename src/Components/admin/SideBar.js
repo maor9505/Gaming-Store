@@ -3,24 +3,24 @@ import React, { useContext, useEffect, useState } from "react";
 import 'react-pro-sidebar/dist/css/styles.css';
 export const SideBar = ({ SideBarLinks }) => {
   return (
-    <div class="col-1 bg-light">
-      <div class="d-flex flex-column align-items-center align-items-sm-start  pt-2 text-white min-vh-100">
+    <div className="col-1 bg-light">
+      <div className="d-flex flex-column align-items-center align-items-sm-start  pt-2 text-white min-vh-100">
         <a
           href="/"
-          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+          className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
-          <span class="fs-5 d-none d-sm-inline">Menu</span>
+          <span className="fs-5 d-none d-sm-inline">Menu</span>
         </a>
         <ul
-          class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+          className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
           id="menu"
         >
-          <li class="nav-item">
-            <a href="#" class="nav-link align-middle px-0">
-              <i class="fs-4 bi-house"></i>{" "}
+          <li className="nav-item">
+            <a href="#" className="nav-link align-middle px-0">
+              <i className="fs-4 bi-house"></i>{" "}
               <span
                 onClick={() => SideBarLinks("Dashboard")}
-                class="ms-1 d-none d-sm-inline"
+                className="ms-1 d-none d-sm-inline"
               >
                 Dashboard
               </span>
@@ -30,27 +30,27 @@ export const SideBar = ({ SideBarLinks }) => {
             <a
               href="#submenu1"
               data-bs-toggle="collapse"
-              class="nav-link px-0 align-middle"
+              className="nav-link px-0 align-middle"
             >
-              <i class="fs-4 bi-speedometer2"></i>{" "}
+              <i className="fs-4 bi-speedometer2"></i>{" "}
               <span
                 onClick={() => SideBarLinks("Products")}
-                class="ms-1 d-none d-sm-inline"
+                className="ms-1 d-none d-sm-inline"
               >
                 Products
               </span>{" "}
             </a>
             <ul
-              class="collapse show nav flex-column ms-1"
+              className="collapse show nav flex-column ms-1"
               id="submenu1"
               data-bs-parent="#menu"
             >
               <li>
-                <a href="#" class="nav-link px-0">
+                <a href="#" className="nav-link px-0">
                   {" "}
                   <span
                     onClick={() => SideBarLinks("Add-Product")}
-                    class="d-none d-sm-inline"
+                    className="d-none d-sm-inline"
                   >
                     Add-Product
                   </span>{" "}
@@ -62,27 +62,27 @@ export const SideBar = ({ SideBarLinks }) => {
             <a
               href="#submenu5"
               data-bs-toggle="collapse"
-              class="nav-link px-0 align-middle"
+              className="nav-link px-0 align-middle"
             >
-              <i class="fs-4 bi-speedometer2"></i>{" "}
+              <i className="fs-4 bi-speedometer2"></i>{" "}
               <span
                 onClick={() => SideBarLinks("Catagories")}
-                class="ms-1 d-none d-sm-inline"
+                className="ms-1 d-none d-sm-inline"
               >
                 Catagories
               </span>{" "}
             </a>
             <ul
-              class="collapse show nav flex-column ms-1"
+              className="collapse show nav flex-column ms-1"
               id="submenu5"
               data-bs-parent="#menu"
             >
               <li>
-                <a href="#" class="nav-link px-0">
+                <a href="#" className="nav-link px-0">
                   {" "}
                   <span
                     onClick={() => SideBarLinks("Add-Catagory")}
-                    class="d-none d-sm-inline"
+                    className="d-none d-sm-inline"
                   >
                     Add-Catagory
                   </span>{" "}
@@ -91,22 +91,22 @@ export const SideBar = ({ SideBarLinks }) => {
             </ul>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-table"></i>{" "}
+            <a href="#" className="nav-link px-0 align-middle">
+              <i className="fs-4 bi-table"></i>{" "}
               <span
                 onClick={() => SideBarLinks("Orders")}
-                class="ms-1 d-none d-sm-inline"
+                className="ms-1 d-none d-sm-inline"
               >
                 Orders
               </span>{" "}
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-table"></i>{" "}
+            <a href="#" className="nav-link px-0 align-middle">
+              <i className="fs-4 bi-table"></i>{" "}
               <span
                 onClick={() => SideBarLinks("Contacts")}
-                class="ms-1 d-none d-sm-inline"
+                className="ms-1 d-none d-sm-inline"
               >
                 Contacts
               </span>{" "}

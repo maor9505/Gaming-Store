@@ -35,8 +35,8 @@ export const Contact = () => {
   };
 
   return (
-    <div class="container contact-form">
-      <div class="contact-image">
+    <div className="container contact-form">
+      <div className="contact-image">
         <img
           src="https://image.ibb.co/kUagtU/rocket_contact.png"
           alt="rocket_contact"
@@ -44,33 +44,33 @@ export const Contact = () => {
       </div>
       <form onSubmit={handleSumbit}>
         <h3>Drop Us a Message</h3>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-group">
               <input
                 type="text"
                 name="txtName"
-                class="form-control mb-3 border-success"
+                className="form-control mb-3 border-success"
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
                 type="email"
-                class="form-control mb-3 border-success"
+                className="form-control mb-3 border-success"
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <input
                 type="text"
-                class="form-control mb-3 border-success"
+                className="form-control mb-3 border-success"
                 placeholder="Your Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -79,10 +79,10 @@ export const Contact = () => {
             </div>
           </div>
           {error && <span className="error-msg bg-warning">{error}</span>}
-          <div class="col-md-6">
-            <div class="form-group ">
+          <div className="col-md-6">
+            <div className="form-group ">
               <textarea
-                class="form-control border-success p-5 "
+                className="form-control border-success p-5 "
                 placeholder="Your Message...."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -90,10 +90,10 @@ export const Contact = () => {
               ></textarea>
             </div>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <input
               type="submit"
-              class="btn btn-lg btn-outline-success mt-2 text-dark  border-success"
+              className="btn btn-lg btn-outline-success mt-2 text-dark  border-success"
               value="Send"
             />
           </div>

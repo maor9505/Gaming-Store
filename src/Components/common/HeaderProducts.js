@@ -77,10 +77,10 @@ const hanldeChangeFilterOption = (type, value) => {
 };
 
   return (
-    <div class="input-group input-group-lg mb-3 ">
+    <div className="input-group input-group-lg mb-3 ">
       <select
         value={catagoryFilter}
-        class="form-select"
+        className="form-select"
         onChange={(e) => hanldeChangeFilterOption("Catagory", e.target.value)}
       >
         <option value="0">Choose Catagory (All)</option>
@@ -92,7 +92,7 @@ const hanldeChangeFilterOption = (type, value) => {
       </select>
       <select
         value={catagoryAgeFilter}
-        class="form-select ms-4"
+        className="form-select ms-4"
         onChange={(e) => hanldeChangeFilterOption("Age", e.target.value)}
       >
         <option value="0">Choose Catagory age</option>

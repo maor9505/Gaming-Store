@@ -190,12 +190,12 @@ db.collection("Products")
         />
         <br />
         <select
-          class="form-select"
+          className="form-select"
           aria-label="Default select example"
           onChange={(e) => setCatagory(e.target.value)}
           value={catagory}
         >
-          <option selected>Choose Catagory</option>
+          <option >Choose Catagory</option>
           {catagoryOption.map((ca) => (
             <option key={ca.name} value={ca.name}>
               {ca.name}
@@ -204,12 +204,12 @@ db.collection("Products")
         </select>
         <br />
         <select
-          class="form-select"
+          className="form-select"
           aria-label="Default select example"
           onChange={(e) => setCatagoryAge(e.target.value)}
           value={catagoryAge}
         >
-          <option selected>Choose Catagory age</option>
+          <option >Choose Catagory age</option>
           <option value="1">3-16</option>
           <option value="2">16-99</option>
         </select>

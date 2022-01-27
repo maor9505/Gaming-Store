@@ -38,7 +38,7 @@ useEffect(() => {
                 <br />
                 <h2>Login</h2>
                 <h1></h1>
-                <div class='top'>
+                <div className='top'>
                 <div >
                     <form autoComplete="off" className='form-group' onSubmit={LoginEmail_Pass}>
                         <label htmlFor="email">Email</label>
@@ -55,7 +55,7 @@ useEffect(() => {
                     {error && <span className='error-msg'>{error}</span>}
                 </div>
                 <br />
-                <div class="col-md-12"> <a onClick={loginInWithGoogle} class="btn btn-lg btn-google btn-block text-uppercase btn-outline-success" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png" /> Login Using Google</a>
+                <div className="col-md-12"> <a onClick={loginInWithGoogle} className="btn btn-lg btn-google btn-block text-uppercase btn-outline-success" href="#"><img src="https://img.icons8.com/color/16/000000/google-logo.png" /> Login Using Google</a>
                 </div>
                 <div>
                     <br />

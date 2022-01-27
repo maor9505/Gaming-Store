@@ -21,17 +21,17 @@ export const Orders = () => {
 
  
   return (
-    <div class="container-fluid">
+    <div className="container-fluid">
       <h1></h1>
       {spinner && (
-        <div class="container">
+        <div className="container">
           <LoadingPage />
         </div>
       )}
       {!spinner && (
-        <div class="container">
+        <div className="container">
           <div>
-            <span class='text-success'>Total:{orders.length}</span>
+            <span className='text-success'>Total:{orders.length}</span>
             <Table data={[...orders]} Columns={OrdersColumn}></Table>
           </div>
         </div>

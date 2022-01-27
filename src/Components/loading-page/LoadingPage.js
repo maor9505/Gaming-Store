@@ -13,7 +13,7 @@ export const LoadingPage = () => {
 
     return (
         <div >
-            <div class='loading'>                
+            <div className='loading'>                
                 <BlockLoading size={"large"} color={"#f57224"} style={commonStyle} />
             </div>
             
