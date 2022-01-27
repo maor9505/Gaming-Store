@@ -1,9 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { CartContext } from '../Global/CartContext'
 import { ProductsContext } from '../Global/ProductsContext'
-import { useHistory,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/Product.css'
-import { db } from '../Config/Config'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
 import { UserContext } from '../Global/UserContext';
@@ -30,11 +28,10 @@ export const ViewsProducts = () => {
     return (
       <>
         {productsP.length !== 0 && <h1> Views Products</h1>}
-
         <div class="container d-flex justify-content-center">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
-            <div  key={ product.ID } class="col-xs-12 col-sm-6 col-md-4">
+            <div key={product.ID} class="col-xs-12 col-sm-6 col-md-4">
               <div class="image-flip">
                 <div class="mainflip flip-0">
                   <Link
@@ -73,7 +70,6 @@ export const ViewsProducts = () => {
                         <div class="card-body text-center mt-4  d-flex flex-column">
                           <h4 class="card-title">{product.ProductName}</h4>
                           <p class="card-text">{product.Description}</p>
-                         
                         </div>
                       </div>
                     </div>

@@ -1,11 +1,11 @@
-import { hasData } from 'jquery';
 import React, { useState, useContext,useEffect } from 'react'
 import { db } from '../../Config/Config'
+import { ProductsContext } from '../../Global/ProductsContext';
 
 
 export const HeaderProducts = ({ data, setFilterProduct }) => {
   const [catagoryOption, setcatagoryOption] = useState([]);
-  const [priceFilter, setpriceFilter] = useState();
+  const [priceFilter, setpriceFilter] = useState(0);
   const [catagoryFilter, setCatagoryFilter] = useState("");
   const [catagoryAgeFilter, setCatagoryAgeFilter] = useState("");
   useEffect(() => {
@@ -15,93 +15,67 @@ export const HeaderProducts = ({ data, setFilterProduct }) => {
       );
     });
   }, []);
-  const hanldeChangeFilterOption = (type, value) => {
-    let dataFilter = [];
-    switch (type) {
-      case "Catagory":
-        setCatagoryFilter(value);
-        if (value != "0") {
-          dataFilter = data.filter((data) => data.Catagory == value);
-          if (catagoryAgeFilter)
-            dataFilter = data.filter(
-              (data) => data.CatagoryAge == catagoryAgeFilter
-            );
-          if (priceFilter)
-            dataFilter = hasData.filter(
-              (data) => data.ProductPrice <= priceFilter
-            );
-        } else {
-          setCatagoryFilter("");
-          setCatagoryAgeFilter("");
-          setpriceFilter("");
-          dataFilter = [...data];
-        }
-        break;
-      case "Age":
-        if (value != "0") {
-          setCatagoryAgeFilter(value);
-          if (catagoryFilter) {
-            dataFilter = data.filter((data) => data.Catagory == catagoryFilter);
-            dataFilter = dataFilter.filter((data) => data.CatagoryAge == value);
-            if (priceFilter)
-              dataFilter = dataFilter.filter(
-                (data) => data.ProductPrice <= priceFilter
-              );
-          } else {
-            dataFilter = data.filter((data) => data.CatagoryAge == value);
-            if (priceFilter)
-              dataFilter = dataFilter.filter(
-                (data) => data.ProductPrice <= priceFilter
-              );
-          }
-        } else {
-          if (catagoryFilter) {
-            dataFilter = data.filter(
-              (data) => data.Catagory == catagoryFilter
-            );
-            if (priceFilter)
-              dataFilter = dataFilter.filter(
-                (data) => data.ProductPrice <= priceFilter
-              );
-            setCatagoryAgeFilter("");
-          } else {
-            dataFilter = [...data];
-            setCatagoryFilter("");
-            setCatagoryAgeFilter("");
-          }
-        }
-        break;
-      case "Price":
-        setpriceFilter(value);
+ 
+const hanldeChangeFilterOption = (type, value) => {
+  let dataFilter = [...data];
+  switch (type) {
+    case "Catagory":
+      setCatagoryFilter(value);
+       if (catagoryAgeFilter)
+         dataFilter = dataFilter.filter(
+           (data) => data.CatagoryAge == catagoryAgeFilter
+         );
+       if (priceFilter)
+         dataFilter = dataFilter.filter(
+           (data) => data.ProductPrice <= priceFilter
+         );
+      if (value != "0") {
+        dataFilter = dataFilter.filter((data) => data.Catagory == value);
+       
+      } else {
+        setCatagoryFilter("");
+        dataFilter = [...dataFilter];
+      }
+      break;
+    case "Age":
+              setCatagoryAgeFilter(value);
+
         if (catagoryFilter) {
-          dataFilter = data.filter((data) => data.Catagory == catagoryFilter);
-          if (catagoryAgeFilter)
-            dataFilter = dataFilter.filter(
-              (data) => data.CatagoryAge == catagoryAgeFilter
-            );
-          if (value)
-            dataFilter = dataFilter.filter(
-              (data) => data.ProductPrice <= value
-            );
-        } else if (catagoryAgeFilter && !catagoryFilter) {
-          dataFilter = data.filter(
-            (data) => data.CatagoryAge == catagoryAgeFilter
+          dataFilter = dataFilter.filter(
+            (data) => data.Catagory == catagoryFilter
           );
-          if (value)
-            dataFilter = dataFilter.filter(
-              (data) => data.ProductPrice <= value
-            );
-        } else if (value && !catagoryAgeFilter && !catagoryFilter) {
-          dataFilter = data.filter((data) => data.ProductPrice <= value);
-        } else {
-          dataFilter = [...data];
         }
-        break;
-      default:
-        dataFilter = [...data];
-    }
-    setFilterProduct(dataFilter);
-  };
+        if (priceFilter) {
+          dataFilter = dataFilter.filter(
+            (data) => data.ProductPrice <= priceFilter
+          );
+        }
+      if (value != "0") {
+        dataFilter = dataFilter.filter((data) => data.CatagoryAge == value);
+      } else {
+          setCatagoryAgeFilter("");
+        dataFilter = [...dataFilter];
+      }
+      break;
+    case "Price":
+      setpriceFilter(value);
+      if (catagoryFilter) {
+        dataFilter = dataFilter.filter(
+          (data) => data.Catagory == catagoryFilter
+        );
+      }
+      if (catagoryAgeFilter)
+        dataFilter = dataFilter.filter(
+          (data) => data.CatagoryAge == catagoryAgeFilter
+        );
+      if (value !=0)
+        dataFilter = dataFilter.filter((data) => data.ProductPrice <= value);
+      break;
+    default:
+      dataFilter = [...data];
+  }
+  setFilterProduct([...dataFilter]);
+};
 
   return (
     <div class="input-group input-group-lg mb-3 ">
