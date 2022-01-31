@@ -103,7 +103,7 @@ orderColumn.push({
       </h3>
       <PanelView
         cardOne={ordersTotal}
-        cardOneText={"Order Total..."}
+        cardOneText={"Total Orders..."}
         cardTwo={incomeTotal + "$"}
         cardTwoText={"Total Income..."}
         cardThree={waitOrders}
