@@ -6,8 +6,13 @@ Home Page
 
 Dashboard Page
 
-<img width="1438" alt="DashBoard" src="https://user-images.githubusercontent.com/48557867/151196006-4e8cdabc-60f0-45c8-aa3f-91e12303abe8.png">
+<img width="1436" alt="Screen Shot 2022-02-12 at 16 53 39" src="https://user-images.githubusercontent.com/48557867/153716256-cb5990ab-3872-4464-9ae4-ee76cc6f5003.png">
 
+
+
+Dashboard-Products Page:
+
+<img width="1440" alt="Screen Shot 2022-02-12 at 16 54 46" src="https://user-images.githubusercontent.com/48557867/153716295-427d5bbb-d6e7-4d18-af7b-2f441dc3cd81.png">
 
 Cart Page
 
