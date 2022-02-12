@@ -1,31 +1,25 @@
 .searchInputs {
    margin-top: 10px;
   display:flex;
- 
+align-items: center; 
     /* padding-right: 10px;
     align-items: center; */
 
 }
 
 
-.search input {
-  border: 0;
-  border-radius: 2px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+.search input { 
   font-size: 16px;
-  height: 60px;
+  height: 40px;
   width: 300px;
-    /* align-items: center; */
-
+text-align: center;
 }
 
 .searchIcon {
   height: 60px;
   width: 50px;
-  background-color: white;
   display: grid;
-      place-items: center;
+  place-items: center;
 
 }
 
@@ -50,7 +44,7 @@ input:focus {
 .dataResult .dataItem {
   width: 100%;
   height: 50px;
-  display: flex;
+  display:flex;
   align-items: center;
   color: black;
 }
@@ -69,6 +63,6 @@ a {
   cursor: pointer;
 }
 .fa-search{
-      color: #FF5722
+      color:green
 
 }

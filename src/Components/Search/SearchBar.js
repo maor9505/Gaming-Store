@@ -10,11 +10,8 @@ export const SearchBar = ({ placeholder, data }) => {
         const searchWord = event.target.value;
         setWordEntered(searchWord);
         const newFilter = data.filter((value) => {
-            console.log('value')
-            console.log(value)
             return value.ProductName.toLowerCase().includes(searchWord.toLowerCase());
         });
-
         if (searchWord === "") {
             setFilteredData([]);
         } else {
@@ -32,21 +29,22 @@ export const SearchBar = ({ placeholder, data }) => {
         <div className="searchInputs">
           <input
             type="text"
+            className="border border-success rounded-pill "
             placeholder={placeholder}
             value={wordEntered}
             onChange={handleFilter}
           />
-          <div className="searchIcon">
-            {filteredData.length === 0 ? (
-              <i className="fa fa-search fa-2x"></i>
-            ) : (
-              <i onClick={clearInput} className="fa fa-times-circle fa-2x"></i>
-            )}
-          </div>
 
+           <div className="searchIcon"> 
+           {filteredData.length === 0 ? (
+              <i className=" bg-light fa fa-search fa-2x"></i>
+            ) : (
+              <i onClick={clearInput} className=" bg-light fa fa-times-circle fa-2x"></i>
+            )} 
+           </div>
           {filteredData.length != 0 && (
             <div className="dataResult ">
-              {filteredData.slice(0, 15).map((value, key) => {
+              {filteredData.slice(0, 15).map((value) => {
                 return (
                   <Link
                     className=" dataItem nav-link text-dark"
