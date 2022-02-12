@@ -68,13 +68,19 @@ export const Navbar = () => {
           {!user && (
             <div>
               <span>
-                <Link to="/signup" className="navlink mr-4 btn btn-outline-success">
+                <Link
+                  to="/signup"
+                  className="navlink mr-4 btn btn-outline-success"
+                >
                   SIGN UP
                 </Link>
               </span>
 
               <span>
-                <Link to="/login" className="navlink m-2 btn btn-outline-success">
+                <Link
+                  to="/login"
+                  className="navlink m-2 btn btn-outline-success"
+                >
                   LOGIN
                 </Link>
               </span>
@@ -82,10 +88,13 @@ export const Navbar = () => {
           )}
           {/* //// */}
           {user && (
-            <div className="d-flex align-items-center">
-              <Link className="nav-link text-dark  position-relative" to="/cart">
-                <i className="fa fa-shopping-cart fa-3x mr-2"></i>
-                <span className="position-absolute top-3 start-100 translate-middle badge rounded-pill bg-danger">
+            <div className="d-flex align-items-center ">
+              <Link
+                className="nav-link text-dark  position-relative"
+                to="/cart"
+              >
+                <i className="fa fa-shopping-cart fa-3x "></i>
+                <span className="position-absolute  top-0 start-80 translate-middle badge rounded-pill bg-danger">
                   {cartUser.length}
                 </span>
               </Link>
@@ -101,7 +110,7 @@ export const Navbar = () => {
               )}
               <div className="dropdown">
                 <button
-                  className="btn btn-outline-success text-dark  border-success dropdown-toggle "
+                  className="btn btn-outline-success text-dark  border-success dropdown-toggle  "
                   type="button"
                   id="dropdownMenuButton2"
                   data-bs-toggle="dropdown"
@@ -110,34 +119,34 @@ export const Navbar = () => {
                   {user.name}
                 </button>
                 <ul
-                  className="dropdown-menu dropdown-menu-dark"
+                  className="dropdown-menu bg-light text-center border-success "
                   aria-labelledby="dropdownMenuButton2"
                 >
-                  <li>
+                  <li className="m-2 ">
                     <Link
                       to="/orders"
-                      className="navlink  btn-outline-success btn-lg"
+                      className="navlink  btn-outline-success btn-lg  "
                     >
                       Orders
                     </Link>
                   </li>
-                  <li>
+                  <li className="m-2 ">
                     <Link
                       to="/userprofile"
-                      className="navlink  btn-outline-success btn-lg"
+                      className="navlink   btn-outline-success btn-lg "
                     >
                       Profile
                     </Link>
                   </li>
-                  <li>
+                  <li className="m-2 ">
                     <Link
                       to="/contact"
-                      className="navlink  btn-outline-success btn-lg"
+                      className="navlink  btn-outline-success btn-lg "
                     >
                       Contact
                     </Link>
                   </li>
-                  <li>
+                  <li className="m-2">
                     <Link
                       className="navlink  btn-outline-success btn-lg"
                       onClick={handleLogout}

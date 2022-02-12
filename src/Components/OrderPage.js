@@ -63,8 +63,8 @@ const [order, setOrder] = useState();
                   <div>Phone: {user.phone}</div>
                 </div>
               </div>
-              <div className="table-responsive-sm">
-                <table className="table table-striped">
+              <div className="table-responsive">
+                <table className="table">
                   <thead>
                     <tr>
                       <th className="center">#</th>

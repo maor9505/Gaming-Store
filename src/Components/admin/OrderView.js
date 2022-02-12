@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
-import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline";
+import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../Config/Config";
-
-import { Icon } from "react-icons-kit";
-
 import { Table } from "../../Utils/Table";
 import { PanelView } from "./PanelView";
-import { OrdersColumn} from "../../Utils/TableColumn";
+import { OrdersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import { orderBy } from "lodash";
+import { ProductDoughnutChart } from "../../Chart/ProductDoughnutChart";
+import { OrderMonthBarChar } from "../../Chart/OrderMonthBarChar";
+
 export const OrderView = () => {
   const { AllOrderUsers } = useContext(AdminOrderContext);
   const [filterOrders, setfilterOrders] = useState([]);
@@ -18,34 +17,34 @@ export const OrderView = () => {
   const [waitOrders, setWaitOrders] = useState(0);
   const [cancleOrders, setCancleOrders] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
-const orderColumn= OrdersColumn();
-orderColumn.push({
-  path: "",
-  label: "",
-  content: (order) =>
-    order.Status == "Order Was accepted and delivered" ? (
-      <button
-        className="fa fa-list-alt btn-outline-success"
-        onClick={() => updateStatusOrder(order)}
-      ></button>
-    ) : (
-      <button
-        className="fa fa-list-alt btn-outline-danger"
-        onClick={() => updateStatusOrder(order)}
-      ></button>
-    ),
-});
+  const orderColumn = OrdersColumn();
+  orderColumn.push({
+    path: "",
+    label: "",
+    content: (order) =>
+      order.Status == "Order Was accepted and delivered" ? (
+        <button
+          className="fa fa-list-alt btn-outline-success"
+          onClick={() => updateStatusOrder(order)}
+        ></button>
+      ) : (
+        <button
+          className="fa fa-list-alt btn-outline-danger"
+          onClick={() => updateStatusOrder(order)}
+        ></button>
+      ),
+  });
 
-//update Status Order in db 
-   const updateStatusOrder = (order) => {
-     db.collection("Orders")
-       .doc(order.UserID + " Orders")
-       .collection("OrderDetails")
-       .doc(order.ID)
-       .update({
-         Status: "Order Was accepted and delivered",
-       });
-   };
+  //update Status Order in db
+  const updateStatusOrder = (order) => {
+    db.collection("Orders")
+      .doc(order.UserID + " Orders")
+      .collection("OrderDetails")
+      .doc(order.ID)
+      .update({
+        Status: "Order Was accepted and delivered",
+      });
+  };
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
     if (AllOrderUsers.length != 0) {
@@ -70,7 +69,7 @@ orderColumn.push({
   const filterOrderDesc = () => {
     return orderBy(AllOrderUsers, "DateCreate", "desc");
   };
-  //filter data by date 
+  //filter data by date
   const filterArrayByDate = (value) => {
     console.log("value");
     console.log(value);
@@ -97,20 +96,32 @@ orderColumn.push({
     setfilterOrders(filterOrderDesc());
   };
   return (
-    <div className="container ">
+    <div className="container">
       <h3>
         <span className="badge bg-light text-success p-4">Orders Details:</span>
       </h3>
-      <PanelView
-        cardOne={ordersTotal}
-        cardOneText={"Total Orders..."}
-        cardTwo={incomeTotal + "$"}
-        cardTwoText={"Total Income..."}
-        cardThree={waitOrders}
-        cardThreeText={"Waiting Orders..."}
-        cardFor={cancleOrders}
-        cardForText={"Cancled Orders..."}
-      />
+      <div className="container  justify-content-center">
+        <div className="container">
+          <PanelView
+            cardOne={ordersTotal}
+            cardOneText={"Total Orders..."}
+            cardTwo={incomeTotal + "$"}
+            cardTwoText={"Total Income..."}
+            cardThree={waitOrders}
+            cardThreeText={"Waiting Orders..."}
+            cardFor={cancleOrders}
+            cardForText={"Cancled Orders..."}
+          />
+        </div>
+        <div className="row align-items-end">
+          <div className="col-xl-8  mb-5">
+            <OrderMonthBarChar />
+          </div>
+          <div className="col-xl-4 mb-5 ">
+            <ProductDoughnutChart />
+          </div>
+        </div>
+      </div>
       <h1></h1>
       <h3>
         {" "}
@@ -132,9 +143,7 @@ orderColumn.push({
         </button>
       </div>
       <br />
-      <div className="">
-        <Table data={filterOrders} Columns={orderColumn}></Table>
-      </div>
+      <Table data={filterOrders} Columns={orderColumn}></Table>
     </div>
   );
 };

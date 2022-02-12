@@ -23,7 +23,6 @@ export const ContactsView = () => {
           DateCreate: doc.data().DateCreate.toMillis(),
           ...doc.data(),
         });
-        console.log(prevContacts);
         setcontactsData([...prevContacts]);
       });
     });

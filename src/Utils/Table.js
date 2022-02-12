@@ -32,21 +32,22 @@ export const Table = ({ data, Columns }) => {
     setcurrentPage(page);
   };
   return (
-    <div>
+    <div className="container">
       {arrayData.length === 0 && (
-        <div className="container d-flex justify-content-center bg-warning">
+        <div className="d-flex justify-content-center bg-warning">
           No Orders To Display...
         </div>
       )}
-
-      <table className="table table-hover table-bordered">
-        <TableHeader
-          columns={columns}
-          sortColumn={sortColumn}
-          onSort={onSort}
-        />
-        <TableBody data={ordersP} columns={columns} />
-      </table>
+      <div className="table-responsive">
+        <table className="table table-hover table-bordered">
+          <TableHeader
+            columns={columns}
+            sortColumn={sortColumn}
+            onSort={onSort}
+          />
+          <TableBody data={ordersP} columns={columns} />
+        </table>
+      </div>
       <div className="d-flex justify-content-center mt-4">
         <Pagination
           itemsCount={data.length}

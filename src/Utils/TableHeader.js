@@ -11,12 +11,11 @@ export const TableHeader = ({ columns, sortColumn, onSort }) => {
       newColumn.path = path;
       newColumn.order = "asc";
     }
-    console.log('good')
     onSort(newColumn);
   };
 
   return (
-    <thead className="table-success">
+    <thead className="">
       <tr>
         {columns.map((col) => (
           <th key={col.path} onClick={() => raiseSort(col.path)}>

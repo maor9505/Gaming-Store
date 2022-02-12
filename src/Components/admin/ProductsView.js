@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState,useMemo } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { Table } from "../../Utils/Table";
 import { Pagination } from "../common/Pagiantion";
 import { paginate } from "../common/paginat";
 import { PanelView } from "./PanelView";
-import {ProductColumn } from "../../Utils/TableColumn";
+import { ProductColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { ProductsContext } from "../../Global/ProductsContext";
-import {HeaderProducts} from "../common/HeaderProducts";
+import { HeaderProducts } from "../common/HeaderProducts";
+import { ProductVbarChart } from "../../Chart/ProductVbarChar";
 
 export const ProductsView = () => {
   const { products, spinner } = useContext(ProductsContext);
@@ -39,9 +40,11 @@ export const ProductsView = () => {
   }, [products]);
 
   return (
-    <div className="container ">
+    <div className="container">
       <h3>
-        <span className="badge bg-light text-success p-4">Products Details:</span>
+        <span className="badge bg-light text-success p-4">
+          Products Details:
+        </span>
       </h3>
       <PanelView
         cardOne={productsTotal}
@@ -53,13 +56,14 @@ export const ProductsView = () => {
         cardFor={"?"}
         cardForText={"???"}
       />
-      <h1></h1>
+      <div className="container">
+        <ProductVbarChart />
+      </div>
       <h3>
         {" "}
         <span className="badge bg-light text-success">Products:</span>
       </h3>
-
-      <div className="">
+      <div className="container">
         <HeaderProducts
           data={products}
           setFilterProduct={setFilterProduct}

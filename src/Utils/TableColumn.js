@@ -91,11 +91,6 @@ export const OrdersColumn = () => {
    };
   return [
     {
-      path: "UserID",
-      label: "User ID",
-      content: (order) => <span>{order.UserID}</span>,
-    },
-    {
       path: "ID",
       label: "Order ID",
       content: (order) => (

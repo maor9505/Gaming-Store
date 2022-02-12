@@ -21,7 +21,7 @@ export const Orders = () => {
 
  
   return (
-    <div className="container-fluid">
+    <div className="container">
       <h1></h1>
       {spinner && (
         <div className="container">
@@ -30,10 +30,8 @@ export const Orders = () => {
       )}
       {!spinner && (
         <div className="container">
-          <div>
             <span className='text-success'>Total:{orders.length}</span>
             <Table data={[...orders]} Columns={OrdersColumn}></Table>
-          </div>
         </div>
       )}
     </div>

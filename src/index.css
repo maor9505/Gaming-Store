@@ -15,9 +15,9 @@ code {
 #container {
   display: flex;
   min-height: 110vh;
-  flex-direction: column;
-}
+  flex-direction: column; } 
 
 #main-content {
-  flex: 1;
-}
+    padding: 10px;
+    flex: 1;
+} 

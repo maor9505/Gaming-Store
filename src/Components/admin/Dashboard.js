@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SideBar } from "./SideBar";
+import { NavBarDash } from "./NavBarDash";
 import { AddProducts } from "./AddProducts";
 import { AddCatagory } from "./AddCatagory";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -20,15 +20,14 @@ export const Dashboard = () => {
   const history = useHistory();
   const [viewDashboard, setViewDashboard] = useState(<HomeView />);
 
-
   useEffect(() => {
-    if (!user || user.type !== 'admin') {
+    if (!user || user.type !== "admin") {
       history.push("/login");
     }
   }, [user]);
 
-// controll the view thet present in main view page
-  const SideBarLinks = (path) => {
+  // controll the view thet present in main view page
+  const NavBarLinks = (path) => {
     switch (path) {
       case "Dashboard":
         setViewDashboard(<HomeView />);
@@ -57,23 +56,28 @@ export const Dashboard = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row flex-nowrap">
+    <div>
+      <div>
+        <h2>
+          {" "}
+          <span className="badge bg-light text-danger">Dashboard-Admin</span>
+        </h2>
         {/* //Sidebar */}
-        <SideBar SideBarLinks={SideBarLinks} />
+        <NavBarDash NavBarLinks={NavBarLinks} />
+      </div>
+      <h1 />
+      <div className="">
         <div className="col">
-          <h1>
-            {" "}
-            <span className="badge bg-light text-danger">Dashboard-Admin</span>
-          </h1>
-          <div id="main" className="col px-5">
-            {spinner && (
-              <div className="container">
-                <LoadingPage />
-              </div>
-            )}
-            {!spinner && <div className="">{viewDashboard}</div>}
-          </div>
+          {spinner && (
+            <div className="container">
+              <LoadingPage />
+            </div>
+          )}
+          {!spinner && (
+            <div className="container justify-content-center ">
+              {viewDashboard}
+            </div>
+          )}
         </div>
       </div>
     </div>

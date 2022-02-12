@@ -10,15 +10,10 @@ export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);
     const [pageSize, setpageSize] = useState(3);
     const [currentPage, setcurrentPage] = useState(1);
-
     //sort
     let sortProductsByviews = [...products]
     sortProductsByviews = sortProductsByviews.sort((a,b)=> b.Views - a.Views);
-    console.log('sort')
-    console.log(sortProductsByviews)
-
     const productsP = paginate(sortProductsByviews, currentPage, pageSize);
-
     // function the handle the page change
     const handlePagechange = page => {
         setcurrentPage(page);
