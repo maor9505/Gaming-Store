@@ -9,7 +9,8 @@ export function ProductDoughnutChart() {
   const { products } = useContext(ProductsContext);
 
   // get Random color for item chart
-  function getRandomColor() {
+  const getRandomColor=() =>{
+
     var letters = "0123456789ABCDEF".split("");
     var color = "#";
     for (var i = 0; i < 6; i++) {
