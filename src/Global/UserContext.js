@@ -15,8 +15,6 @@ export const UserContextProvider = (props) => {
                  .doc(user.uid)
                  .get()
                  .then((snapshot) => {
-                     console.log('user')
-                     console.log(user.uid)
                    setUser(getUser(snapshot, user));
                  });
 

@@ -70,13 +70,13 @@ export const Cart = () => {
         console.log("success Order to db");
         // Delete cart user after order succes
         db.collection("Cart")
-          .doc("Cart " + user.uid)
+          .doc(user.uid)
           .collection("CartProducts")
           .get()
           .then((snapshot) => {
             snapshot.docs.map((doc) => {
               db.collection("Cart")
-                .doc("Cart " + user.uid)
+                .doc(user.uid)
                 .collection("CartProducts")
                 .doc(doc.id)
                 .delete()

@@ -21,7 +21,7 @@ useEffect(() => {
 // get cart from db 
 const getCart=  ()=>{
     db.collection("Cart")
-    .doc("Cart " + user.uid)
+    .doc(user.uid)
     .collection("CartProducts")
     .onSnapshot((snapshot) => {
            let newCart = [];

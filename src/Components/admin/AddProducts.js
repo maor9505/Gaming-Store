@@ -74,16 +74,7 @@ export const AddProducts = () => {
                         setCatagory('');
                         setCatagoryAge('');
                         setError('');
-
-                        toast.info('this product is Add ', {
-                            position: "top-right",
-                            autoClose: 2000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: false,
-                            draggable: false,
-                            progress: undefined,
-                        });
+                       ToastAlert("this product is Add ");
                         document.getElementById('file').value = '';
                     }).catch(err => setError(err.message))
                 })
@@ -95,7 +86,6 @@ export const AddProducts = () => {
         
         <div className='container'>
             <br />
-            {/* <button onClick={getCatgories}>????</button> */}
             <h2>Add Product:</h2>
             <hr />
             <form autoComplete="off" className='form-group' onSubmit={addProduct}>

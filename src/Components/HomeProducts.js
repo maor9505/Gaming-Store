@@ -8,11 +8,9 @@ import { UserContext } from '../Global/UserContext';
 
 
 export const HomeProducts = () => {
-      const { user } = useContext(UserContext);
      const { products} = useContext(ProductsContext);
      const [productsP, setproductsP] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
-    const { dispatch } = useContext(CartContext);
 useEffect(() => {
   setproductsP([...products]);
 }, [products]);
