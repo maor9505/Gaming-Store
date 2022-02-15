@@ -25,7 +25,7 @@ const [order, setOrder] = useState();
   // update order to cancle Status 
  const CancleOrder =()=>{
         db.collection("Orders")
-          .doc(user.uid + " Orders")
+          .doc(user.uid)
           .collection("OrderDetails")
           .doc(order.ID)
           .update({

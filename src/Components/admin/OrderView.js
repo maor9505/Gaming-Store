@@ -38,7 +38,7 @@ export const OrderView = () => {
   //update Status Order in db
   const updateStatusOrder = (order) => {
     db.collection("Orders")
-      .doc(order.UserID + " Orders")
+      .doc(order.UserID)
       .collection("OrderDetails")
       .doc(order.ID)
       .update({

@@ -44,10 +44,9 @@ export const Cart = () => {
   // after user complete the order and payment accepted uplode to db
   const handleOrderToDb = (paymentRequest) => {
     const date = new Date();
-    const time =
-      date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     db.collection("Orders")
-      .doc(user.uid + " Orders")
+      .doc(user.uid)
       .collection("OrderDetails")
       .add({
         UserID: user.uid,

@@ -18,7 +18,7 @@ export const OrderContextProvider = (props) => {
 
   const getOrders=()=>{
     db.collection("Orders")
-      .doc(user.uid + " Orders")
+      .doc(user.uid)
       .collection("OrderDetails")
       .orderBy("DateCreate", "desc")
       .onSnapshot((snapshot) => {

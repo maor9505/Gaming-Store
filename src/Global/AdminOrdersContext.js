@@ -18,7 +18,7 @@ export const AdminOrdersContextProvider = (props) => {
       snapshot.docs.map((doc) =>
         db
           .collection("Orders")
-          .doc(doc.id + " Orders")
+          .doc(doc.id)
           .collection("OrderDetails")
           .onSnapshot((snapshot) => {
             snapshot.docChanges().forEach( ( change ) => {
