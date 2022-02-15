@@ -13,6 +13,7 @@ import { ProductsView } from "./ProductsView";
 import { CatagoryView } from "./CatagoryView";
 import { OrderView } from "./OrderView";
 import { ContactsView } from "./ContactsView";
+import { UsersView } from "./UsersView";
 
 export const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -46,6 +47,9 @@ export const Dashboard = () => {
         break;
       case "Orders":
         setViewDashboard(<OrderView />);
+        break;
+      case "Users":
+        setViewDashboard(<UsersView />);
         break;
       case "Contacts":
         setViewDashboard(<ContactsView />);

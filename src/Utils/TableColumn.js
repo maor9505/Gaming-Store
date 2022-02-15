@@ -160,3 +160,40 @@ export const CatagoryColumn = () => {
     },
   ];
 };
+export const UsersColumn = () => {
+  const DeleteUser = (user) => {
+    db.collection("Catagories").doc(user.ID).delete();
+  };
+
+  return [
+    {
+      path: "ID",
+      label: "ID",
+      content: (catagory) => <span>{catagory.ID}</span>,
+    },
+    {
+      path: "name",
+      label: "Full-Name",
+      content: (user) => <span>{user.DisplayName}</span>,
+    },
+    {
+      path: "email",
+      label: "Email",
+      content: (user) => <span>{user.Email}</span>,
+    },
+    {
+      path: "phone",
+      label: "Phone-Number",
+      content: (user) => <span>{user.PhoneNumber}</span>,
+    },
+    {
+      path: "",
+      label: "",
+      content: (user) => (
+        <button className="delete-btn" onClick={() => DeleteUser(user)}>
+          <Icon icon={iosTrashOutline} size={24} />
+        </button>
+      ),
+    },
+  ];
+};

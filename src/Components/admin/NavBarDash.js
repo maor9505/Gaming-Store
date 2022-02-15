@@ -79,6 +79,14 @@ export const NavBarDash = ({ NavBarLinks }) => {
           </li>
           <li>
             <a href="#" className="nav-link">
+              <i className="fs-4 bi-table"></i>{" "}
+              <span onClick={() => NavBarLinks("Users")} className="ms-1 ">
+                Users
+              </span>{" "}
+            </a>
+          </li>
+          <li>
+            <a href="#" className="nav-link">
               <i className="fs-4 "></i>{" "}
               <span onClick={() => NavBarLinks("Contacts")} className="ms-1 ">
                 Contacts
