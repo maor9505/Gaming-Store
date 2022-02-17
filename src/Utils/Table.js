@@ -39,7 +39,7 @@ export const Table = ({ data, Columns }) => {
         </div>
       )}
       <div className="table-responsive">
-        <table className="table table-hover table-bordered">
+        <table className="table table-hover table-bordered mx-auto">
           <TableHeader
             columns={columns}
             sortColumn={sortColumn}

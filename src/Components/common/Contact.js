@@ -38,6 +38,7 @@ export const Contact = () => {
     <div className="container contact-form">
       <div className="contact-image">
         <img
+        className="img-fluid"
           src="https://image.ibb.co/kUagtU/rocket_contact.png"
           alt="rocket_contact"
         />

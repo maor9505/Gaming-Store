@@ -1,6 +1,7 @@
 import React, { createContext,useEffect,useState,useReducer } from 'react'
 import { db } from '../Config/Config'
 import {getProduct} from '../DbModal/Product'
+import _ from 'lodash'
 export const ProductsContext = createContext();
 
 export const ProductsContextProvider = (props) => {
@@ -9,15 +10,23 @@ export const ProductsContextProvider = (props) => {
 
     useEffect(() => { 
      const getP = () => {
+       let prevProducts = [];
         db.collection("Products").onSnapshot((snapshot) => {
-        let prevProducts = [];
-         snapshot.docs.map((doc) => prevProducts.push(getProduct(doc)));
-         setProducts([...prevProducts]);
+           snapshot.docChanges().forEach((change) => {
+             if (change.type === "added") {
+               prevProducts.push(getProduct(change.doc));
+             }
+             if (change.type === "modified") {
+               _.remove(prevProducts, { ID: change.doc.id });
+               prevProducts.push(getProduct(change.doc));
+             }
+             setProducts([...prevProducts]);
+           });
          setSpinner(false);
-       });
+       })
      };
-     
      getP();
+     
     },[])
 
    

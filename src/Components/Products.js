@@ -11,7 +11,7 @@ import { UserContext } from '../Global/UserContext';
 
 export const Products = () => {
     const { products } = useContext(ProductsContext);
-    const [pageSize, setpageSize] = useState(3);
+    const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
     const [filterProduct, setFilterProduct] = useState([]);
     const productsP = paginate(filterProduct, currentPage, pageSize);
@@ -28,20 +28,20 @@ useEffect(() => {
 
     return (
       <>
-        {productsP.length !== 0 && <h1> Products</h1>}
         <div className="container">
+          {productsP.length !== 0 && <h1> Products</h1>}
           <HeaderProducts data={products} setFilterProduct={setFilterProduct} />
         </div>
 
-        <div className="container d-flex justify-content-center">
+        <div className="container d-flex justify-content-center mt-4">
           {productsP.length === 0 && (
             <div>
               No Products To Display...Or your opttion search id not Correct
             </div>
           )}
-          <div className="container d-flex justify-content-center">
+          <div className="row ">
             {productsP.map((product) => (
-              <div className="col-xs-12 col-xs-6 col-md-4 " key={product.ID}>
+              <div className="col-sm-12 col-sm-6 col-lg-3 " key={product.ID}>
                 <div className="image-flip">
                   <div className="mainflip flip-0">
                     <Link
@@ -58,7 +58,9 @@ useEffect(() => {
                                 alt="card image"
                               />
                             </p>
-                            <h4 className="card-title">{product.ProductName}</h4>
+                            <h4 className="card-title text-wrap">
+                              {product.ProductName}
+                            </h4>
                             <p className="card-text">{product.Catagory}</p>
                             <p className="card-text">
                               Price: {product.ProductPrice}$$
@@ -78,22 +80,10 @@ useEffect(() => {
                       <div className="backside">
                         <div className="card">
                           <div className="card-body text-center mt-4 d-flex flex-column">
-                            <h4 className="card-title">{product.ProductName}</h4>
+                            <h4 className="card-title">
+                              {product.ProductName}
+                            </h4>
                             <p className="card-text">{product.Description}</p>
-                            {/* {user && (
-                              <button
-                                className="btn btn-outline-danger mt-auto "
-                                onClick={() =>
-                                  dispatch({
-                                    type: "ADD_TO_CART",
-                                    id: product.ProductID,
-                                    product,
-                                  })
-                                }
-                              >
-                                ADD TO CART
-                              </button>
-                            )} */}
                           </div>
                         </div>
                       </div>

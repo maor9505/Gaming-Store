@@ -8,7 +8,7 @@ import { UserContext } from '../Global/UserContext';
 
 export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);
-    const [pageSize, setpageSize] = useState(3);
+    const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
     //sort
     let sortProductsByviews = [...products]
@@ -20,12 +20,14 @@ export const ViewsProducts = () => {
     }
 
     return (
-      <>
+      <div className='container'>
+
         {productsP.length !== 0 && <h1> Views Products</h1>}
-        <div className="container d-flex justify-content-center">
+        <hr/>
+        <div className="row">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
-            <div key={product.ID} className="col-xs-12 col-sm-6 col-md-4">
+            <div key={product.ID} className="col-sm-12 col-sm-6 col-lg-3">
               <div className="image-flip">
                 <div className="mainflip flip-0">
                   <Link
@@ -42,7 +44,7 @@ export const ViewsProducts = () => {
                               alt="card image"
                             />
                           </p>
-                          <h4 className="card-title">{product.ProductName}</h4>
+                          <h4 className="card-title text-wrap">{product.ProductName}</h4>
                           <p className="card-text">{product.Catagory}</p>
                           <p className="card-text">
                             Price: {product.ProductPrice}$$
@@ -81,6 +83,6 @@ export const ViewsProducts = () => {
             onPageChange={handlePagechange}
           />
         </div>
-      </>
+      </div>
     );
 }

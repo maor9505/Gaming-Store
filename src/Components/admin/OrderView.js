@@ -37,13 +37,15 @@ export const OrderView = () => {
 
   //update Status Order in db
   const updateStatusOrder = (order) => {
-    db.collection("Orders")
-      .doc(order.UserID)
-      .collection("OrderDetails")
-      .doc(order.ID)
-      .update({
-        Status: "Order Was accepted and delivered",
-      });
+    if (order.Status != "Order Cancled"){
+      db.collection("Orders")
+        .doc(order.UserID)
+        .collection("OrderDetails")
+        .doc(order.ID)
+        .update({
+          Status: "Order Was accepted and delivered",
+        });
+      }
   };
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {

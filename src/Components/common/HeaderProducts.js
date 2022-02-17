@@ -1,6 +1,6 @@
-import React, { useState, useContext,useEffect } from 'react'
-import { db } from '../../Config/Config'
-
+import React, { useState, useContext, useEffect } from "react";
+import { db } from "../../Config/Config";
+import _ from "lodash";
 
 export const HeaderProducts = ({ data, setFilterProduct }) => {
   const [catagoryOption, setcatagoryOption] = useState([]);
@@ -14,76 +14,48 @@ export const HeaderProducts = ({ data, setFilterProduct }) => {
       );
     });
   }, []);
- 
-const hanldeChangeFilterOption = (type, value) => {
-  let dataFilter = [...data];
-  switch (type) {
-    case "Catagory":
-      setCatagoryFilter(value);
-       if (catagoryAgeFilter)
-         dataFilter = dataFilter.filter(
-           (data) => data.CatagoryAge == catagoryAgeFilter
-         );
-       if (priceFilter)
-         dataFilter = dataFilter.filter(
-           (data) => data.ProductPrice <= priceFilter
-         );
-      if (value != "0") {
-        dataFilter = dataFilter.filter((data) => data.Catagory == value);
-       
-      } else {
-        setCatagoryFilter("");
-        dataFilter = [...dataFilter];
-      }
-      break;
-    case "Age":
-              setCatagoryAgeFilter(value);
 
-        if (catagoryFilter) {
-          dataFilter = dataFilter.filter(
-            (data) => data.Catagory == catagoryFilter
-          );
-        }
-        if (priceFilter) {
-          dataFilter = dataFilter.filter(
-            (data) => data.ProductPrice <= priceFilter
-          );
-        }
-      if (value != "0") {
-        dataFilter = dataFilter.filter((data) => data.CatagoryAge == value);
-      } else {
-          setCatagoryAgeFilter("");
-        dataFilter = [...dataFilter];
-      }
-      break;
-    case "Price":
-      setpriceFilter(value);
-      if (catagoryFilter) {
-        dataFilter = dataFilter.filter(
-          (data) => data.Catagory == catagoryFilter
-        );
-      }
-      if (catagoryAgeFilter)
-        dataFilter = dataFilter.filter(
-          (data) => data.CatagoryAge == catagoryAgeFilter
-        );
-      if (value !=0)
-        dataFilter = dataFilter.filter((data) => data.ProductPrice <= value);
-      break;
-    default:
-      dataFilter = [...data];
-  }
-  setFilterProduct([...dataFilter]);
-};
+  useEffect(() => {
+    var DataFilter = _.filter(data, (obj) =>
+    (catagoryFilter != ""
+        ? obj.Catagory == catagoryFilter
+        : obj.Catagory != catagoryFilter) &&
+       (catagoryAgeFilter != ""
+        ? obj.CatagoryAge == catagoryAgeFilter
+        : obj.CatagoryAge != catagoryAgeFilter)
+         && (priceFilter != 0
+        ? obj.ProductPrice <= priceFilter
+        : obj.ProductPrice >= 0)
+    );
+       setFilterProduct([...DataFilter]);
+  }, [catagoryFilter, catagoryAgeFilter,priceFilter]);
+
+  const hanldeChangeFilterOption = (type, value) => {
+    switch (type) {
+      case "Catagory":
+        setCatagoryFilter(value);
+        break;
+      case "Age":
+        setCatagoryAgeFilter(value);
+        break;
+      case "Price":
+        setpriceFilter(value);
+        break;
+      default:
+        break;
+    }
+    console.log(value);
+  };
+ 
 
   return (
-    <div className="input-group input-group-lg mb-3 ">
+    <div className="input-group input-group-lg mt-4 ">
       <select
         value={catagoryFilter}
         className="form-select"
         onChange={(e) => hanldeChangeFilterOption("Catagory", e.target.value)}
       >
-        <option value="0">Choose Catagory (All)</option>
+        <option value="">Choose Catagory (All)</option>
         {catagoryOption.map((ca) => (
           <option key={ca.name} value={ca.name}>
             {ca.name}
@@ -95,7 +67,7 @@ const hanldeChangeFilterOption = (type, value) => {
         className="form-select ms-4"
         onChange={(e) => hanldeChangeFilterOption("Age", e.target.value)}
       >
-        <option value="0">Choose Catagory age</option>
+        <option value="">Choose Catagory age</option>
         <option key={"1"} value="1">
           3-16
         </option>

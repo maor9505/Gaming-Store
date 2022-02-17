@@ -6,7 +6,7 @@ const commonStyle = {
     position: 'relative',
     left: 0,
     right: 0,
-    top: '50px',
+    top: '150px',
     bottom: 0
 };
 export const LoadingPage = () => {

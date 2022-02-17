@@ -18,16 +18,16 @@ useEffect(() => {
 // sort by Views to Desc products views
 useEffect(() => {
   let sortProductsByviews = productsP.sort((a, b) => b.Sales - a.Sales);
-  sortProductsByviews = sortProductsByviews.slice(0, 3);
+  sortProductsByviews = sortProductsByviews.slice(0, 4);
   setFilterProduct(sortProductsByviews);
 }, [productsP]);
 
 
     return (
-      <div className="container d-flex justify-content-center">
+      <div className="row mt-3">
         {filterProduct.length === 0 && <div>No Products To Display...</div>}
         {filterProduct.map((product) => (
-          <div  key={product.ID}className="col-xs-12 col-sm-6 col-md-4">
+          <div key={product.ID} className="col-sm-12 col-sm-6 col-lg-3">
             <div className="image-flip">
               <div className="mainflip flip-0">
                 <Link
@@ -46,7 +46,9 @@ useEffect(() => {
                         </p>
                         <h4 className="card-title">{product.ProductName}</h4>
                         <p className="card-text">{product.Catagory}</p>
-                        <p className="card-text">Price: {product.ProductPrice}$$</p>
+                        <p className="card-text">
+                          Price: {product.ProductPrice}$$
+                        </p>
                         <p className="card-text">Views: {product.Views}</p>
                         <p className="card-text">Sales: {product.Sales}</p>
 
@@ -64,7 +66,6 @@ useEffect(() => {
                       <div className="card-body text-center mt-4  d-flex flex-column">
                         <h4 className="card-title">{product.ProductName}</h4>
                         <p className="card-text">{product.Description}</p>
-                       
                       </div>
                     </div>
                   </div>

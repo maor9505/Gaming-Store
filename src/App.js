@@ -37,7 +37,7 @@ export const App = () => {
               <AdminOrdersContextProvider>
                 <div id="container">
                   <Navbar />
-                  <div id="main-container">
+                  <div id="main-content">
                     <Switch>
                       {/* home */}
                       <Route exact path="/" component={Home} />
@@ -87,8 +87,8 @@ export const App = () => {
                       <Redirect to="/not-found" />
                     </Switch>
                   </div>
+                  <Footer />
                 </div>
-                <Footer />
               </AdminOrdersContextProvider>
             </OrderContextProvider>
           </CartContextProvider>

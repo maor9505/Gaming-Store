@@ -10,17 +10,20 @@ export const Home = () => {
   const {spinner } = useContext(ProductsContext);
 
   return (
-    <div className="container-fluid">
-      <HeroMain />
+    <>
+      <div className="container-fluid">
+        <HeroMain />
+        <br/>
+      </div>
       <div className="container">
         <h1></h1>
         {spinner && (
-          <div>
+          <div className="container">
             <LoadingPage />
           </div>
         )}
         {!spinner && (
-          <div>
+          <div className="container">
             <h1> Sales Products</h1>
             <HomeProducts />
             <h1></h1>
@@ -31,6 +34,6 @@ export const Home = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };

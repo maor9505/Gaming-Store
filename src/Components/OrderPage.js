@@ -2,38 +2,50 @@ import React, {useEffect,useContext,useState } from "react";
 
 import { useParams, useHistory } from "react-router-dom";
 import { db } from "../Config/Config";
+import { AdminOrderContext } from "../Global/AdminOrdersContext";
 import { OrderContext } from "../Global/OrderContext";
 import { UserContext } from "../Global/UserContext";
 import "../styles/OrderPage.css";
 import { ToastAlert } from "../Utils/Toast";
-
+//כפתור cancle
 
 export const OrderPage = () => {
   const {user}= useContext(UserContext);
+    const { AllOrderUsers } = useContext(AdminOrderContext);
+
 const { orders } = useContext(OrderContext);
 const [order, setOrder] = useState();
   const { id } = useParams();
-  console.log(id);
-
+      const history = useHistory();
   // find the order by id param
   useEffect(() => {
-      const order = orders.find((order) => order.ID == id);
+    let order;
+    if(user){
+    if(user.type=='admin'){
+       order = AllOrderUsers.find((order) => order.ID == id);
+    }else{
+       order = orders.find((order) => order.ID == id);
+    }
+  }else{
+    history.push('/')
+  }
       console.log(order);
       setOrder(order)
-  },[orders]);
+  },[]);
 
   // update order to cancle Status 
  const CancleOrder =()=>{
         db.collection("Orders")
-          .doc(user.uid)
+          .doc(order.UserID)
           .collection("OrderDetails")
           .doc(order.ID)
           .update({
-            Status:'Order Cancled'
+            Status: "Order Cancled",
           })
           .then(() => {
-            ToastAlert('Cancle Order Success')
-          })
+            ToastAlert("Cancle Order Success");
+            order.Status = "Order Cancled";
+          });
     
  }
   return (

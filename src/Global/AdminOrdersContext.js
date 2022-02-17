@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState, useContext } from "react";
 import { db } from "../Config/Config";
 import { getOrder } from "../DbModal/Order";
 import { UserContext } from "./UserContext";
+import _ from "lodash";
 export const AdminOrderContext = createContext();
 
 export const AdminOrdersContextProvider = (props) => {
@@ -28,19 +29,18 @@ export const AdminOrdersContextProvider = (props) => {
                       AllOrders.push(getOrder(change.doc));
                     }
                     if (change.type === "modified") {
-                      AllOrders = AllOrders.filter(
-                        (item) => item.ID !== change.doc.id
-                      );
+                      _.remove(AllOrders, { ID: change.doc.id });
                       AllOrders.push(getOrder(change.doc));
                     }
-                    setSpinner(false);
                     setAllOrdersUser([...AllOrders]);
                   });
                 })
             );
           });
+        setSpinner(false);
       }
     },
+
     [user]
   );
 

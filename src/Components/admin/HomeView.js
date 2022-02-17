@@ -7,7 +7,7 @@ import { OrdersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import { ProductsContext } from "../../Global/ProductsContext";
-
+import _ from 'lodash'
 
 export const HomeView = () => {
   const { AllOrderUsers } = useContext(AdminOrderContext);
@@ -77,7 +77,9 @@ export const HomeView = () => {
       />
       <h1></h1>
       <h3>
-        <span className="badge bg-light text-success p-4">Products Details:</span>
+        <span className="badge bg-light text-success p-4">
+          Products Details:
+        </span>
       </h3>
       <PanelView
         cardOne={productsTotal}
@@ -90,7 +92,10 @@ export const HomeView = () => {
         cardForText={"???"}
       />
       <div className="">
-        <Table data={AllOrderUsers} Columns={OrdersColumn}></Table>
+        <Table
+          data={_.orderBy(AllOrderUsers, "DateCreate", "desc")}
+          Columns={OrdersColumn}
+        ></Table>
       </div>
     </div>
   );
