@@ -13,7 +13,7 @@ Dashboard Page
 
 Dashboard-Products Page:
 
-<img width="1440" alt="Screen Shot 2022-02-21 at 18 07 20" src="https://user-images.githubusercontent.com/48557867/154991937-ba5a08d7-3b87-43fc-a565-1afafbb7068d.png">
+<img width="1440" alt="Screen Shot 2022-02-21 at 18 17 59" src="https://user-images.githubusercontent.com/48557867/154992852-e195f88f-b9f0-4c70-9182-d7ac00976d58.png">
 
 
 
