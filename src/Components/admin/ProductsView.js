@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { Table } from "../../Utils/Table";
-import { Pagination } from "../common/Pagiantion";
-import { paginate } from "../common/paginat";
 import { PanelView } from "./PanelView";
 import { ProductColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { ProductsContext } from "../../Global/ProductsContext";
 import { HeaderProducts } from "../common/HeaderProducts";
 import { ProductVbarChart } from "../../Chart/ProductVbarChar";
+import _ from "lodash";
 
 export const ProductsView = () => {
   const { products, spinner } = useContext(ProductsContext);
   const [filterProduct, setFilterProduct] = useState([]);
   const [productsTotal, setproductsTotal] = useState(0);
   const [viewsTotal, setviewsTotal] = useState(0);
+  const [totalSales, setTotalSales] = useState(0);
   const [mostViewProducts, setmostViewProducts] = useState("");
 
   useEffect(() => {
@@ -24,18 +24,20 @@ export const ProductsView = () => {
   useEffect(() => {
     if (products.length != 0) {
       setproductsTotal(products.length);
+      setTotalSales(
+        _.sumBy(products, (o) => {
+          return o.Sales;
+        })
+      );
+
       setviewsTotal(
         products.map((product) => product.Views).reduce((a, b) => a + b)
       );
       const mostViewProductsP = [...products];
-      const highestMaxView = Math.max(
-        ...mostViewProductsP.map((product) => product.Views)
-      );
-
-      const mostViewProduct = mostViewProductsP.find(
-        (product) => product.Views === highestMaxView
-      );
-      setmostViewProducts(mostViewProduct.ProductName);
+      const highestMaxView = _.maxBy(mostViewProductsP, (o) => {
+        return o.Views;
+      });
+      setmostViewProducts(highestMaxView.ProductName);
     }
   }, [products]);
 
@@ -48,13 +50,13 @@ export const ProductsView = () => {
       </h3>
       <PanelView
         cardOne={productsTotal}
-        cardOneText={"Products Total..."}
-        cardTwo={viewsTotal}
-        cardTwoText={"Views Total..."}
-        cardThree={mostViewProducts}
-        cardThreeText={"Most view Product..."}
-        cardFor={"?"}
-        cardForText={"???"}
+        cardOneText={"Total Products..."}
+        cardTwo={totalSales}
+        cardTwoText={"Total Products Sales..."}
+        cardThree={viewsTotal}
+        cardThreeText={"Total Views..."}
+        cardFor={mostViewProducts}
+        cardForText={"Most View Product..."}
       />
       <div className="container">
         <ProductVbarChart />

@@ -30,6 +30,7 @@ export const GooglePay = (props) => {
                         },
                     ],
                     merchantInfo: {
+                        // only for production
                         merchantId: '12345678901234567890',
                         merchantName: 'Test',
                     },

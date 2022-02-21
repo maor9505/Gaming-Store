@@ -15,8 +15,8 @@ export const HomeView = () => {
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [waitOrders, setWaitOrders] = useState(0);
   const [cancleOrders, setCancleOrders] = useState(0);
-  const { products, spinner } = useContext(ProductsContext);
-  const [filterProduct, setFilterProduct] = useState([]);
+  const { products} = useContext(ProductsContext);
+  const [totalSales, setTotalSales] = useState(0);
   const [productsTotal, setproductsTotal] = useState(0);
   const [viewsTotal, setviewsTotal] = useState(0);
   const [mostViewProducts, setmostViewProducts] = useState("");
@@ -25,18 +25,15 @@ export const HomeView = () => {
   useEffect(() => {
     if (products.length != 0) {
       setproductsTotal(products.length);
+      setTotalSales(_.sumBy(products, (o)=> { return o.Sales }));
       setviewsTotal(
         products.map((product) => product.Views).reduce((a, b) => a + b)
       );
       const mostViewProductsP = [...products];
-      const highestMaxView = Math.max(
-        ...mostViewProductsP.map((product) => product.Views)
-      );
-
-      const mostViewProduct = mostViewProductsP.find(
-        (product) => product.Views === highestMaxView
-      );
-      setmostViewProducts(mostViewProduct.ProductName);
+          const highestMaxView=  _.maxBy(mostViewProductsP, (o) => {
+              return o.Views;
+            });
+      setmostViewProducts(highestMaxView.ProductName);
     }
   }, [products]);
 
@@ -84,12 +81,12 @@ export const HomeView = () => {
       <PanelView
         cardOne={productsTotal}
         cardOneText={"Total Products..."}
-        cardTwo={viewsTotal}
-        cardTwoText={"Total Views..."}
-        cardThree={mostViewProducts}
-        cardThreeText={"Most View Product..."}
-        cardFor={"?"}
-        cardForText={"???"}
+        cardTwo={totalSales}
+        cardTwoText={"Total Products Sales..."}
+        cardThree={viewsTotal}
+        cardThreeText={"Total Views..."}
+        cardFor={mostViewProducts}
+        cardForText={"Most View Product..."}
       />
       <div className="">
         <Table

@@ -1,4 +1,4 @@
-import React, {useEffect,useContext,useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 
 import { useParams, useHistory } from "react-router-dom";
 import { db } from "../Config/Config";
@@ -10,44 +10,48 @@ import { ToastAlert } from "../Utils/Toast";
 //כפתור cancle
 
 export const OrderPage = () => {
-  const {user}= useContext(UserContext);
-    const { AllOrderUsers } = useContext(AdminOrderContext);
-
-const { orders } = useContext(OrderContext);
-const [order, setOrder] = useState();
+  const { user } = useContext(UserContext);
+  const { AllOrderUsers } = useContext(AdminOrderContext);
+  const { orders } = useContext(OrderContext);
+  const [order, setOrder] = useState();
   const { id } = useParams();
-      const history = useHistory();
+  const history = useHistory();
+
   // find the order by id param
   useEffect(() => {
     let order;
-    if(user){
-    if(user.type=='admin'){
-       order = AllOrderUsers.find((order) => order.ID == id);
-    }else{
-       order = orders.find((order) => order.ID == id);
+    if (user) {
+      if (user.type == "admin") {
+        order = AllOrderUsers.find((order) => order.ID == id);
+      } else {
+        order = orders.find((order) => order.ID == id);
+      }
+    } else {
+      history.push("/");
     }
-  }else{
-    history.push('/')
-  }
-      console.log(order);
-      setOrder(order)
-  },[]);
+    console.log(order);
+    setOrder(order);
+  }, [id]);
 
-  // update order to cancle Status 
- const CancleOrder =()=>{
-        db.collection("Orders")
-          .doc(order.UserID)
-          .collection("OrderDetails")
-          .doc(order.ID)
-          .update({
-            Status: "Order Cancled",
-          })
-          .then(() => {
-            ToastAlert("Cancle Order Success");
-            order.Status = "Order Cancled";
-          });
-    
- }
+  // update order to cancle Status
+  const CancleOrder = () => {
+    db.collection("Orders")
+      .doc(order.UserID)
+      .collection("OrderList")
+      .doc(order.ID)
+      .update({
+        Status: "Order Cancled",
+      })
+      .then(() => {
+        ToastAlert("Cancle Order Success");
+        document.getElementById("btnCancle").textContent = "Order Cancled";
+        document.getElementById("btnCancle").style.color = 'red';
+        document.getElementById('btnCancle').style.backgroundColor='white'
+        document.getElementById("btnCancle").style.borderColor = 'gray';
+
+        order.Status = "Order Cancled";
+      });
+  };
   return (
     <div>
       {!order && <div className="top">slow internet...no order to display</div>}
@@ -64,7 +68,9 @@ const [order, setOrder] = useState();
               <div className="row mb-4">
                 <div className="col-sm-6 ">
                   <h5 className="mb-3">To:</h5>
-                  <h3 className="text-dark mb-1">{order.ShippingAddress.name}</h3>
+                  <h3 className="text-dark mb-1">
+                    {order.ShippingAddress.name}
+                  </h3>
                   <div>{order.ShippingAddress.postalCode}</div>
                   <div>
                     {order.ShippingAddress.countryCode}{" "}
@@ -107,19 +113,24 @@ const [order, setOrder] = useState();
                           <strong className="text-dark">Total Price:</strong>{" "}
                         </td>
                         <td className="right">
-                          <strong className="text-dark">{order.TotalPrice}</strong>
+                          <strong className="text-dark">
+                            {order.TotalPrice}
+                          </strong>
                         </td>
                         <td className="left">
                           <strong className="text-dark">Total Qty:</strong>{" "}
                         </td>
                         <td className="right">
-                          <strong className="text-dark">{order.TotalQty}</strong>
+                          <strong className="text-dark">
+                            {order.TotalQty}
+                          </strong>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   {order.Status == "In Procces..." && (
                     <button
+                      id='btnCancle'
                       className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
                       onClick={CancleOrder}
                     >

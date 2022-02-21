@@ -24,7 +24,7 @@ export const CartReducer = (state, action) => {
       break;
 
     case "INC":
-      product = action.cart;
+      product = action.product;
       product.qty = ++product.qty;
       db.collection("Cart")
         .doc(uid)
@@ -34,7 +34,7 @@ export const CartReducer = (state, action) => {
       break;
 
     case "DEC":
-      product = action.cart;
+      product = action.product;
       if (product.qty > 1) {
         product.qty = product.qty - 1;
         db.collection("Cart")
@@ -48,7 +48,7 @@ export const CartReducer = (state, action) => {
       break;
 
     case "DELETE":
-      product = action.cart;
+      product = action.product;
       db.collection("Cart")
         .doc(uid)
         .collection("CartProducts")

@@ -1,55 +1,56 @@
-
-import React, { createContext, useReducer, useEffect,useState,useContext ,useMemo} from 'react'
-import { CartReducer } from './CartReducer';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
+import { CartReducer } from "./CartReducer";
 import { db } from "../Config/Config";
-import { UserContext } from './UserContext';
+import { UserContext } from "./UserContext";
 
 export const CartContext = createContext();
 
-export const CartContextProvider = (props) => { 
-      const { user } = useContext(UserContext);
-const [cart, dispatch] = useReducer(CartReducer)
-const [cartUser, setCart] = useState([]);
+export const CartContextProvider = (props) => {
+  const { user } = useContext(UserContext);
+  const [cart, dispatch] = useReducer(CartReducer);
+  const [cartUser, setCart] = useState([]);
 
-// if user is login get cart from db 
-useEffect(() => {
-  if (user) {
-  getCart() 
- }
-}, [user]);
+  // if user is login get cart from db
+  useEffect(() => {
+    if (user) {
+      getCart();
+    }
+    console.log(cartUser)
+  }, [user]);
 
-// get cart from db 
-const getCart=  ()=>{
+  // get cart from db
+  const getCart = () => {
     db.collection("Cart")
-    .doc(user.uid)
-    .collection("CartProducts")
-    .onSnapshot((snapshot) => {
-           let newCart = [];
-           snapshot.forEach((doc)=>{
-              newCart.push({
-             ID: doc.id,
-             ...doc.data()
-           })
+      .doc(user.uid)
+      .collection("CartProducts")
+      .onSnapshot((snapshot) => {
+        let newCart = [];
+        snapshot.forEach((doc) => {
+          newCart.push({
+            ID: doc.id,
+            ...doc.data(),
+          });
+                      console.log("1");
 
-           })
-           setCart(newCart)
-    });
-}
+        });
+        setCart(newCart);
+      });
+  };
 
-    return (
-      <CartContext.Provider value={{ cartUser: [...cartUser], ...cart, dispatch }}>
-        {props.children}
-      </CartContext.Provider>
-    );
-}
-
-
-
-
-
-
-
-
+  return (
+    <CartContext.Provider
+      value={{ cartUser: [...cartUser], ...cart, dispatch }}
+    >
+      {props.children}
+    </CartContext.Provider>
+  );
+};
 
 // snapshot.docChanges().forEach((snap) => {
 //   if (snap.type == "added") {

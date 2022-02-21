@@ -39,9 +39,9 @@ export const PanelView = ({
       )}
       {cardFor != "?" && (
         <div className="col-sm-3">
-          <div className="card border-danger text-danger shadow">
+          <div className="card border-info text-info shadow">
             <div className="card-body">
-              <h5 className="card-title text-danger">{cardForText}</h5>
+              <h5 className="card-title text-info">{cardForText}</h5>
               <p className="card-text fs-2">{cardFor}</p>
             </div>
           </div>

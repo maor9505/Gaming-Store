@@ -46,26 +46,29 @@ export const OrderMonthBarChar = () => {
     for (let k in data) {
       t.push({
         lable: k,
+        month: k.slice(0,2),
+        year: k.slice(3,8),
         totalPrice: _.sum(data[k]),
       });
     }
-    t = _.orderBy(t, ["lable"], ["asc"]);
+    t = _.orderBy(t, ["year", "month"], ["asc", "asc"]);
+
     return t;
   };
   var options = {
-    responsive:true,
+    responsive: true,
     scales: {
       y: {
+        beginAtZero: true,
         ticks: {
-          color: "gray",
-          beginAtZero: true,
+          color: "black",
           padding: 10,
         },
       },
       x: {
         ticks: {
-          color: "gray",
-          padding: 10,
+          color: "black",
+          padding: 5,
         },
       },
     },

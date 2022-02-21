@@ -3,10 +3,10 @@ import { Table } from "../../Utils/Table";
 import { UsersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { db } from "../../Config/Config";
-
+import _ from 'lodash'
 export const UsersView = () => {
   const [usersData, setusersData] = useState([]);
-
+  const [filterUsers, setfilterUsers] = useState([]);
   //get catagories from db
   useEffect(() => {
     db.collection("users").onSnapshot((snapshot) => {
@@ -17,17 +17,47 @@ export const UsersView = () => {
           ...doc.data(),
         });
         setusersData([...prevUsers]);
+        setfilterUsers([...prevUsers]);
       });
     });
   }, []);
 
+  //filter array by ID User
+  const filterUserByID = (value) => {
+    console.log(usersData)
+    console.log(value)
+    let user = _.find(usersData, { ID: value });
+    console.log(user)
+    setfilterUsers(user ? [user] : []);
+  };
+  const cancleDateB = () => {
+    document.getElementById('idUser').value="";
+    setfilterUsers([...usersData]);
+  };
   return (
     <div className="container ">
       <h3>
-        <span className="badge bg-light text-success">Users:  {usersData.length}</span>
+        <span className="badge bg-light text-success">
+          Users: {usersData.length}
+        </span>
       </h3>
+      <div className="d-inline d-flex">
+        <input
+        id="idUser"
+          type="text"
+          className=" col-3  m-2"
+          onChange={(e) => filterUserByID(e.target.value)}
+          placeholder="Filter User By ID:"
+        />
+        <button
+          className="btn btn-success btn-md m-3 "
+          onClick={() => cancleDateB()}
+        >
+          <i className="fa fa-window-close"></i>
+        </button>
+      </div>
       <div className="">
-        <Table data={usersData} Columns={UsersColumn}></Table>
+        <Table data={filterUsers} Columns={UsersColumn}></Table>
       </div>
     </div>
   );

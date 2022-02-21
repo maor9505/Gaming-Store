@@ -5,7 +5,7 @@ import { PanelView } from "./PanelView";
 import { OrdersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AdminOrderContext } from "../../Global/AdminOrdersContext";
-import { orderBy } from "lodash";
+import _, { orderBy } from "lodash";
 import { ProductDoughnutChart } from "../../Chart/ProductDoughnutChart";
 import { OrderMonthBarChar } from "../../Chart/OrderMonthBarChar";
 
@@ -40,7 +40,7 @@ export const OrderView = () => {
     if (order.Status != "Order Cancled"){
       db.collection("Orders")
         .doc(order.UserID)
-        .collection("OrderDetails")
+        .collection("OrderList")
         .doc(order.ID)
         .update({
           Status: "Order Was accepted and delivered",
@@ -71,6 +71,11 @@ export const OrderView = () => {
   const filterOrderDesc = () => {
     return orderBy(AllOrderUsers, "DateCreate", "desc");
   };
+  //filter array by ID Order
+  const filterOrderByID= (value) => {
+    let order = _.find(AllOrderUsers, {'ID':value});
+        setfilterOrders((order)?[order]:[]);
+  };
   //filter data by date
   const filterArrayByDate = (value) => {
     console.log("value");
@@ -95,6 +100,7 @@ export const OrderView = () => {
   };
   const cancleDateB = () => {
     setdateFilter("");
+    document.getElementById('idOrder').value=''
     setfilterOrders(filterOrderDesc());
   };
   return (
@@ -129,11 +135,19 @@ export const OrderView = () => {
         {" "}
         <span className="badge bg-light text-success p-4">Orders:</span>
       </h3>
-      <label className="m-3 p-3 text-success">Filter Orders By Date...</label>
-      <div className="d-inline">
+      <div className="d-inline d-flex">
+        {/* <label className="m-3 p-3 text-success">Filter Orders By ID:</label> */}
+
+        <input
+          type="text"
+          id="idOrder"
+          className=" col-3  m-2"
+          onChange={(e) => filterOrderByID(e.target.value)}
+          placeholder="Filter Orders By ID:"
+        />
         <input
           type="date"
-          className=" col-3 p-2"
+          className=" col-3  m-2"
           onChange={(e) => filterArrayByDate(e.target.value)}
           value={dateFilter}
         />

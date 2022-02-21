@@ -3,7 +3,7 @@ import React
  from "react";
 
 import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline"
-import { db } from "../Config/Config";
+import { db} from "../Config/Config";
 import { Icon } from "react-icons-kit"
 import { EditProductModal } from "../Components/admin/EditProductModal";
 import { ToastAlert } from "./Toast";
@@ -79,16 +79,6 @@ export const ProductColumn = () => {
 };
 
 export const OrdersColumn = () => {
-
-   const updateStatusOrder = (order) => {
-     db.collection("Orders")
-       .doc(order.UserID + " Orders")
-       .collection("OrderDetails")
-       .doc(order.ID)
-       .update({
-         Status: "Order Was accepted and delivered",
-       });
-   };
   return [
     {
       path: "ID",
@@ -125,9 +115,13 @@ export const OrdersColumn = () => {
       label: "Status",
       content: (order) =>
         order.Status == "Order Cancled" ? (
-          <span className="text-danger">{order.Status}</span>
+          <span className="text-danger" >
+            {order.Status}
+          </span>
         ) : (
-          <span className="text-primary">{order.Status}</span>
+          <span className="text-primary" >
+            {order.Status}
+          </span>
         ),
     },
   ];
@@ -161,8 +155,9 @@ export const CatagoryColumn = () => {
   ];
 };
 export const UsersColumn = () => {
+  
   const DeleteUser = (user) => {
-    db.collection("Catagories").doc(user.ID).delete();
+    db.collection("users").doc(user.ID).delete()
   };
 
   return [

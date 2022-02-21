@@ -108,9 +108,9 @@ export const Navbar = () => {
                   </button>
                 </Link>
               )}
-              <div className="dropdown">
+              <div className="dropdown flex me-5">
                 <button
-                  className="btn btn-outline-success text-dark  border-success dropdown-toggle  "
+                  className="btn btn-outline-success  text-dark  border-success dropdown-toggle  "
                   type="button"
                   id="dropdownMenuButton2"
                   data-bs-toggle="dropdown"

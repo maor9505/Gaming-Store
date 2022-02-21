@@ -10,7 +10,7 @@ import '../styles/Cart.css'
 import { GooglePay } from './common/GooglePay'
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../Global/UserContext'
-import { ToastAlert } from '../Utils/Toast'
+import { ToastAlert } from '../Utils/Toast';
 
 
 export const Cart = () => {
@@ -47,7 +47,7 @@ export const Cart = () => {
     const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     db.collection("Orders")
       .doc(user.uid)
-      .collection("OrderDetails")
+      .collection("OrderList")
       .add({
         UserID: user.uid,
         Products: cartUser,
@@ -91,9 +91,9 @@ export const Cart = () => {
 
   return (
     <>
-      {cartUser.length !== 0 && <h1 className="text-success">Cart</h1>}
-
       <div className="cart-container">
+        {cartUser.length !== 0 && <h1>Cart</h1>}
+
         {cartUser.length === 0 && (
           <>
             <div>
@@ -106,47 +106,53 @@ export const Cart = () => {
           </>
         )}
         {cartUser &&
-          cartUser.map((cart) => (
-            <div className="cart-card" key={cart.ID}>
+          cartUser.map((product) => (
+            <div className="cart-card" key={product.ID}>
               <div className="cart-img">
-                <img src={cart.ProductImg} alt="not found" />
+                <img src={product.ProductImg} alt="not found" />
               </div>
               <div>
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
-                  to={{ pathname: `/products/${cart.ID}` }}
+                  to={{ pathname: `/products/${product.ID}` }}
                 >
-                  {cart.ProductName}
+                  {product.ProductName}
                 </Link>
               </div>
 
               <div className="cart-price-orignal">
-                Rs {cart.ProductPrice}.00
+                Rs {product.ProductPrice}.00
               </div>
 
               <div
                 className="inc"
-                onClick={() => dispatch({ type: "INC", id: cart.ID, cart })}
+                onClick={() =>
+                  dispatch({ type: "INC", id: product.ID, product })
+                }
               >
                 <Icon icon={ic_add} size={24} />
               </div>
 
-              <div className="quantity">{cart.qty}</div>
+              <div className="quantity">{product.qty}</div>
 
               <div
                 className="dec"
-                onClick={() => dispatch({ type: "DEC", id: cart.ID, cart })}
+                onClick={() =>
+                  dispatch({ type: "DEC", id: product.ID, product })
+                }
               >
                 <Icon icon={ic_remove} size={24} />
               </div>
 
               <div className="cart-price">
-                Rs {cart.ProductPrice * cart.qty}.00
+                Rs {product.ProductPrice * product.qty}.00
               </div>
 
               <button
                 className="delete-btn"
-                onClick={() => dispatch({ type: "DELETE", id: cart.ID, cart })}
+                onClick={() =>
+                  dispatch({ type: "DELETE", id: product.ID, product })
+                }
               >
                 <Icon icon={iosTrashOutline} size={24} />
               </button>

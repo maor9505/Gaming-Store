@@ -19,7 +19,7 @@ export const OrderContextProvider = (props) => {
   const getOrders=()=>{
     db.collection("Orders")
       .doc(user.uid)
-      .collection("OrderDetails")
+      .collection("OrderList")
       .orderBy("DateCreate", "desc")
       .onSnapshot((snapshot) => {
             let prevOrders = [];
