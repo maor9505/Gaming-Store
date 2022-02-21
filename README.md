@@ -2,7 +2,7 @@
 
 
 Home Page
-<img width="1440" alt="Home" src="https://user-images.githubusercontent.com/48557867/151195878-1f9e78d4-0e77-42d5-b607-eb3bafbb81ff.png">
+<img width="1439" alt="Screen Shot 2022-02-21 at 18 58 27" src="https://user-images.githubusercontent.com/48557867/154998677-7e310559-da14-426e-bbbb-e6437657fbb5.png">
 
 Dashboard Page
 
