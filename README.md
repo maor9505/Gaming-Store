@@ -6,17 +6,20 @@ Home Page
 
 Dashboard Page
 
-<img width="1436" alt="Screen Shot 2022-02-12 at 16 53 39" src="https://user-images.githubusercontent.com/48557867/153716256-cb5990ab-3872-4464-9ae4-ee76cc6f5003.png">
+<img width="1440" alt="Screen Shot 2022-02-21 at 18 07 07" src="https://user-images.githubusercontent.com/48557867/154991502-8b0176b4-c5c8-437e-83d5-733d56e9f313.png">
+
 
 
 
 Dashboard-Products Page:
 
-<img width="1440" alt="Screen Shot 2022-02-12 at 16 54 46" src="https://user-images.githubusercontent.com/48557867/153716295-427d5bbb-d6e7-4d18-af7b-2f441dc3cd81.png">
+img width="1440" alt="Screen Shot 2022-02-21 at 18 07 20" src="https://user-images.githubusercontent.com/48557867/154991614-5661cc96-ccae-47b9-bc9c-7d0fabef0513.png">
+
 
 Dashboard-Orders Page:
 
-<img width="1440" alt="Screen Shot 2022-02-12 at 16 55 06" src="https://user-images.githubusercontent.com/48557867/153716346-35c8bff2-9590-4c96-942a-2b0b4c89c5ea.png">
+<img width="1436" alt="Screen Shot 2022-02-21 at 18 08 06" src="https://user-images.githubusercontent.com/48557867/154991778-2aedb25d-30e5-4e2d-84fc-f5c82a408345.png">
+
 
 
 Cart Page
