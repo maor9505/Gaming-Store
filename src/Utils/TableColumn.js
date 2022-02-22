@@ -55,6 +55,18 @@ export const ProductColumn = () => {
       content: (product) => <span>{product.ProductPrice}</span>,
     },
     {
+      path: "MaxQty",
+      label: "Qty",
+      content: (product) => {
+        if (product.MaxQty >= 20)
+          return <span className="text-success">{product.MaxQty}</span>;
+        else if (product.MaxQty >= 10)
+          return <span className="text-warning">{product.MaxQty}</span>;
+        else if (product.MaxQty < 10)
+          return <span className="text-danger">{product.MaxQty}</span>;
+      },
+    },
+    {
       path: "Views",
       label: "Views",
       content: (product) => <span>{product.Views}</span>,
@@ -71,9 +83,7 @@ export const ProductColumn = () => {
     {
       path: "Edit",
       label: "",
-      content: (product) => (
-        <EditProductModal product={product}/>
-      ),
+      content: (product) => <EditProductModal product={product} />,
     },
   ];
 };

@@ -38,7 +38,7 @@ export const Contact = () => {
     <div className="container contact-form">
       <div className="contact-image">
         <img
-        className="img-fluid"
+          className="img-fluid"
           src="https://image.ibb.co/kUagtU/rocket_contact.png"
           alt="rocket_contact"
         />
@@ -51,7 +51,7 @@ export const Contact = () => {
               <input
                 type="text"
                 name="txtName"
-                className="form-control mb-3 border-success"
+                className="form-control mb-3 border-primary"
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -61,7 +61,7 @@ export const Contact = () => {
             <div className="form-group">
               <input
                 type="email"
-                className="form-control mb-3 border-success"
+                className="form-control mb-3 border-primary"
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -71,7 +71,7 @@ export const Contact = () => {
             <div className="form-group">
               <input
                 type="text"
-                className="form-control mb-3 border-success"
+                className="form-control mb-3 border-primary"
                 placeholder="Your Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -83,7 +83,7 @@ export const Contact = () => {
           <div className="col-md-6">
             <div className="form-group ">
               <textarea
-                className="form-control border-success p-5 "
+                className="form-control border-primary p-5 "
                 placeholder="Your Message...."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -94,13 +94,12 @@ export const Contact = () => {
           <div className="form-group">
             <input
               type="submit"
-              className="btn btn-lg btn-outline-success mt-2 text-dark  border-success"
+              className="btn btn-lg btn-outline-success mt-2 text-dark  border-primary"
               value="Send"
             />
           </div>
         </div>
       </form>
     </div>
-
   );
 };

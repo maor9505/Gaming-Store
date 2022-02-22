@@ -40,7 +40,7 @@ export const Navbar = () => {
         <Link to="/" className="navbar-brand d-flex align-items-center">
           <span className="ml-3 font-weight-bold">
             <b>GAMING</b>
-            <span className="font-weight-light text-warning">ZONE</span>
+            <span className="font-weight-light text-success">ZONE</span>
           </span>
         </Link>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">

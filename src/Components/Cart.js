@@ -62,7 +62,7 @@ export const Cart = () => {
         cartUser.map((p) =>
           db
             .collection("Products")
-            .doc(p.ProductID)
+            .doc(p.ID)
             .update({
               Sales: p.Sales + 1,
             })
@@ -92,7 +92,7 @@ export const Cart = () => {
   return (
     <>
       <div className="cart-container">
-        {cartUser.length !== 0 && <h1>Cart</h1>}
+        {cartUser.length !== 0 && <h1 className="text-success">Cart</h1>}
 
         {cartUser.length === 0 && (
           <>

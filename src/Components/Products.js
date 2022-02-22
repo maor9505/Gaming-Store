@@ -28,8 +28,10 @@ useEffect(() => {
 
     return (
       <>
-        <div className="container">
-          {productsP.length !== 0 && <h1> Products</h1>}
+        <div className="container ">
+          {productsP.length !== 0 && (
+            <h1 className="text-success"> Products</h1>
+          )}
           <HeaderProducts data={products} setFilterProduct={setFilterProduct} />
         </div>
 
@@ -39,9 +41,9 @@ useEffect(() => {
               No Products To Display...Or your opttion search id not Correct
             </div>
           )}
-          <div className="row ">
+          <div className="row d-flex justify-content-center  mt-4 ">
             {productsP.map((product) => (
-              <div className="col-sm-12 col-sm-6 col-lg-3 " key={product.ID}>
+              <div className="col-sm-3 col-md-6 " key={product.ID}>
                 <div className="image-flip">
                   <div className="mainflip flip-0">
                     <Link
@@ -67,12 +69,13 @@ useEffect(() => {
                             </p>
                             <p className="card-text">Views: {product.Views}</p>
                             <p className="card-text">Sales: {product.Sales}</p>
-
+                          </div>
+                          <div className="card-footer  d-flex justify-content-center">
                             <span
                               href="https://www.fiverr.com/share/qb8D02"
-                              className="btn btn-success btn-sm"
+                              className="btn btn-success btn-md  "
                             >
-                              <i className="fa fa-plus"></i>
+                              <i className="fa fa-info"></i>
                             </span>
                           </div>
                         </div>
@@ -84,6 +87,14 @@ useEffect(() => {
                               {product.ProductName}
                             </h4>
                             <p className="card-text">{product.Description}</p>
+                          </div>
+                          <div className="card-footer  d-flex justify-content-center">
+                            <span
+                              href="https://www.fiverr.com/share/qb8D02"
+                              className="btn btn-success btn-md  "
+                            >
+                              <i className="fa fa-plus"></i>
+                            </span>
                           </div>
                         </div>
                       </div>

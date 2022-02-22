@@ -47,6 +47,14 @@ export const ProductVbarChart = () => {
         borderColor: "rgb(255, 255, 0)",
         borderWidth: 2,
       },
+
+      {
+        label: `Product-Qty`,
+        data: products.map((p) => p.MaxQty),
+        backgroundColor: "#20c997",
+        borderColor: "#20c997",
+        borderWidth: 2,
+      },
     ],
   };
   var options = {

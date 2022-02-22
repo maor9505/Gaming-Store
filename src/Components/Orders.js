@@ -5,7 +5,7 @@ import { Table } from "../Utils/Table";
 import { useHistory } from "react-router-dom";
 import { LoadingPage } from "./loading-page/LoadingPage";
 import { OrderContext } from "../Global/OrderContext";
-
+import _ from'lodash';
 export const Orders = () => {
   const { user } = useContext(UserContext);
   const { orders,spinner } = useContext(OrderContext);
@@ -30,8 +30,11 @@ export const Orders = () => {
       )}
       {!spinner && (
         <div className="container">
-            <span className='text-success'>Total:{orders.length}</span>
-            <Table data={[...orders]} Columns={OrdersColumn}></Table>
+          <span className="text-success">Total Orders:{orders.length}</span>
+          <Table
+            data={orders}
+            Columns={OrdersColumn}
+          ></Table>
         </div>
       )}
     </div>

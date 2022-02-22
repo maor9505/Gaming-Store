@@ -1,4 +1,3 @@
-import { db } from "../Config/Config";
 
 export const getProduct = (doc) => {
   return {
@@ -13,5 +12,6 @@ export const getProduct = (doc) => {
     Catagory: doc.data().Catagory,
     UplodeDate: doc.data().UplodeDate,
     DateCreate: doc.data().DateCreate,
+    MaxQty: doc.data().MaxQty,
   };
 };

@@ -9,7 +9,8 @@ export const CartReducer = (state, action) => {
   
   switch (action.type) {
     case "ADD_TO_CART":
-      product = action.product;
+      product = {...action.product};
+      if(product.MaxQty > 0){
       product["qty"] = 1;
       db.collection("Cart")
         .doc(uid)
@@ -20,21 +21,32 @@ export const CartReducer = (state, action) => {
           ToastAlert("this product is Add to Cart");
         })
         .catch((err) => console.log(err.message));
-    
+      }
+      else
+          ToastAlert("This Product Is Out Of Stock");
+
       break;
 
     case "INC":
-      product = action.product;
-      product.qty = ++product.qty;
+      product = { ...action.product };
+      if(product.qty < product.MaxQty)
+      {
+        product.qty = ++product.qty;
       db.collection("Cart")
         .doc(uid)
         .collection("CartProducts")
         .doc(product.ID)
         .update(product);
+      }
+      else
+            ToastAlert(
+              `There is no more in Quantity try again later! \n Quantity: ${product.MaxQty}`
+            );
+
       break;
 
     case "DEC":
-      product = action.product;
+      product = { ...action.product };
       if (product.qty > 1) {
         product.qty = product.qty - 1;
         db.collection("Cart")
@@ -48,7 +60,7 @@ export const CartReducer = (state, action) => {
       break;
 
     case "DELETE":
-      product = action.product;
+      product = { ...action.product };
       db.collection("Cart")
         .doc(uid)
         .collection("CartProducts")

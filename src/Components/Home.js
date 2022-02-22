@@ -13,7 +13,7 @@ export const Home = () => {
     <>
       <div className="container-fluid">
         <HeroMain />
-        <br/>
+        <br />
       </div>
       <div className="container">
         <h1></h1>
@@ -24,13 +24,17 @@ export const Home = () => {
         )}
         {!spinner && (
           <div className="container">
-            <h1> Sales Products</h1>
-            <HomeProducts />
-            <h1></h1>
-            <Products />
-            <h1></h1>
-            <Contact />
-            <h1></h1>
+            <section>
+              <h1 className="text-success">Best-Selling Products</h1>
+              <br/>
+              <HomeProducts />
+            </section>
+            <section>
+              <Products />
+            </section>
+            <section>
+              <Contact />
+            </section>
           </div>
         )}
       </div>

@@ -20,14 +20,14 @@ export const ViewsProducts = () => {
     }
 
     return (
-      <div className='container'>
-
-        {productsP.length !== 0 && <h1> Views Products</h1>}
-        <hr/>
-        <div className="row">
+      <div className="container">
+        {productsP.length !== 0 && (
+          <h1 className="text-success"> Views Products</h1>
+        )}
+        <div className="row mt-4">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
-            <div key={product.ID} className="col-sm-12 col-sm-6 col-lg-3">
+            <div key={product.ID} className="col-sm-3 col-md-6">
               <div className="image-flip">
                 <div className="mainflip flip-0">
                   <Link
@@ -44,28 +44,39 @@ export const ViewsProducts = () => {
                               alt="card image"
                             />
                           </p>
-                          <h4 className="card-title text-wrap">{product.ProductName}</h4>
+                          <h4 className="card-title text-wrap">
+                            {product.ProductName}
+                          </h4>
                           <p className="card-text">{product.Catagory}</p>
                           <p className="card-text">
                             Price: {product.ProductPrice}$$
                           </p>
                           <p className="card-text">Views: {product.Views}</p>
                           <p className="card-text">Sales: {product.Sales}</p>
-
+                        </div>
+                        <div className="card-footer  d-flex justify-content-center">
                           <span
                             href="https://www.fiverr.com/share/qb8D02"
-                            className="btn btn-success btn-sm"
+                            className="btn btn-success btn-md  "
                           >
-                            <i className="fa fa-plus"></i>
+                            <i className="fa fa-info"></i>
                           </span>
                         </div>
                       </div>
                     </div>
                     <div className="backside">
                       <div className="card">
-                        <div className="card-body text-center mt-4  d-flex flex-column">
+                        <div className="card-body text-center mt-4 d-flex flex-column">
                           <h4 className="card-title">{product.ProductName}</h4>
                           <p className="card-text">{product.Description}</p>
+                        </div>
+                        <div className="card-footer  d-flex justify-content-center">
+                          <span
+                            href="https://www.fiverr.com/share/qb8D02"
+                            className="btn btn-success btn-md  "
+                          >
+                            <i className="fa fa-plus"></i>
+                          </span>
                         </div>
                       </div>
                     </div>

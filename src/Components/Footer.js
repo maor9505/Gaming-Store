@@ -7,7 +7,7 @@ export const Footer = () => {
 
 
     return (
-      <div className=" footer w-100">
+      <div className=" footer w-100 bg-success">
         <footer className="text-center text-white ">
           <section className="">
             {!user && (

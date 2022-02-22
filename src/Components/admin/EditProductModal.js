@@ -38,6 +38,7 @@ const EditProducts = ({ product }) => {
   const history = useHistory();
   const [productName, setProductName] = useState(product.ProductName);
   const [productPrice, setProductPrice] = useState(product.ProductPrice);
+    const [maxQty, setmaxQty] = useState(product.maxQty);
   const [productImg, setProductImg] = useState(product.ProductImg);
   const [description, setDescription] = useState(product.Description);
   const [catagory, setCatagory] = useState(product.Catagory);
@@ -104,6 +105,7 @@ const EditProducts = ({ product }) => {
                 Description: description,
                 Catagory: catagory,
                 CatagoryAge: catagoryAge,
+                MaxQty: maxQty,
                 Views: 0,
                 Sales: 0,
                 DateCreate: date,
@@ -180,6 +182,15 @@ db.collection("Products")
           value={productPrice}
         />
         <br />
+        <label>Max Quantity:</label>
+        <input
+          type="number"
+          className="form-control"
+          required
+          onChange={(e) => setmaxQty(e.target.value)}
+          value={maxQty}
+        />
+        <br />
         <label>Description</label>
         <textarea
           type="text"
@@ -195,7 +206,7 @@ db.collection("Products")
           onChange={(e) => setCatagory(e.target.value)}
           value={catagory}
         >
-          <option >Choose Catagory</option>
+          <option>Choose Catagory</option>
           {catagoryOption.map((ca) => (
             <option key={ca.name} value={ca.name}>
               {ca.name}
@@ -209,7 +220,7 @@ db.collection("Products")
           onChange={(e) => setCatagoryAge(e.target.value)}
           value={catagoryAge}
         >
-          <option >Choose Catagory age</option>
+          <option>Choose Catagory age</option>
           <option value="1">3-16</option>
           <option value="2">16-99</option>
         </select>
