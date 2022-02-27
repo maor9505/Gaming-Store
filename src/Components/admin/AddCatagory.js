@@ -24,10 +24,6 @@ export const AddCatagory = () => {
       .catch((err) => setError(err.message));
   };
 
-  const handleBack = () => {
-    //handle to admin dashboard
-    history.push("/dashboard");
-  };
   return (
     <div className="container">
       <br />
@@ -46,9 +42,7 @@ export const AddCatagory = () => {
         <button type="submit" className="btn btn-success btn-md ">
           ADD
         </button>
-        <button onClick={handleBack} className="btn btn-success btn-md  m-4">
-          Back
-        </button>
+
       </form>
       {error && <span className="error-msg">{error}</span>}
     </div>

@@ -64,7 +64,7 @@ export const Cart = () => {
             .collection("Products")
             .doc(p.ID)
             .update({
-              Sales: p.Sales + 1,
+              Sales: p.Sales + p.qty,
             })
         );
         console.log("success Order to db");

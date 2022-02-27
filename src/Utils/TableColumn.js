@@ -56,14 +56,36 @@ export const ProductColumn = () => {
     },
     {
       path: "MaxQty",
-      label: "Qty",
+      label: "Total Qty",
+      content: (product) => <span>{product.MaxQty}</span>,
+    },
+    {
+      path: "Sales",
+      label: "Sales",
+      content: (product) => <span>{product.Sales}</span>,
+    },
+    {
+      path: "MaxQty",
+      label: "Qty Left",
       content: (product) => {
         if (product.MaxQty >= 20)
-          return <span className="text-success">{product.MaxQty}</span>;
+          return (
+            <span className="text-success">
+              {product.MaxQty - product.Sales}
+            </span>
+          );
         else if (product.MaxQty >= 10)
-          return <span className="text-warning">{product.MaxQty}</span>;
+          return (
+            <span className="text-warning">
+              {product.MaxQty - product.Sales}
+            </span>
+          );
         else if (product.MaxQty < 10)
-          return <span className="text-danger">{product.MaxQty}</span>;
+          return (
+            <span className="text-danger">
+              {product.MaxQty - product.Sales}
+            </span>
+          );
       },
     },
     {

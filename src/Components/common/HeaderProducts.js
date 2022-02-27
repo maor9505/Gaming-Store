@@ -49,12 +49,10 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
       case "Price":
         setpriceFilter(value);
         break;
-      case "Views":
+      case "checkInput":
         setcheckInput(value);
         break;
-      case "Sales":
-        setcheckInput(value);
-        break;
+
       default:
         break;
     }
@@ -97,42 +95,48 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
         />
       </div>
       <div className="d-flex justify-content-center">
-        <div class="form-check m-2">
+        <div className="form-check m-2">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             id="flexCheckDefault"
             value="Views"
             checked={checkInput == "Views"}
-            onChange={(e) => hanldeChangeFilterOption("Views", e.target.value)}
+            onChange={(e) =>
+              hanldeChangeFilterOption("checkInput", e.target.value)
+            }
           />
-          <label class="form-check-label" for="flexCheckDefault">
+          <label className="form-check-label" for="flexCheckDefault">
             By Views
           </label>
         </div>
-        <div class="form-check m-2">
+        <div className="form-check m-2">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             id="flexCheckDefault1"
             value="Sales"
             checked={checkInput == "Sales"}
-            onChange={(e) => hanldeChangeFilterOption("Sales", e.target.value)}
+            onChange={(e) =>
+              hanldeChangeFilterOption("checkInput", e.target.value)
+            }
           />
           <label class="form-check-label" for="flexCheckDefault1">
             By Sales
           </label>
         </div>
-        <div class="form-check m-2">
+        <div className="form-check m-2">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             id="flexCheckDefault2"
             value=""
             checked={checkInput == ""}
-            onChange={(e) => hanldeChangeFilterOption("Sales", e.target.value)}
+            onChange={(e) =>
+              hanldeChangeFilterOption("checkInput", e.target.value)
+            }
           />
-          <label class="form-check-label" for="flexCheckDefault2">
+          <label className="form-check-label" for="flexCheckDefault2">
             Non
           </label>
         </div>

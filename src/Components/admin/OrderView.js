@@ -18,6 +18,11 @@ export const OrderView = () => {
   const [cancleOrders, setCancleOrders] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
   const orderColumn = OrdersColumn();
+  orderColumn.unshift({
+    path: "UserID",
+    label: "User-ID",
+    content: (order) => <span>{order.UserID}</span>,
+  });
   orderColumn.push({
     path: "",
     label: "",
@@ -37,7 +42,7 @@ export const OrderView = () => {
 
   //update Status Order in db
   const updateStatusOrder = (order) => {
-    if (order.Status != "Order Cancled"){
+    if (order.Status != "Order Cancled") {
       db.collection("Orders")
         .doc(order.UserID)
         .collection("OrderList")
@@ -45,7 +50,7 @@ export const OrderView = () => {
         .update({
           Status: "Order Was accepted and delivered",
         });
-      }
+    }
   };
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
@@ -71,10 +76,15 @@ export const OrderView = () => {
   const filterOrderDesc = () => {
     return orderBy(AllOrderUsers, "DateCreate", "desc");
   };
+  //filter array by  User ID Order
+  const filterOrderByUserID = (value) => {
+    let order = _.filter([...AllOrderUsers], ['UserID', value]);
+    setfilterOrders(order ? [...order] : []);
+  };
   //filter array by ID Order
-  const filterOrderByID= (value) => {
-    let order = _.find(AllOrderUsers, {'ID':value});
-        setfilterOrders((order)?[order]:[]);
+  const filterOrderByID = (value) => {
+    let order = _.find(AllOrderUsers, { ID: value });
+    setfilterOrders(order ? [order] : []);
   };
   //filter data by date
   const filterArrayByDate = (value) => {
@@ -100,7 +110,7 @@ export const OrderView = () => {
   };
   const cancleDateB = () => {
     setdateFilter("");
-    document.getElementById('idOrder').value=''
+    document.getElementById("idOrder").value = "";
     setfilterOrders(filterOrderDesc());
   };
   return (
@@ -137,7 +147,13 @@ export const OrderView = () => {
       </h3>
       <div className="d-inline d-flex">
         {/* <label className="m-3 p-3 text-success">Filter Orders By ID:</label> */}
-
+        <input
+          type="text"
+          id="idOrder"
+          className=" col-3  m-2"
+          onChange={(e) => filterOrderByUserID(e.target.value)}
+          placeholder="Filter Orders By  User ID:"
+        />
         <input
           type="text"
           id="idOrder"

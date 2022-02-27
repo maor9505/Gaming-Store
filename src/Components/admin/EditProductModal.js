@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { storage, db } from "../../Config/Config";
 import { useHistory } from "react-router-dom";
+import { ToastAlert } from "../../Utils/Toast";
 export  const EditProductModal= ({product}) => {
       const [show, setShow] = useState(false);
 
@@ -38,7 +39,7 @@ const EditProducts = ({ product }) => {
   const history = useHistory();
   const [productName, setProductName] = useState(product.ProductName);
   const [productPrice, setProductPrice] = useState(product.ProductPrice);
-    const [maxQty, setmaxQty] = useState(product.maxQty);
+    const [maxQty, setmaxQty] = useState(product.MaxQty);
   const [productImg, setProductImg] = useState(product.ProductImg);
   const [description, setDescription] = useState(product.Description);
   const [catagory, setCatagory] = useState(product.Catagory);
@@ -112,15 +113,7 @@ const EditProducts = ({ product }) => {
                 UplodeDate: date.getTime(),
               })
               .then(() => {
-                toast.info("this product is Update ", {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: false,
-                  progress: undefined,
-                });
+               ToastAlert("this product is Update");
                 document.getElementById("file").value = "";
               })
               .catch((err) => setError(err.message));
@@ -144,15 +137,7 @@ db.collection("Products")
                 UplodeDate: date.getTime(),
               })
               .then(() => {
-                toast.info("this product is Update ", {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: false,
-                  draggable: false,
-                  progress: undefined,
-                });
+               ToastAlert("this product is Update ");
               })
               .catch((err) => setError(err.message));
     }
