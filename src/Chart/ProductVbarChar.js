@@ -3,8 +3,6 @@ import Chart from "chart.js/auto";
 import { BarElement } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { ProductsContext } from "../Global/ProductsContext";
-import _ from "lodash";
-
 Chart.register(BarElement);
 
 export const ProductVbarChart = () => {

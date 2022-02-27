@@ -60,7 +60,7 @@ export const OrderPage = () => {
           <div className="card">
             <div className="p-4">
               <div className="float-right">
-                <h3 className="mb-0">Order-Number: {order.OrderID}</h3>
+                <h3 className="mb-0">Order-Number: {order.ID}</h3>
                 Date-Order: {new Date(order.DateCreate).toLocaleString("en-GB")}
               </div>
             </div>
@@ -128,23 +128,25 @@ export const OrderPage = () => {
                       </tr>
                     </tbody>
                   </table>
-                  {order.Status == "In Procces..." && (
-                    <button
-                      id='btnCancle'
-                      className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
-                      onClick={CancleOrder}
-                    >
-                      Cancle Order....
-                    </button>
-                  )}
-                  {order.Status == "Order Cancled" && (
-                    <h1>
-                      {" "}
-                      <span className="badge bg-light text-danger">
-                        Order Cancled
-                      </span>
-                    </h1>
-                  )}
+                  <div className="d-flex justify-content-center">
+                    {order.Status == "In Procces..." && (
+                      <button
+                        id="btnCancle"
+                        className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
+                        onClick={CancleOrder}
+                      >
+                        Cancle Order....
+                      </button>
+                    )}
+                    {order.Status == "Order Cancled" && (
+                      <h1>
+                        {" "}
+                        <span className="badge bg-light text-danger">
+                          Order Cancled
+                        </span>
+                      </h1>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

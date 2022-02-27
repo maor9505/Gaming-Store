@@ -65,6 +65,16 @@ export const UserProfile = () => {
         }).catch(err => setError(err.message));
         }
     }
+const upadtePassword = (Email) => {
+  auth
+    .sendPasswordResetEmail(Email)
+    .then(function () {
+      ToastAlert("Please check your email...");
+    })
+    .catch(function (e) {
+      console.log(e);
+    });
+};
 
     return (
       <div className="container mt-3">
@@ -153,19 +163,17 @@ export const UserProfile = () => {
                               placeholder={email}
                               onChange={(e) => setEmail(e.target.value)}
                             />
+                            <span >
+                              Update your Password? click
+                              <span className='text-success' onClick={() => upadtePassword(email)}>
+                                {" "}
+                                Here
+                              </span>
+                            </span>
+                            ;
                           </div>
                         </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                          <div className="form-group">
-                            <label className="p-2">Enter new Password</label>
-                            <input
-                              type="password"
-                              className="form-control p-2"
-                              placeholder="Enter new Password"
-                              onChange={(e) => setPassword(e.target.value)}
-                            />
-                          </div>
-                        </div>
+
                         <div className="row gutters">
                           <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div className="text-right mt-1">

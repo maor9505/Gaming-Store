@@ -9,7 +9,6 @@ export const ProductsContextProvider = (props) => {
     const [spinner, setSpinner] = useState(true);
 
     useEffect(() => { 
-     const getP = () => {
        let prevProducts = [];
         db.collection("Products").onSnapshot((snapshot) => {
            snapshot.docChanges().forEach((change) => {
@@ -24,9 +23,6 @@ export const ProductsContextProvider = (props) => {
            });
          setSpinner(false);
        })
-     };
-     getP();
-     
     },[])
 
    

@@ -16,10 +16,6 @@ export const Products = () => {
     const [filterProduct, setFilterProduct] = useState([]);
     const productsP = paginate(filterProduct, currentPage, pageSize);
     
-useEffect(() => {
-   setFilterProduct([...products])
-}, [products])
-
     // function the handle the page change
     const handlePagechange = page => {
         setcurrentPage(page);

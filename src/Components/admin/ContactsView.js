@@ -87,7 +87,7 @@ export const ContactsView = () => {
   return (
     <div className="container ">
       <h3>
-        <span className="badge bg-light text-success p-4">Orders Details:</span>
+        <span className="badge bg-light text-success p-4">Contacts Details:</span>
       </h3>
       <PanelView
         cardOne={contactsTotal}

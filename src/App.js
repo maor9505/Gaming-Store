@@ -23,7 +23,6 @@ import { OrderContextProvider } from "./Global/OrderContext";
 import ScrollToTop from "./Utils/ScrollToTop";
 import { Dashboard } from "./Components/admin/Dashboard";
 import { AdminOrdersContextProvider } from "./Global/AdminOrdersContext";
-import { HomeView } from "./Components/admin/HomeView";
 import { AboutMe } from "./Components/AboutMe";
 
 export const App = () => {

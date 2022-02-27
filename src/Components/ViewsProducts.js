@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import '../styles/Product.css'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
-import { UserContext } from '../Global/UserContext';
 
 export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);

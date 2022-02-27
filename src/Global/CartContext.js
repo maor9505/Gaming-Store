@@ -36,8 +36,6 @@ export const CartContextProvider = (props) => {
             ID: doc.id,
             ...doc.data(),
           });
-                      console.log("1");
-
         });
         setCart(newCart);
       });

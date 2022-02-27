@@ -27,7 +27,6 @@ export const Signup = () => {
             .doc(cred.user.uid)
             .set({
               Email: email,
-              Password: password,
               Type: "not-admin",
               PhoneNumber: phone,
               DisplayName: displayName,
