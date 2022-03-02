@@ -55,7 +55,7 @@ export const ProductColumn = () => {
       content: (product) => <span>{product.ProductPrice}</span>,
     },
     {
-      path: "MaxQty",
+      path: "",
       label: "Total Qty",
       content: (product) => <span>{product.MaxQty}</span>,
     },

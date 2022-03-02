@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Table } from "../../Utils/Table";
-import { Pagination } from "../common/Pagiantion";
-import { paginate } from "../common/paginat";
 import { PanelView } from "./PanelView";
 import { OrdersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";

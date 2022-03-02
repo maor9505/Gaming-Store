@@ -13,7 +13,7 @@ export const OrderMonthBarChar = () => {
 
   useEffect(() => {
     setdataChart(sumOrderbyMonth());
-  }, [AllOrderUsers]);
+  },[AllOrderUsers]);
 
   var data = {
     labels: dataChart.map((d) => d.lable),

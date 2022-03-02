@@ -1,4 +1,3 @@
-import { db } from "../Config/Config";
 
 export const getOrder = (doc) => {
   return {

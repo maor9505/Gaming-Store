@@ -2,7 +2,6 @@ import { Modal, Button } from "react-bootstrap";
 import { ic_mode_edit } from "react-icons-kit/md/ic_mode_edit";
 import { Icon } from "react-icons-kit";
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { storage, db } from "../../Config/Config";
 import { useHistory } from "react-router-dom";
@@ -107,8 +106,8 @@ const EditProducts = ({ product }) => {
                 Catagory: catagory,
                 CatagoryAge: catagoryAge,
                 MaxQty: maxQty,
-                Views: 0,
-                Sales: 0,
+                Views: product.Views,
+                Sales: product.Sales,
                 DateCreate: date,
                 UplodeDate: date.getTime(),
               })
@@ -122,25 +121,25 @@ const EditProducts = ({ product }) => {
     );
     }
     else{
-db.collection("Products")
-              .doc(product.ID)
-              .update({
-                ProductName: productName,
-                ProductPrice: Number(productPrice),
-                ProductImg: productImg,
-                Description: description,
-                Catagory: catagory,
-                CatagoryAge: catagoryAge,
-                Views: 0,
-                Sales: 0,
-                DateCreate: date,
-                UplodeDate: date.getTime(),
-              })
-              .then(() => {
-               ToastAlert("this product is Update ");
-              })
-              .catch((err) => setError(err.message));
-    }
+        db.collection("Products")
+          .doc(product.ID)
+          .update({
+            ProductName: productName,
+            ProductPrice: Number(productPrice),
+            ProductImg: productImg,
+            Description: description,
+            Catagory: catagory,
+            CatagoryAge: catagoryAge,
+            Views: product.Views,
+            Sales: product.Sales,
+            DateCreate: date,
+            UplodeDate: date.getTime(),
+          })
+          .then(() => {
+            ToastAlert("this product is Update ");
+          })
+          .catch((err) => setError(err.message));
+            }
   };
 
   return (

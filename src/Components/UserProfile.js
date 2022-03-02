@@ -31,9 +31,9 @@ export const UserProfile = () => {
       const handleUpdatePersonalDetails = () => {
           let vaildName = formValidation('name',displayName)
           let vaildPhone = formValidation('phone',phone);
-          if(vaildName==true && vaildPhone==true){
+          if(vaildName===true && vaildPhone===true){
         db.collection('users').doc(user.uid).update({
-            PhoneNumber: (phone=='')?"":phone,
+            PhoneNumber: (phone==='')?"":phone,
             DisplayName: displayName
         }).then(() => {
             setErrorp('');
@@ -41,12 +41,13 @@ export const UserProfile = () => {
         }).catch(err => setErrorp(err.message));
     }
     else{
-        setErrorp((vaildName==true)?vaildPhone:vaildName)
+        setErrorp((vaildName===true)?vaildPhone:vaildName)
     }
     }
+
     //change email and pass on Db
     const handleUpdateLoginDetails = () => {
-        if(user.providerId=='password'){
+        if(user.providerId==='password'){
             auth.currentUser.updateEmail(email.trim()).then(() => {
             console.log("Email updated!");
             db.collection('users').doc(user.uid).update({
@@ -57,7 +58,7 @@ export const UserProfile = () => {
                 setPassword('');
                 history.push('/login')
             }).catch(err => setError(err.message));
-            if(password !=''){
+            if(password !==''){
             auth.currentUser.updatePassword(password).then(() => {
             console.log("password updated!");
         }).catch(err => setError(err.message));
@@ -87,7 +88,7 @@ const upadtePassword = (Email) => {
                   <div className="account-settings">
                     <div className="user-profile">
                       <div className="user-avatar mt-5">
-                        {user.providerId == "google.com" ? (
+                        {user.providerId === "google.com" ? (
                           <img className="mt-2" src={user.photoURL} alt="443" />
                         ) : (
                           <i className="fa fa-user-circle fa-5x mr-2 mt-2"></i>
@@ -147,7 +148,7 @@ const upadtePassword = (Email) => {
                         <span className="error-msg bg-warning">{errorp}</span>
                       )}
                     </div>
-                    {user.providerId == "password" ? (
+                    {user.providerId === "password" ? (
                       <div className="row gutters">
                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                           <h6 className="mb-2 text-success mt-4">

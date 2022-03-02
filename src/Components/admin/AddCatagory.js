@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import {db } from '../../Config/Config'
- import { useHistory } from 'react-router-dom'
 import { ToastAlert } from '../../Utils/Toast';
 
 export const AddCatagory = () => {
-  const history = useHistory();
-
   const [catagoryName, setCatagoryName] = useState("");
   const [error, setError] = useState("");
 

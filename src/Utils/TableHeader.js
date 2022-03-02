@@ -18,7 +18,7 @@ export const TableHeader = ({ columns, sortColumn, onSort }) => {
     <thead className="">
       <tr>
         {columns.map((col) => (
-          <th key={col.path} onClick={() => raiseSort(col.path)}>
+          <th key={col.path+col.label} onClick={() => raiseSort(col.path)}>
             {col.label}
           </th>
         ))}

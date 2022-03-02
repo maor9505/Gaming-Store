@@ -1,13 +1,10 @@
-import React, { useContext,useState,useEffect } from 'react'
-import { CartContext } from '../Global/CartContext'
+import React, { useContext,useState} from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
-import { useHistory, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import '../styles/Product.css';
-import { db } from '../Config/Config'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
 import { HeaderProducts } from './common/HeaderProducts';
-import { UserContext } from '../Global/UserContext';
 
 export const Products = () => {
     const { products } = useContext(ProductsContext);
@@ -47,7 +44,7 @@ export const Products = () => {
                       to={`/products/${product.ID}`}
                     >
                       <div className="frontside">
-                        <div className="card">
+                        <div className="card ">
                           <div className="card-body text-center">
                             <p>
                               <img

@@ -15,9 +15,13 @@ code {
 #container {
   display: flex;
   min-height: 110vh;
-  flex-direction: column; } 
+  flex-direction: column;
+      zoom: 70%;
+
+ } 
 
 #main-content {
     margin-top: 10px;
     flex: 1;
 } 
+

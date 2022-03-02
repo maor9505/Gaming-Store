@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-
 
 export const AboutMe = () => {
-  
 
   return (
     <section className="vh-100">

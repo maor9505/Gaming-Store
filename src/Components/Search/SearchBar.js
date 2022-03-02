@@ -42,7 +42,7 @@ export const SearchBar = ({ placeholder, data }) => {
               <i onClick={clearInput} className=" bg-light fa fa-times-circle fa-2x"></i>
             )} 
            </div>
-          {filteredData.length != 0 && (
+          {filteredData.length !== 0 && (
             <div className="dataResult ">
               {filteredData.slice(0, 15).map((value) => {
                 return (

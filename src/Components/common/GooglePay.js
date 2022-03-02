@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { db } from '../../Config/Config'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
+
 import GooglePayButton from '@google-pay/button-react';
 
 export const GooglePay = (props) => {

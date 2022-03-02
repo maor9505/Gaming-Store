@@ -1,15 +1,15 @@
 import React ,{useContext}from 'react'
 import '../styles/Footer.css'
-import { Link, NavLink } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { UserContext } from '../Global/UserContext';
 export const Footer = () => {
     const { user } = useContext(UserContext);
 
 
     return (
-      <div className=" footer w-100 bg-success">
+      <div className=" footer w-100 h-25 bg-success">
         <footer className="text-center text-white ">
-          <section className="">
+          <section >
             {!user && (
               <p className="d-flex justify-content-center align-items-center">
                 <span className="me-3">Register for free</span>

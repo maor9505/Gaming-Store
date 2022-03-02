@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { AdminOrderContext } from "../Global/AdminOrdersContext";
 import { ProductsContext } from "../Global/ProductsContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);

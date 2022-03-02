@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "../../Utils/Table";
 import { PanelView } from "./PanelView";
 import "react-pro-sidebar/dist/css/styles.css";
 import { orderBy } from "lodash";
@@ -31,7 +30,7 @@ export const ContactsView = () => {
 
   // filter contacts data UNRead.lenth - Filter Desc
   useEffect(() => {
-    if (contactsData.length != 0) {
+    if (contactsData.length !== 0) {
       setcontactsTotal(contactsData.length);
 
       const unRead = [...contactsData];

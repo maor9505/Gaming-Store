@@ -21,17 +21,17 @@ export const OrderPage = () => {
   useEffect(() => {
     let order;
     if (user) {
-      if (user.type == "admin") {
-        order = AllOrderUsers.find((order) => order.ID == id);
+      if (user.type === "admin") {
+        order = AllOrderUsers.find((order) => order.ID === id);
       } else {
-        order = orders.find((order) => order.ID == id);
+        order = orders.find((order) => order.ID === id);
       }
     } else {
       history.push("/");
     }
     console.log(order);
     setOrder(order);
-  }, [id]);
+  },[id]);
 
   // update order to cancle Status
   const CancleOrder = () => {
@@ -129,7 +129,7 @@ export const OrderPage = () => {
                     </tbody>
                   </table>
                   <div className="d-flex justify-content-center">
-                    {order.Status == "In Procces..." && (
+                    {order.Status === "In Procces..." && (
                       <button
                         id="btnCancle"
                         className="btn btn-outline-success  btn-lg mt-1  mb-2 float-left"
@@ -138,7 +138,7 @@ export const OrderPage = () => {
                         Cancle Order....
                       </button>
                     )}
-                    {order.Status == "Order Cancled" && (
+                    {order.Status === "Order Cancled" && (
                       <h1>
                         {" "}
                         <span className="badge bg-light text-danger">

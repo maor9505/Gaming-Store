@@ -3,7 +3,6 @@ import { NavBarDash } from "./NavBarDash";
 import { AddProducts } from "./AddProducts";
 import { AddCatagory } from "./AddCatagory";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Products } from "../Products";
 import { HomeView } from "./HomeView";
 import { LoadingPage } from "../loading-page/LoadingPage";
 import { UserContext } from "../../Global/UserContext";

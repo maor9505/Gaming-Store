@@ -11,42 +11,7 @@ export const AdminOrdersContextProvider = (props) => {
   const [AllOrderUsers, setAllOrdersUser] = useState([]);
   const [spinner, setSpinner] = useState(true);
   
-
-
-  // useEffect(
-  //   function getOrders() {
-  //     if (user && user.type == "admin") {
-  //       var AllOrders = [];
-  //       db.collection("users")
-  //         .get()
-  //         .then((snapshot) => {
-  //           snapshot.docs.map((doc) =>
-  //             db
-  //               .collection("Orders")
-  //               .doc(doc.id)
-  //               .collection("OrderList")
-  //               .onSnapshot((snapshot) => {
-  //                 snapshot.docChanges().forEach((change) => {
-  //                   if (change.type === "added") {
-  //                     AllOrders.push(getOrder(change.doc));
-  //                   }
-  //                   if (change.type === "modified") {
-  //                     _.remove(AllOrders, { ID: change.doc.id });
-  //                     AllOrders.push(getOrder(change.doc));
-  //                   }
-  //                   setAllOrdersUser([...AllOrders]);
-  //                 });
-  //               })
-  //           );
-  //         });
-  //       setSpinner(false);
-  //     }
-  //   },
-
-  //   [user]
-  // );
-useEffect(
- async function getOrders() {
+useEffect(async()=> {
     if (user && user.type == "admin") {
       var AllOrders = [];
      const users = await db.collection("users").get();

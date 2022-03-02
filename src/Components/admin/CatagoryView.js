@@ -1,12 +1,7 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState} from "react";
 import { Table } from "../../Utils/Table";
-import { Pagination } from "../common/Pagiantion";
-import { paginate } from "../common/paginat";
-import { PanelView } from "./PanelView";
-import { CatagoryColumn, ProductColumn } from "../../Utils/TableColumn";
+import { CatagoryColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
-import { ProductsContext } from "../../Global/ProductsContext";
-import { HeaderProducts } from "../common/HeaderProducts";
 import { db } from "../../Config/Config";
 
 export const CatagoryView = () => {
@@ -28,6 +23,7 @@ export const CatagoryView = () => {
         })
 
   }, []);
+
 
   return (
     <div className="container ">

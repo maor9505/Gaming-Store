@@ -11,24 +11,24 @@ export const OrderContextProvider = (props) => {
 
   // get user order if his login 
   useEffect(() => {
+    const getOrders = () => {
+      db.collection("Orders")
+        .doc(user.uid)
+        .collection("OrderList")
+        .orderBy("DateCreate", "desc")
+        .onSnapshot((snapshot) => {
+          let prevOrders = [];
+          snapshot.docs.map((doc) => prevOrders.push(getOrder(doc)));
+          setOrders(prevOrders);
+          setSpinner(false);
+        });
+    };
       if(user){
    getOrders();
 }
   },[user]);
 
-  const getOrders=()=>{
-    db.collection("Orders")
-      .doc(user.uid)
-      .collection("OrderList")
-      .orderBy("DateCreate", "desc")
-      .onSnapshot((snapshot) => {
-            let prevOrders = [];
-        snapshot.docs.map((doc) => prevOrders.push(getOrder(doc)));
-        setOrders(prevOrders);
-        setSpinner(false);
-
-      });
-  }
+  
   return (
     <OrderContext.Provider value={{ orders: [...orders], spinner: spinner }}>
       {props.children}

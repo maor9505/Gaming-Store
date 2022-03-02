@@ -15,7 +15,7 @@ export const ProductPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const product = products.find((product) => product.ID == id);
+    const product = products.find((product) => product.ID === id);
     setproduct(product);
   }, [products]);
 
@@ -59,7 +59,7 @@ export const ProductPage = () => {
                     <hr />
                     <h3>
                       Age Category:&ensp;
-                      {product.CatagoryAge == 1 ? "3-16" : "16-99"}
+                      {product.CatagoryAge === 1 ? "3-16" : "16-99"}
                     </h3>
                     <hr />
                     <h3>Description:&ensp;{product.Description}</h3>
@@ -96,8 +96,6 @@ export const ProductPage = () => {
               </div>
             </div>
           </div>
-          // </div>
-          // </div>
         )}
       </>
       <h1></h1>

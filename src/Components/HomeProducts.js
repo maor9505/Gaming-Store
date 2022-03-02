@@ -1,10 +1,7 @@
 import React,{useContext,useState,useEffect} from 'react'
-import { Link, useHistory } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import '../styles/Product.css'
-import { CartContext } from '../Global/CartContext'
 import { ProductsContext } from '../Global/ProductsContext';
-import { UserContext } from '../Global/UserContext';
 
 
 export const HomeProducts = () => {

@@ -21,7 +21,6 @@ export const CartContextProvider = (props) => {
     if (user) {
       getCart();
     }
-    console.log(cartUser)
   }, [user]);
 
   // get cart from db
@@ -49,23 +48,3 @@ export const CartContextProvider = (props) => {
     </CartContext.Provider>
   );
 };
-
-// snapshot.docChanges().forEach((snap) => {
-//   if (snap.type == "added") {
-//     newCart.push({
-//       ID: snap.doc.id,
-//       ...snap.doc.data(),
-//     });
-//     setCart([...newCart]);
-//   }
-//   if (snap.type === "removed") {
-//     console.log("new");
-//     console.log(newCart);
-
-//     console.log(snap.doc.data());
-//     newCart2 = newCart.filter((ca) => ca.ID !== snap.doc.data().ID);
-//     console.log("new2");
-//     console.log(newCart2);
-//     setCart([...newCart2]);
-//   }
-// });

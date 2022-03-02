@@ -86,8 +86,8 @@ export const App = () => {
                       <Redirect to="/not-found" />
                     </Switch>
                   </div>
-                  <Footer />
                 </div>
+                <Footer />
               </AdminOrdersContextProvider>
             </OrderContextProvider>
           </CartContextProvider>

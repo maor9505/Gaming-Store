@@ -21,12 +21,11 @@ export const AddProducts = () => {
   const types = ["image/png", "image/jpeg"]; // image types
 
   // get catagories from db
-  useEffect(() => {
-    db.collection("Catagories").onSnapshot((snapshot) => {
-      setcatagoryOption(
-        snapshot.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
+  useEffect(async() => {
+    const catagories =  await db.collection("Catagories").get();
+     setcatagoryOption(
+        catagories.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
       );
-    });
   }, []);
 
   const handleBack = () => {

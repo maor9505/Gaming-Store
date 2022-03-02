@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../Config/Config";
 import _ from "lodash";
 
@@ -9,13 +9,12 @@ export const HeaderProducts = ({ data, setFilterProduct }) => {
   const [catagoryAgeFilter, setCatagoryAgeFilter] = useState("");
   const [checkInput, setcheckInput] = useState("");
 
-  useEffect(() => {
-    db.collection("Catagories").onSnapshot((snapshot) => {
-      setcatagoryOption(
-        snapshot.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
-      );
-    });
-  }, []);
+ useEffect(async () => {
+   const catagories = await db.collection("Catagories").get();
+   setcatagoryOption(
+     catagories.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
+   );
+ }, []);
 
   useEffect(() => {
     var DataFilter = _.filter(
@@ -99,14 +98,13 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
           <input
             className="form-check-input"
             type="checkbox"
-            id="flexCheckDefault"
             value="Views"
             checked={checkInput == "Views"}
             onChange={(e) =>
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label className="form-check-label" for="flexCheckDefault">
+          <label className="form-check-label" >
             By Views
           </label>
         </div>
@@ -114,14 +112,13 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
           <input
             className="form-check-input"
             type="checkbox"
-            id="flexCheckDefault1"
             value="Sales"
             checked={checkInput == "Sales"}
             onChange={(e) =>
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label class="form-check-label" for="flexCheckDefault1">
+          <label className="form-check-label" >
             By Sales
           </label>
         </div>
@@ -129,15 +126,15 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
           <input
             className="form-check-input"
             type="checkbox"
-            id="flexCheckDefault2"
+            
             value=""
             checked={checkInput == ""}
             onChange={(e) =>
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label className="form-check-label" for="flexCheckDefault2">
-            Non
+          <label className="form-check-label" >
+            No
           </label>
         </div>
       </div>

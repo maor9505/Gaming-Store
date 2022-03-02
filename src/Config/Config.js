@@ -2,9 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
-// const admin = require("firebase-admin");
-
-import { useHistory } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCg-TxNJGlYDTURf8m06elb6QRjAb1yQ4s",

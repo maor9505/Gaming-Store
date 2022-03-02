@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { auth, googleProvider, db } from "../../Config/Config";
+import { auth, googleProvider } from "../../Config/Config";
 import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import { UserContext } from "../../Global/UserContext";
@@ -81,7 +81,7 @@ export const Login = () => {
               <br />
               <span>
                 Forget your Password? click
-                <Link onClick={() => forgotPassword(email)}> Here</Link>
+                <a href="#" onClick={() => forgotPassword(email)}> Here</a>
               </span>
               <button
                 type="submit "

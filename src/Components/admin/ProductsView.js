@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { Table } from "../../Utils/Table";
 import { PanelView } from "./PanelView";
 import { ProductColumn } from "../../Utils/TableColumn";
