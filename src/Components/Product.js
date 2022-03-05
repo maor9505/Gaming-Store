@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 export const Product = ({product}) => {
   return (
-    <>
-      <div className="col-sm-3 col-md-6 " key={product.ID}>
         <div className="image-flip">
           <div className="mainflip flip-0">
             <Link
@@ -58,7 +56,5 @@ export const Product = ({product}) => {
             </Link>
           </div>
         </div>
-      </div>
-    </>
   );
 }

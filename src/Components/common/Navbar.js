@@ -143,7 +143,7 @@ export const Navbar = () => {
                       to="/contact"
                       className="navlink  btn-outline-success btn-lg "
                     >
-                      Contact
+                      Contact Us
                     </Link>
                   </li>
                   <li className="m-2">

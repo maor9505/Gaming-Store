@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
-import { Link } from 'react-router-dom';
 import '../styles/Product.css'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
@@ -27,7 +26,9 @@ export const ViewsProducts = () => {
         <div className="row mt-4">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
+             <div className="col-sm-3 col-md-6 " key={product.ID}>
             <Product product={product} />
+            </div>
           ))}
         </div>
         <div className="d-flex justify-content-center mt-4">

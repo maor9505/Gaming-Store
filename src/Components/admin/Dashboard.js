@@ -11,7 +11,7 @@ import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import { ProductsView } from "./ProductsView";
 import { CatagoryView } from "./CatagoryView";
 import { OrderView } from "./OrderView";
-import { ContactsView } from "./ContactsView";
+import {  MessagesView } from "./MessagesView";
 import { UsersView } from "./UsersView";
 
 export const Dashboard = () => {
@@ -50,8 +50,8 @@ export const Dashboard = () => {
       case "Users":
         setViewDashboard(<UsersView />);
         break;
-      case "Contacts":
-        setViewDashboard(<ContactsView />);
+      case "Messages":
+        setViewDashboard(<MessagesView />);
         break;
       default:
         break;

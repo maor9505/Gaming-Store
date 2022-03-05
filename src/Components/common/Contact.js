@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "../../styles/Contact.css";
 import { db } from "../../Config/Config";
 import { ToastAlert } from "../../Utils/Toast";
@@ -15,7 +15,7 @@ export const Contact = () => {
     const date = new Date();
     const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     e.preventDefault();
-    db.collection("Contact")
+    db.collection("Messages")
       .doc()
       .set({
         Name: name,
@@ -30,7 +30,7 @@ export const Contact = () => {
         setMessage("");
         setName("");
         setPhone("");
-        ToastAlert("Thank you for your application,"+name);  
+        ToastAlert("Thank you we will replay to you soon!,"+name);  
     })
       .catch((err) => setEror(err.message));
   };

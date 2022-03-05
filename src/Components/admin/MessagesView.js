@@ -5,105 +5,103 @@ import { orderBy } from "lodash";
 import { db } from "../../Config/Config";
 
 
-export const ContactsView = () => {
-  const [contactsData, setcontactsData] = useState([]);
-  const [filterContacts, setfilterContacts] = useState([]);
-  const [contactsTotal, setcontactsTotal] = useState(0);
-  const [contactsUnread, setcontactsUnread] = useState(0);
+export const MessagesView = () => {
+  const [MessagesData, setMessagesData] = useState([]);
+  const [filterMessages, setfilterMessages] = useState([]);
+  const [messagesTotal, setmessagesTotal] = useState(0);
+  const [messagesUnread, setmessagesUnread] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
 
-  //get contacts values from db
+  //get messages values from db
   useEffect(() => {
-    db.collection("Contact").onSnapshot((snapshot) => {
-      let prevContacts = [];
+    db.collection("Messages").onSnapshot((snapshot) => {
+      let prevMessage = [];
       snapshot.forEach((doc) => {
-        prevContacts.push({
+        prevMessage.push({
           ID: doc.id,
           DateCreate: doc.data().DateCreate.toMillis(),
           ...doc.data(),
         });
-        setcontactsData([...prevContacts]);
+        setMessagesData([...prevMessage]);
       });
     });
   }, []);
 
-
-  // filter contacts data UNRead.lenth - Filter Desc
+  // filter messages data UNRead.lenth - Filter Desc
   useEffect(() => {
-    if (contactsData.length !== 0) {
-      setcontactsTotal(contactsData.length);
+    if (MessagesData.length !== 0) {
+      setmessagesTotal(MessagesData.length);
 
-      const unRead = [...contactsData];
+      const unRead = [...MessagesData];
       const unRead2 = unRead.filter((item) => !item.IsRead);
-      setcontactsUnread(unRead2.length);
-      setfilterContacts(filterContactsDesc());
+      setmessagesUnread(unRead2.length);
+      setfilterMessages(filterMessagesDesc());
     }
-  }, [contactsData]);
+  }, [MessagesData]);
 
   // return filter data-Desc
-  const filterContactsDesc = () => {
-    return orderBy(contactsData, "DateCreate", "desc");
+  const filterMessagesDesc = () => {
+    return orderBy(MessagesData, "DateCreate", "desc");
   };
 
   // filter data By Date
   const filterArrayByDate = (value) => {
     setdateFilter(value);
     const arr = [];
-    contactsData.map((or) => {
+    MessagesData.map((or) => {
       let date = new Date(or.DateCreate.toMillis());
       let dateS =
         date.getFullYear() +
         "-" +
-        ((date.getMonth() < 10)
+        (date.getMonth() < 10
           ? "0" + parseInt(date.getMonth() + 1)
-          : parseInt(date.getMonth() + 1))+
+          : parseInt(date.getMonth() + 1)) +
         "-" +
-        ((date.getDate() < 10)
-          ? "0" + date.getDate()
-          : date.getDate());
+        (date.getDate() < 10 ? "0" + date.getDate() : date.getDate());
       if (value === dateS) {
         arr.push(or);
       }
     });
-    setfilterContacts(arr);
+    setfilterMessages(arr);
   };
 
   const cancleDateB = () => {
     setdateFilter("");
-    setfilterContacts(filterContactsDesc());
+    setfilterMessages(filterMessagesDesc());
   };
   // update in db the message to Read
-  const UpdateReadContact = (contact) =>
-  {
-    db.collection('Contact').doc(contact.ID).update({
-        IsRead:true
-    })
-  }
-  // delete contact from db 
-  const DeleteContact = (contact) => {
-    db.collection("Contact").doc(contact.ID).delete();
+  const UpdateReadMessage = (message) => {
+    db.collection("Messages").doc(message.ID).update({
+      IsRead: true,
+    });
+  };
+  // delete message from db
+  const DeleteMessage = (message) => {
+    db.collection("Messages").doc(message.ID).delete();
   };
   return (
     <div className="container ">
       <h3>
-        <span className="badge bg-light text-success p-4">Contacts Details:</span>
+        <span className="badge bg-light text-success p-4">
+          Messages Details:
+        </span>
       </h3>
       <PanelView
-        cardOne={contactsTotal}
-        cardOneText={"Contacts Total..."}
-        cardTwo={contactsUnread}
+        cardOne={messagesTotal}
+        cardOneText={"Messages Total..."}
+        cardTwo={messagesUnread}
         cardTwoText={"Total UnRead..."}
         cardThree={"?"}
-        cardThreeText={"Newest Contact"}
+        cardThreeText={"Newest Message"}
         cardFor={"?"}
         cardForText={""}
       />
       <h1></h1>
       <h3>
         {" "}
-        <span className="badge bg-light text-success p-4">Contacts:</span>
+        <span className="badge bg-light text-success p-4">Messages:</span>
       </h3>
-      <label className="m-3 p-3 text-success">Filter Contacts By Date...</label>
+      <label className="m-3 p-3 text-success">Filter Messages By Date...</label>
       <div className="d-inline">
         <input
           type="date"
@@ -114,53 +112,52 @@ export const ContactsView = () => {
         <button
           className="btn btn-success btn-md m-3 fa fa-window-close "
           onClick={() => cancleDateB()}
-        >
-        </button>
+        ></button>
       </div>
       <br />
       <div className="accordion" id="accordionExample">
-        {filterContacts.map((con) => (
-          <div className="accordion-item" key={con.ID}>
+        {filterMessages.map((mes) => (
+          <div className="accordion-item" key={mes.ID}>
             <h2 className="accordion-header" id="headingOne">
               <button
                 className="accordion-button"
                 data-bs-toggle="collapse"
-                data-bs-target={"#a" + con.ID}
+                data-bs-target={"#a" + mes.ID}
                 aria-expanded="true"
-                aria-controls={"a" + con.ID}
+                aria-controls={"a" + mes.ID}
               >
                 <button
                   className={
-                    con.IsRead == true
+                    mes.IsRead == true
                       ? "btn btn-outline-success m-2 fa fa-bookmark"
                       : "btn btn-outline-danger m-2 fa fa-bookmark"
                   }
-                  onClick={() => UpdateReadContact(con)}
+                  onClick={() => UpdateReadMessage(mes)}
                 ></button>
                 <button
                   className="btn btn-outline-danger m-2 fa fa-trash"
-                  onClick={() => DeleteContact(con)}
+                  onClick={() => DeleteMessage(mes)}
                 ></button>
                 <span
                   className={
-                    con.IsRead == true ? "text-success p-3" : "text-danger p-3"
+                    mes.IsRead == true ? "text-success p-3" : "text-danger p-3"
                   }
                 >
-                  {new Date(con.DateCreate.toMillis()).toLocaleString("en-GB") +
+                  {new Date(mes.DateCreate.toMillis()).toLocaleString("en-GB") +
                     "  " +
-                    con.Email}
+                    mes.Email}
                 </span>
               </button>
             </h2>
 
             <div
-              id={"a" + con.ID}
+              id={"a" + mes.ID}
               className="accordion-collapse collapse"
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                <span>{con.Message}</span>
+                <span>{mes.Message}</span>
               </div>
             </div>
           </div>
