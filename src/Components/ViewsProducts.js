@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Product.css'
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';
+import { Product } from './Product';
 
 export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);
@@ -26,63 +27,7 @@ export const ViewsProducts = () => {
         <div className="row mt-4">
           {productsP.length === 0 && <div>No Products To Display...</div>}
           {productsP.map((product) => (
-            <div key={product.ID} className="col-sm-3 col-md-6">
-              <div className="image-flip">
-                <div className="mainflip flip-0">
-                  <Link
-                    className="nav-link text-dark img-wrap"
-                    to={`/products/${product.ProductID}`}
-                  >
-                    <div className="frontside">
-                      <div className="card">
-                        <div className="card-body text-center">
-                          <p>
-                            <img
-                              className=" img-fluid"
-                              src={product.ProductImg}
-                              alt="card image"
-                            />
-                          </p>
-                          <h4 className="card-title text-wrap">
-                            {product.ProductName}
-                          </h4>
-                          <p className="card-text">{product.Catagory}</p>
-                          <p className="card-text">
-                            Price: {product.ProductPrice}$$
-                          </p>
-                          <p className="card-text">Views: {product.Views}</p>
-                          <p className="card-text">Sales: {product.Sales}</p>
-                        </div>
-                        <div className="card-footer  d-flex justify-content-center">
-                          <span
-                            href="https://www.fiverr.com/share/qb8D02"
-                            className="btn btn-success btn-md  "
-                          >
-                            <i className="fa fa-info"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="backside">
-                      <div className="card">
-                        <div className="card-body text-center mt-4 d-flex flex-column">
-                          <h4 className="card-title">{product.ProductName}</h4>
-                          <p className="card-text">{product.Description}</p>
-                        </div>
-                        <div className="card-footer  d-flex justify-content-center">
-                          <span
-                            href="https://www.fiverr.com/share/qb8D02"
-                            className="btn btn-success btn-md  "
-                          >
-                            <i className="fa fa-plus"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <Product product={product} />
           ))}
         </div>
         <div className="d-flex justify-content-center mt-4">

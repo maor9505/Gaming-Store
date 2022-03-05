@@ -24,8 +24,8 @@ export const Cart = () => {
     cartUser.map((pro) => (sum += pro.ProductPrice * pro.qty));
     return sum;
   };
-  // calc sum of products Qty
 
+  // calc sum of products Qty
   const CalcTotalQty = () => {
     let sum = 0;
     cartUser.map((pro) => (sum += pro.qty));

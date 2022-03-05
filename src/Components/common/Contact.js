@@ -3,6 +3,7 @@ import "../../styles/Contact.css";
 import { db } from "../../Config/Config";
 import { ToastAlert } from "../../Utils/Toast";
 
+
 export const Contact = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

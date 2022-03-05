@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-
 import { useParams, useHistory } from "react-router-dom";
 import { db } from "../Config/Config";
 import { AdminOrderContext } from "../Global/AdminOrdersContext";
@@ -7,7 +6,6 @@ import { OrderContext } from "../Global/OrderContext";
 import { UserContext } from "../Global/UserContext";
 import "../styles/OrderPage.css";
 import { ToastAlert } from "../Utils/Toast";
-//כפתור cancle
 
 export const OrderPage = () => {
   const { user } = useContext(UserContext);
