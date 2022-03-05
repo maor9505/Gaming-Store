@@ -134,7 +134,7 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
             }
           />
           <label className="form-check-label" >
-            No
+            Non
           </label>
         </div>
       </div>
