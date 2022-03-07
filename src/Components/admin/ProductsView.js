@@ -9,7 +9,7 @@ import { ProductVbarChart } from "../../Chart/ProductVbarChar";
 import _ from "lodash";
 
 export const ProductsView = () => {
-  const { products, spinner } = useContext(ProductsContext);
+  const { products} = useContext(ProductsContext);
   const [filterProduct, setFilterProduct] = useState([]);
   const [productsTotal, setproductsTotal] = useState(0);
   const [viewsTotal, setviewsTotal] = useState(0);

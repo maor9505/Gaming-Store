@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import BlockLoading from 'react-loadingg/lib/BlockLoading';
 import './loading.css'
 const commonStyle = {

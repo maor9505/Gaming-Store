@@ -45,7 +45,7 @@ export const MessagesView = () => {
   };
 
   // filter data By Date
-  const filterArrayByDate = (value) => {
+  const filterMessagesByDate = (value) => {
     setdateFilter(value);
     const arr = [];
     MessagesData.map((or) => {
@@ -65,18 +65,18 @@ export const MessagesView = () => {
     setfilterMessages(arr);
   };
 
-  const cancleDateB = () => {
+  const handleResetButton = () => {
     setdateFilter("");
     setfilterMessages(filterMessagesDesc());
   };
   // update in db the message to Read
-  const UpdateReadMessage = (message) => {
+  const updateReadMessage = (message) => {
     db.collection("Messages").doc(message.ID).update({
       IsRead: true,
     });
   };
   // delete message from db
-  const DeleteMessage = (message) => {
+  const deleteMessage = (message) => {
     db.collection("Messages").doc(message.ID).delete();
   };
   return (
@@ -88,7 +88,7 @@ export const MessagesView = () => {
       </h3>
       <PanelView
         cardOne={messagesTotal}
-        cardOneText={"Messages Total..."}
+        cardOneText={"Total Messages..."}
         cardTwo={messagesUnread}
         cardTwoText={"Total UnRead..."}
         cardThree={"?"}
@@ -106,12 +106,12 @@ export const MessagesView = () => {
         <input
           type="date"
           className=" col-3 p-2"
-          onChange={(e) => filterArrayByDate(e.target.value)}
+          onChange={(e) => filterMessagesByDate(e.target.value)}
           value={dateFilter}
         />
         <button
           className="btn btn-success btn-md m-3 fa fa-window-close "
-          onClick={() => cancleDateB()}
+          onClick={() => handleResetButton()}
         ></button>
       </div>
       <br />
@@ -132,11 +132,11 @@ export const MessagesView = () => {
                       ? "btn btn-outline-success m-2 fa fa-bookmark"
                       : "btn btn-outline-danger m-2 fa fa-bookmark"
                   }
-                  onClick={() => UpdateReadMessage(mes)}
+                  onClick={() => updateReadMessage(mes)}
                 ></button>
                 <button
                   className="btn btn-outline-danger m-2 fa fa-trash"
-                  onClick={() => DeleteMessage(mes)}
+                  onClick={() => deleteMessage(mes)}
                 ></button>
                 <span
                   className={

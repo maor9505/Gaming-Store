@@ -45,7 +45,7 @@ export const AddProducts = () => {
   };
 
   // add product to db
-  const addProduct = (e) => {
+  const addProducToDB = (e) => {
     e.preventDefault();
     const date = new Date();
     const uploadTask = storage
@@ -103,7 +103,7 @@ export const AddProducts = () => {
       <br />
       <h2>Add Product:</h2>
       <hr />
-      <form autoComplete="off" className="form-group" onSubmit={addProduct}>
+      <form autoComplete="off" className="form-group" onSubmit={addProducToDB}>
         <label htmlFor="product-name">Product Name</label>
         <input
           type="text"

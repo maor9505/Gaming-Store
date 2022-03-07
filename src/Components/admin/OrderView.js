@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../Config/Config";
 import { Table } from "../../Utils/Table";
 import { PanelView } from "./PanelView";
-import { OrdersColumn } from "../../Utils/TableColumn";
+import { OrdersAdminColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import _, { orderBy } from "lodash";
@@ -17,41 +17,7 @@ export const OrderView = () => {
   const [waitOrders, setWaitOrders] = useState(0);
   const [cancleOrders, setCancleOrders] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
-  const orderColumn = OrdersColumn();
-  orderColumn.unshift({
-    path: "UserID",
-    label: "User-ID",
-    content: (order) => <span>{order.UserID}</span>,
-  });
-  orderColumn.push({
-    path: "",
-    label: "",
-    content: (order) =>
-      order.Status == "Order Was accepted and delivered" ? (
-        <button
-          className="fa fa-list-alt btn-outline-success"
-          onClick={() => updateStatusOrder(order)}
-        ></button>
-      ) : (
-        <button
-          className="fa fa-list-alt btn-outline-danger"
-          onClick={() => updateStatusOrder(order)}
-        ></button>
-      ),
-  });
 
-  //update Status Order in db
-  const updateStatusOrder = (order) => {
-    if (order.Status != "Order Cancled") {
-      db.collection("Orders")
-        .doc(order.UserID)
-        .collection("OrderList")
-        .doc(order.ID)
-        .update({
-          Status: "Order Was accepted and delivered",
-        });
-    }
-  };
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
     if (AllOrderUsers.length != 0) {
@@ -87,7 +53,7 @@ export const OrderView = () => {
     setfilterOrders(order ? [order] : []);
   };
   //filter data by date
-  const filterArrayByDate = (value) => {
+  const filterByDate = (value) => {
     console.log("value");
     console.log(value);
     setdateFilter(value);
@@ -108,7 +74,7 @@ export const OrderView = () => {
     });
     setfilterOrders(arr);
   };
-  const cancleDateB = () => {
+  const handleResetButtom = () => {
     setdateFilter("");
     document.getElementById("idOrder").value = "";
     setfilterOrders(filterOrderDesc());
@@ -164,18 +130,18 @@ export const OrderView = () => {
         <input
           type="date"
           className=" col-3  m-2"
-          onChange={(e) => filterArrayByDate(e.target.value)}
+          onChange={(e) => filterByDate(e.target.value)}
           value={dateFilter}
         />
         <button
           className="btn btn-success btn-md m-3 "
-          onClick={() => cancleDateB()}
+          onClick={() => handleResetButtom()}
         >
           <i className="fa fa-window-close"></i>
         </button>
       </div>
       <br />
-      <Table data={filterOrders} Columns={orderColumn}></Table>
+      <Table data={filterOrders} Columns={OrdersAdminColumn}></Table>
     </div>
   );
 };

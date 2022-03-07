@@ -224,3 +224,81 @@ export const UsersColumn = () => {
     },
   ];
 };
+
+export const OrdersAdminColumn = () => {
+  //update Status Order in db
+  const updateStatusOrder = (order) => {
+    if (order.Status != "Order Cancled") {
+      db.collection("Orders")
+        .doc(order.UserID)
+        .collection("OrderList")
+        .doc(order.ID)
+        .update({
+          Status: "Order Was accepted and delivered",
+        });
+    }
+  };
+  return [
+    {
+      path: "UserID",
+      label: "User-ID",
+      content: (order) => <span>{order.UserID}</span>,
+    },
+    {
+      path: "ID",
+      label: "Order ID",
+      content: (order) => (
+        <Link
+          to={{
+            pathname: `/OrderPage/${order.ID}`,
+          }}
+        >
+          {order.ID}
+        </Link>
+      ),
+    },
+    {
+      path: "DateCreate",
+      label: "Date Order:",
+      content: (order) => (
+        <span>{new Date(order.DateCreate).toLocaleString("en-GB")}</span>
+      ),
+    },
+    {
+      path: "TotalPrice",
+      label: "Total Price",
+      content: (order) => <span>{order.TotalPrice}</span>,
+    },
+    {
+      path: "TotalQty",
+      label: "Total Qty",
+      content: (order) => <span>{order.TotalQty}</span>,
+    },
+    {
+      path: "Status",
+      label: "Status",
+      content: (order) =>
+        order.Status == "Order Cancled" ? (
+          <span className="text-danger">{order.Status}</span>
+        ) : (
+          <span className="text-primary">{order.Status}</span>
+        ),
+    },
+    {
+      path: "",
+      label: "",
+      content: (order) =>
+        order.Status == "Order Was accepted and delivered" ? (
+          <button
+            className="fa fa-list-alt btn-outline-success"
+            onClick={() => updateStatusOrder(order)}
+          ></button>
+        ) : (
+          <button
+            className="fa fa-list-alt btn-outline-danger"
+            onClick={() => updateStatusOrder(order)}
+          ></button>
+        ),
+    },
+  ];
+};

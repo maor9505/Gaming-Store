@@ -14,7 +14,7 @@ export const Signup = () => {
   const [error, setError] = useState("");
 
   // signup with Email && Password
-  const signup = (e) => {
+  const signupEmail_Pass = (e) => {
     e.preventDefault();
     let vaildName = formValidation("name", displayName);
     console.log(vaildName);
@@ -100,7 +100,7 @@ export const Signup = () => {
       </div>
 
       <h1></h1>
-      <form className="form-group" onSubmit={signup}>
+      <form className="form-group" onSubmit={signupEmail_Pass}>
         <label htmlFor="email">Email</label>
         <input
           type="email"

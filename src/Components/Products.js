@@ -1,6 +1,5 @@
 import React, { useContext,useState} from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
-import { Link} from 'react-router-dom';
 import '../styles/Product.css';
 import { Pagination } from './common/Pagiantion'
 import { paginate } from './common/paginat';

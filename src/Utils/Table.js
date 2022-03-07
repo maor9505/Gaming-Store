@@ -24,8 +24,6 @@ export const Table = ({ data, Columns }) => {
     setsortColumn(newColumn);
     const sortarray = _.orderBy(data, [sortColumn.path], [sortColumn.order]);
     setarrayData(sortarray);
-    console.log("aa");
-    console.log(arrayData);
   };
   // function the handle the page change
   const handlePagechange = (page) => {

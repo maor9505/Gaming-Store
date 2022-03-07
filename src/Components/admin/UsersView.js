@@ -30,8 +30,8 @@ export const UsersView = () => {
     console.log(user)
     setfilterUsers(user ? [user] : []);
   };
-  const cancleDateB = () => {
-    document.getElementById('idUser').value="";
+  const handleResetButton = () => {
+    document.getElementById("idUser").value = "";
     setfilterUsers([...usersData]);
   };
   return (
@@ -43,7 +43,7 @@ export const UsersView = () => {
       </h3>
       <div className="d-inline d-flex">
         <input
-        id="idUser"
+          id="idUser"
           type="text"
           className=" col-3  m-2"
           onChange={(e) => filterUserByID(e.target.value)}
@@ -51,7 +51,7 @@ export const UsersView = () => {
         />
         <button
           className="btn btn-success btn-md m-3 "
-          onClick={() => cancleDateB()}
+          onClick={() => handleResetButton()}
         >
           <i className="fa fa-window-close"></i>
         </button>

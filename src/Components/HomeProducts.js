@@ -9,7 +9,7 @@ export const HomeProducts = () => {
      const [productsP, setproductsP] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
 useEffect(() => {
-  setproductsP([...products]);
+   setproductsP([...products]);
 }, [products]);
 
 // sort by Views to Desc products views

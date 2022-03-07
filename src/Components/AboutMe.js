@@ -43,12 +43,10 @@ export const AboutMe = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-start">
-                      <a href="#!">
                         <a
                           className="fa fa-linkedin fa-lg me-3"
                           href="https://www.linkedin.com/in/maor-elimelech-654a6a188"
                         ></a>
-                      </a>
                     </div>
                   </div>
                 </div>
