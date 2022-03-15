@@ -15,7 +15,7 @@ import { ToastAlert } from '../Utils/Toast';
 
 export const Cart = () => {
   const { user } = useContext(UserContext);
-  const { cartUser, dispatch } = useContext(CartContext);
+  const {cartUser, dispatch } = useContext(CartContext);
   const history = useHistory();
 
   // calc sum of products price
@@ -39,7 +39,7 @@ export const Cart = () => {
     if (!user) {
       history.push("/login");
     }
-  }, []);
+  }, [user]);
 
   // after user complete the order and payment accepted uplode to db
   const handleOrderToDb = (paymentRequest) => {

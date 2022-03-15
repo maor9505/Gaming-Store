@@ -2,7 +2,6 @@ import React, {
   createContext,
   useReducer,
   useEffect,
-  useState,
   useContext,
 } from "react";
 import { CartReducer } from "./CartReducer";
@@ -10,39 +9,34 @@ import { db } from "../Config/Config";
 import { UserContext } from "./UserContext";
 
 export const CartContext = createContext();
+const defaultCartState = { items: [] };
 
 export const CartContextProvider = (props) => {
   const { user } = useContext(UserContext);
-  const [cart, dispatch] = useReducer(CartReducer);
-  const [cartUser, setCart] = useState([]);
-
+  const [cart, dispatch] = useReducer(CartReducer, defaultCartState);
+  
   // if user is login get cart from db
-  useEffect(() => {
+  useEffect(async () => {
     if (user) {
-      getCart();
+      let newCart = [];
+      const response = await db
+        .collection("Cart")
+        .doc(user.uid)
+        .collection("CartProducts")
+        .get();
+      response.docs.map((doc) =>
+        newCart.push({
+          ID: doc.id,
+          ...doc.data(),
+        })
+      );
+      return dispatch({ type: "Get_Data", data: [...newCart] });
     }
   }, [user]);
 
-  // get cart from db
-  const getCart = () => {
-    db.collection("Cart")
-      .doc(user.uid)
-      .collection("CartProducts")
-      .onSnapshot((snapshot) => {
-        let newCart = [];
-        snapshot.forEach((doc) => {
-          newCart.push({
-            ID: doc.id,
-            ...doc.data(),
-          });
-        });
-        setCart(newCart);
-      });
-  };
-
   return (
     <CartContext.Provider
-      value={{ cartUser: [...cartUser], ...cart, dispatch }}
+      value={{ ...cart, cartUser: [...cart.items], dispatch }}
     >
       {props.children}
     </CartContext.Provider>

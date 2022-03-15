@@ -36,9 +36,9 @@ export const Products = () => {
           )}
           <div className="row d-flex justify-content-center  mt-4 ">
             {productsP.map((product) => (
-                <div className="col-sm-3 col-md-6 " key={product.ID}>
-              <Product product={product}/>
-              </div>
+                <div className="col " key={product.ID}>
+              <Product key={product.ID}  product={product}/>
+               </div>
             ))}
           </div>
         </div>

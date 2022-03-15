@@ -46,7 +46,6 @@ export const OrderPage = () => {
         document.getElementById("btnCancle").style.color = 'red';
         document.getElementById('btnCancle').style.backgroundColor='white'
         document.getElementById("btnCancle").style.borderColor = 'gray';
-
         order.Status = "Order Cancled";
       });
   };
