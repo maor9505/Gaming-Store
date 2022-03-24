@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { CartContext } from '../Global/CartContext'
 import { Icon } from 'react-icons-kit'
 import { ic_add } from 'react-icons-kit/md/ic_add'
@@ -19,27 +19,19 @@ export const Cart = () => {
   const history = useHistory();
 
   // calc sum of products price
-  const CalcTotalSum = () => {
+  const calcTotalSum = useMemo(() => {
     let sum = 0;
     cartUser.map((pro) => (sum += pro.ProductPrice * pro.qty));
     return sum;
-  };
+  },[cartUser]);
 
   // calc sum of products Qty
-  const CalcTotalQty = () => {
+  const calcTotalQty = useMemo(() => {
     let sum = 0;
     cartUser.map((pro) => (sum += pro.qty));
     return sum;
-  };
-  const totalPrice = CalcTotalSum();
-  const totalQty = CalcTotalQty();
+  },[cartUser]);
 
-  // if user not login send to login page
-  useEffect(() => {
-    if (!user) {
-      history.push("/login");
-    }
-  }, [user]);
 
   // after user complete the order and payment accepted uplode to db
   const handleOrderToDb = (paymentRequest) => {
@@ -51,8 +43,8 @@ export const Cart = () => {
       .add({
         UserID: user.uid,
         Products: cartUser,
-        TotalPrice: totalPrice,
-        TotalQty: totalQty,
+        TotalPrice: calcTotalQty,
+        TotalQty: calcTotalQty,
         ShippingAddress: paymentRequest.shippingAddress,
         DateCreate: date,
         DateTime: time,
@@ -163,15 +155,15 @@ export const Cart = () => {
             <div className="cart-summary-heading">Cart-Summary</div>
             <div className="cart-summary-price">
               <span>Total Price</span>
-              <span>{totalPrice}</span>
+              <span>{calcTotalSum}</span>
             </div>
             <div className="cart-summary-price">
               <span>Total Qty</span>
-              <span>{totalQty}</span>
+              <span>{calcTotalQty}</span>
             </div>
             <div className="GooglePay">
               <GooglePay
-                totalP={totalPrice}
+                totalP={calcTotalSum}
                 handleOrderToDb={handleOrderToDb}
               />
             </div>

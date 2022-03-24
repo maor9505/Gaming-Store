@@ -45,7 +45,6 @@ const EditProducts = ({ product }) => {
   const [catagoryAge, setCatagoryAge] = useState(product.CatagoryAge);
   const [catagoryOption, setcatagoryOption] = useState([]);
     const [exisImg, setexisImg] = useState(true);
-
   const [error, setError] = useState("");
   const types = ["image/png", "image/jpeg"]; // image types
 
@@ -56,10 +55,6 @@ const EditProducts = ({ product }) => {
       );
     });
   }, []);
-
-  const handleBack = () => {
-    history.push("/");
-  };
   const productImgHandler = (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile && types.includes(selectedFile.type)) {
@@ -220,9 +215,7 @@ const EditProducts = ({ product }) => {
         <button type="submit" className="btn btn-success btn-md ">
           Edit
         </button>
-        <button onClick={handleBack} className="btn btn-success btn-md  m-4">
-          Back
-        </button>{" "}
+
       </form>
       {error && <span className="error-msg">{error}</span>}
     </div>

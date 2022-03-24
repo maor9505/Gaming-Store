@@ -24,7 +24,7 @@ export const CartContextProvider = (props) => {
         .doc(user.uid)
         .collection("CartProducts")
         .get();
-      response.docs.map((doc) =>
+       response.docs.map((doc) =>
         newCart.push({
           ID: doc.id,
           ...doc.data(),

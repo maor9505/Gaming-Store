@@ -1,4 +1,4 @@
-import React, { createContext,useEffect,useState,useReducer } from 'react'
+import React, { createContext,useEffect,useState, useCallback, useMemo } from 'react'
 import { db } from '../Config/Config'
 import {getProduct} from '../DbModal/Product'
 import _ from 'lodash'
@@ -10,7 +10,7 @@ export const ProductsContextProvider = (props) => {
 
     useEffect(() => { 
        let prevProducts = [];
-        db.collection("Products").onSnapshot((snapshot) => {
+       db.collection("Products").onSnapshot((snapshot) => {
            snapshot.docChanges().forEach((change) => {
              if (change.type === "added") {
                prevProducts.push(getProduct(change.doc));
@@ -25,7 +25,7 @@ export const ProductsContextProvider = (props) => {
        })
     },[])
 
-   
+    
     return (
       <ProductsContext.Provider
         value={{

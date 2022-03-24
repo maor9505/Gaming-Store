@@ -16,14 +16,12 @@ export const UserProfile = () => {
     const [errorp, setErrorp] = useState('');
     const history = useHistory();
 
-    // if user active set data/ if not send to login page
+    // if user active? set data/ if not send to login page
      useEffect(() => {
          if(user){
             setEmail(user.email)
             setdisplayName(user.name)
             setPhone(user.phone)
-         }else{
-            history.push("/login");
          }
     }, [user]);
 

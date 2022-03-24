@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Table } from "../../Utils/Table";
 import { PanelView } from "./PanelView";
 import { OrdersColumn } from "../../Utils/TableColumn";
@@ -9,32 +9,36 @@ import _ from 'lodash'
 
 export const HomeView = () => {
   const { AllOrderUsers } = useContext(AdminOrderContext);
+    const { products } = useContext(ProductsContext);
   const [ordersTotal, setordersTotal] = useState(0);
   const [incomeTotal, setIncomeTotal] = useState(0);
   const [waitOrders, setWaitOrders] = useState(0);
   const [cancleOrders, setCancleOrders] = useState(0);
-  const { products} = useContext(ProductsContext);
-  const [totalSales, setTotalSales] = useState(0);
-  const [productsTotal, setproductsTotal] = useState(0);
-  const [viewsTotal, setviewsTotal] = useState(0);
-  const [mostViewProducts, setmostViewProducts] = useState("");
   
   // update  products details productsTotal/viewsTotal/mostViewProducts
-  useEffect(() => {
-    if (products.length != 0) {
-      setproductsTotal(products.length);
-      setTotalSales(_.sumBy(products, (o)=> { return o.Sales }));
-      setviewsTotal(
-        products.map((product) => product.Views).reduce((a, b) => a + b)
-      );
-      const mostViewProductsP = [...products];
-          const highestMaxView=  _.maxBy(mostViewProductsP, (o) => {
-              return o.Views;
-            });
-      setmostViewProducts(highestMaxView.ProductName);
+  const productdetails = useMemo(()=>{
+    if(products.length>0){
+      const totalProducts = products.length;
+      const totalSales = _.sumBy(products, (o) => {
+        return o.Sales;
+      });
+      const totalViews = products
+        .map((product) => product.Views)
+        .reduce((a, b) => a + b);
+         const highestMaxView = _.maxBy(products, (o) => {
+           return o.Views;
+         });
+         return {
+           totalProducts: totalProducts,
+           totalSales: totalSales,
+           totalViews: totalViews,
+           highestMaxView: highestMaxView.ProductName,
+         };
     }
-  }, [products]);
+     return {};
 
+  },[products])
+  
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
     if (AllOrderUsers.length != 0) {
@@ -77,13 +81,13 @@ export const HomeView = () => {
         </span>
       </h3>
       <PanelView
-        cardOne={productsTotal}
+        cardOne={productdetails.totalProducts}
         cardOneText={"Total Products..."}
-        cardTwo={totalSales}
+        cardTwo={productdetails.totalSales}
         cardTwoText={"Total Products Sales..."}
-        cardThree={viewsTotal}
+        cardThree={productdetails.totalViews}
         cardThreeText={"Total Views..."}
-        cardFor={mostViewProducts}
+        cardFor={productdetails.highestMaxView}
         cardForText={"Most View Product..."}
       />
       <div className="">

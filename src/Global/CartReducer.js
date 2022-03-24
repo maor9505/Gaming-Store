@@ -1,4 +1,3 @@
-import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { auth, db } from "../Config/Config";
 import { ToastAlert } from "../Utils/Toast";

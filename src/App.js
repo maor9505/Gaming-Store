@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar } from "./Components/common/Navbar";
 import { ProductsContextProvider } from "./Global/ProductsContext";
 import { Home } from "./Components/Home";
@@ -24,75 +24,70 @@ import ScrollToTop from "./Utils/ScrollToTop";
 import { Dashboard } from "./Components/admin/Dashboard";
 import { AdminOrdersContextProvider } from "./Global/AdminOrdersContext";
 import { AboutMe } from "./Components/AboutMe";
-
+import { UserContext } from "./Global/UserContext.js";
 export const App = () => {
+  const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <React.Fragment>
       <ScrollToTop />
-      <UserContextProvider>
-        <ProductsContextProvider>
-          <CartContextProvider>
-            <OrderContextProvider>
-              <AdminOrdersContextProvider>
-                <div id="container">
-                  <Navbar />
-                  <div id="main-content">
-                    <Switch>
-                      {/* home */}
-                      <Route exact path="/" component={Home} />
-                      {/* signup */}
-                      <Route path="/signup" component={Signup} />
-                      {/* login */}
-                      <Route path="/login" component={Login} />
-                      {/* cart products} */}
-                      <Route path="/cart" component={Cart} />
-                      {/*  ProductPage  } */}
-                      <Route
-                        path="/products/:id"
-                        component={ProductPage}
-                      ></Route>
-                      {/*  Order Page  } */}
-                      <Route
-                        path="/OrderPage/:id"
-                        component={OrderPage}
-                      ></Route>
-                      {/*  Products } */}
-                      <Route path="/products" component={Products}></Route>
-                      {/*  Views Products } */}
-                      <Route
-                        path="/viewsproducts"
-                        component={ViewsProducts}
-                      ></Route>
-                      {/*  About Me } */}
-                      <Route path="/about" component={AboutMe}></Route>
-                      {/*  User Profile} */}
+      <ProductsContextProvider>
+        <CartContextProvider>
+          <OrderContextProvider>
+            <AdminOrdersContextProvider>
+              <div id="container">
+                <Navbar />
+                <div id="main-content">
+                  <Switch>
+                    {/* home */}
+                    <Route exact path="/" component={Home} />
+                    {/* signup */}
+                    <Route path="/signup" component={Signup} />
+                    {/* login */}
+                    <Route path="/login" component={Login} />
+                    {/* cart products} */}
+                    {user && <Route path="/cart" component={Cart} />}
+                    {/*  ProductPage  } */}
+                    <Route path="/products/:id" component={ProductPage}></Route>
+                    {/*  Order Page  } */}
+                    <Route path="/OrderPage/:id" component={OrderPage}></Route>
+                    {/*  Products } */}
+                    <Route path="/products" component={Products}></Route>
+                    {/*  Views Products } */}
+                    <Route
+                      path="/viewsproducts"
+                      component={ViewsProducts}
+                    ></Route>
+                    {/*  About Me } */}
+                    <Route path="/about" component={AboutMe}></Route>
+                    {/*  User Profile} */}
+                    {user && (
                       <Route
                         path="/userprofile"
                         component={UserProfile}
                       ></Route>
-                      {/* add products */}
-                      <Route path="/addproducts" component={AddProducts} />
-                      {/* add products */}
-                      <Route path="/addcatagory" component={AddCatagory} />
-                      {/* Contact */}
-                      <Route path="/contact" component={Contact} />
-                      {/* Contact */}
-                      <Route path="/orders" component={Orders} />
-                      {/* Dashboard */}
+                    )}
+                    {/* Contact */}
+                    <Route path="/contact" component={Contact} />
+                    {/* Contact */}
+                    {user && <Route path="/orders" component={Orders} />}
+                    {/* Dashboard */}
+                    {user && user.type === "admin" && (
                       <Route path="/dashboard" component={Dashboard} />
-                      {/* not-found */}
-                      <Route path="/not-found" component={NotFound} />
-                      <Redirect from="/" exact to="/" />
-                      <Redirect to="/not-found" />
-                    </Switch>
-                  </div>
+                    )}
+                    {/* not-found */}
+                    <Route path="/not-found" component={NotFound} />
+                    <Redirect from="/" exact to="/" />
+                    <Redirect to="/not-found" />
+                  </Switch>
                 </div>
-                <Footer />
-              </AdminOrdersContextProvider>
-            </OrderContextProvider>
-          </CartContextProvider>
-        </ProductsContextProvider>
-      </UserContextProvider>
+              </div>
+
+              <Footer />
+            </AdminOrdersContextProvider>
+          </OrderContextProvider>
+        </CartContextProvider>
+      </ProductsContextProvider>
     </React.Fragment>
   );
 };

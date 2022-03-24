@@ -28,9 +28,6 @@ export const AddProducts = () => {
       );
   }, []);
 
-  const handleBack = () => {
-    history.push("/");
-  };
 
   // image handler check if photo uplode is success
   const productImgHandler = (e) => {
@@ -176,9 +173,6 @@ export const AddProducts = () => {
         <button type="submit" className="btn btn-success btn-md ">
           ADD
         </button>
-        <button onClick={handleBack} className="btn btn-success btn-md  m-4">
-          Back
-        </button>{" "}
       </form>
       {error && <span className="error-msg">{error}</span>}
     </div>

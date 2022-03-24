@@ -7,8 +7,9 @@ export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
 
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({})
     useEffect(() => {
+      
         auth.onAuthStateChanged(user => {
             if (user) {
                db.collection("users")

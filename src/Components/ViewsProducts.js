@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useMemo,useEffect } from 'react'
 import { ProductsContext } from '../Global/ProductsContext'
 import '../styles/Product.css'
 import { Pagination } from './common/Pagiantion'
@@ -9,10 +9,16 @@ export const ViewsProducts = () => {
     const { products } = useContext(ProductsContext);
     const [pageSize, setpageSize] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
+
     //sort
-    let sortProductsByviews = [...products]
-    sortProductsByviews = sortProductsByviews.sort((a,b)=> b.Views - a.Views);
-    const productsP = paginate(sortProductsByviews, currentPage, pageSize);
+    const sortProducts = useMemo(() => {
+      return products.sort((a, b) => b.Views - a.Views);
+    }, [products]);
+  
+  
+
+
+    const productsP = paginate(sortProducts, currentPage, pageSize);
     // function the handle the page change
     const handlePagechange = page => {
         setcurrentPage(page);

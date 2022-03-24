@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import {db } from '../../Config/Config'
 import { ToastAlert } from '../../Utils/Toast';
 
 export const AddCatagory = () => {
   const [catagoryName, setCatagoryName] = useState("");
   const [error, setError] = useState("");
-
+ 
   // add new Catagory to db
   const addCatagoryToDB = (e) => {
     e.preventDefault();
@@ -20,7 +20,6 @@ export const AddCatagory = () => {
       })
       .catch((err) => setError(err.message));
   };
-
   return (
     <div className="container">
       <br />

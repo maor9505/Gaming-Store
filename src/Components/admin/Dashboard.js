@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import { NavBarDash } from "./NavBarDash";
 import { AddProducts } from "./AddProducts";
 import { AddCatagory } from "./AddCatagory";
@@ -13,63 +13,17 @@ import { CatagoryView } from "./CatagoryView";
 import { OrderView } from "./OrderView";
 import {  MessagesView } from "./MessagesView";
 import { UsersView } from "./UsersView";
+import { Route } from "react-router-dom";
 
 export const Dashboard = () => {
-  const { user } = useContext(UserContext);
   const { spinner } = useContext(AdminOrderContext);
-  const history = useHistory();
-  const [viewDashboard, setViewDashboard] = useState(<HomeView />);
-
-  useEffect(() => {
-    if (!user || user.type !== "admin") {
-      history.push("/login");
-    }
-  }, [user]);
-
-  // controll the view thet present in main view page
-  const NavBarLinks = (path) => {
-    switch (path) {
-      case "Dashboard":
-        setViewDashboard(<HomeView />);
-        break;
-      case "Products":
-        setViewDashboard(<ProductsView></ProductsView>);
-        break;
-      case "Add-Product":
-        setViewDashboard(<AddProducts />);
-        break;
-      case "Catagories":
-        setViewDashboard(<CatagoryView />);
-        break;
-      case "Add-Catagory":
-        setViewDashboard(<AddCatagory />);
-        break;
-      case "Orders":
-        setViewDashboard(<OrderView />);
-        break;
-      case "Users":
-        setViewDashboard(<UsersView />);
-        break;
-      case "Messages":
-        setViewDashboard(<MessagesView />);
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <div>
-      <div>
         <h2>
-          {" "}
           <span className="badge bg-light text-danger">Dashboard-Admin</span>
         </h2>
-        {/* //Sidebar */}
-        <NavBarDash NavBarLinks={NavBarLinks} />
-      </div>
-      <h1 />
-      <div className="">
+        <NavBarDash/>
         <div className="col">
           {spinner && (
             <div className="container">
@@ -78,11 +32,33 @@ export const Dashboard = () => {
           )}
           {!spinner && (
             <div className="container justify-content-center ">
-              {viewDashboard}
+              <Route path="/dashboard" exact>
+                <HomeView></HomeView>
+              </Route>
+              <Route path="/dashboard/products">
+                <ProductsView></ProductsView>
+              </Route>
+              <Route path="/dashboard/add-product">
+                <AddProducts></AddProducts>
+              </Route>
+              <Route path="/dashboard/catagory">
+                <CatagoryView></CatagoryView>
+              </Route>
+              <Route path="/dashboard/add-catagory">
+                <AddCatagory></AddCatagory>
+              </Route>
+              <Route path="/dashboard/orders">
+                <OrderView></OrderView>
+              </Route>
+              <Route path="/dashboard/users">
+                <UsersView></UsersView>
+              </Route>
+              <Route path="/dashboard/messages">
+                <MessagesView></MessagesView>
+              </Route>
             </div>
           )}
         </div>
       </div>
-    </div>
   );
 };

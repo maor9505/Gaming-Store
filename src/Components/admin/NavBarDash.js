@@ -1,6 +1,7 @@
 import React from "react";
-import 'react-pro-sidebar/dist/css/styles.css';
-export const NavBarDash = ({ NavBarLinks }) => {
+import "react-pro-sidebar/dist/css/styles.css";
+import {NavLink } from "react-router-dom";
+export const NavBarDash = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <button
@@ -20,77 +21,98 @@ export const NavBarDash = ({ NavBarLinks }) => {
           id="menu"
         >
           <li className="nav-item">
-            <a href="#" className="nav-link ">
-              <i className="fs-4 bi-house"></i>{" "}
-              <span
-                onClick={() => NavBarLinks("Dashboard")}
+            <a className="nav-link ">
+              <NavLink
                 className="text-danger"
+                to="/dashboard"
+                style={{ textDecoration: "none" }}
               >
                 Dashboard
-              </span>
+              </NavLink>
             </a>
           </li>
           <li className="nav-item">
             <a href="#submenu1" data-bs-toggle="collapse" className="nav-link ">
-              <i className="fs-4 bi-speedometer2"></i>{" "}
-              <span onClick={() => NavBarLinks("Products")} className="ms-1">
-                Products
-              </span>{" "}
+              Products{" "}
             </a>
             <ul className="collapse  ms-1" id="submenu1" data-bs-parent="#menu">
               <li>
                 <a href="#" className="nav-link ">
-                  {" "}
-                  <span onClick={() => NavBarLinks("Add-Product")} className="">
+                  <NavLink
+                    to="/dashboard/products"
+                    style={{ textDecoration: "none" }}
+                  >
+                    Products-Details
+                  </NavLink>
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link ">
+                  <NavLink
+                    to="/dashboard/add-product"
+                    style={{ textDecoration: "none" }}
+                  >
                     Add-Product
-                  </span>{" "}
+                  </NavLink>
                 </a>
               </li>
             </ul>
           </li>
-          <li>
-            <a href="#submenu5" data-bs-toggle="collapse" className="nav-link ">
-              <i className="fs-4 bi-speedometer2"></i>{" "}
-              <span onClick={() => NavBarLinks("Catagories")} className="ms-1 ">
-                Catagories
-              </span>{" "}
+          <li className="nav-item">
+            <a href="#submenu2" data-bs-toggle="collapse" className="nav-link ">
+              Catagoris
             </a>
-            <ul className="collapse  ms-1" id="submenu5" data-bs-parent="#menu">
+            <ul className="collapse  ms-1" id="submenu2" data-bs-parent="#menu">
               <li>
-                <a href="#" className="nav-link px-0">
-                  {" "}
-                  <span
-                    onClick={() => NavBarLinks("Add-Catagory")}
-                    className=""
+                <a href="#" className="nav-link ">
+                  <NavLink
+                    to="/dashboard/catagory"
+                    style={{ textDecoration: "none" }}
+                  >
+                    Catagories-Details
+                  </NavLink>
+                </a>
+              </li>
+              <li>
+                <a href="#" className="nav-link ">
+                  <NavLink
+                    to="/dashboard/add-catagory"
+                    style={{ textDecoration: "none" }}
                   >
                     Add-Catagory
-                  </span>{" "}
+                  </NavLink>
                 </a>
               </li>
             </ul>
           </li>
           <li>
             <a href="#" className="nav-link">
-              <i className="fs-4 bi-table"></i>{" "}
-              <span onClick={() => NavBarLinks("Orders")} className="ms-1 ">
+              <NavLink
+                to="/dashboard/orders"
+                style={{ textDecoration: "none" }}
+              >
                 Orders
-              </span>{" "}
+              </NavLink>
             </a>
           </li>
           <li>
             <a href="#" className="nav-link">
-              <i className="fs-4 bi-table"></i>{" "}
-              <span onClick={() => NavBarLinks("Users")} className="ms-1 ">
+              <NavLink
+                to="/dashboard/users"
+                style={{ textDecoration: "none" }}
+              >
                 Users
-              </span>{" "}
+              </NavLink>
             </a>
           </li>
           <li>
             <a href="#" className="nav-link">
-              <i className="fs-4 "></i>{" "}
-              <span onClick={() => NavBarLinks("Messages")} className="ms-1 ">
+              <NavLink
+                to="/dashboard/messages"
+                style={{ textDecoration: "none" }}
+              >
                 Messages
-              </span>{" "}
+              </NavLink>
             </a>
           </li>
         </ul>
