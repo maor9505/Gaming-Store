@@ -8,11 +8,14 @@ align-items: center;
 }
 
 
-.search input { 
+.searchInputs input { 
   font-size: 16px;
-  height: 40px;
-  width: 300px;
-text-align: center;
+  height: 50px;
+  width: 250px;
+  display: flex;
+  text-align: left;
+  text-indent: 15px;
+
 }
 
 .searchIcon {
@@ -31,20 +34,22 @@ input:focus {
 }
 
 .dataResult {
-  margin-top: 5px;
-  width: 300px;
-  height: 100px;
+  margin-top: 2px;
+  width: 250px;
+  height: 200px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  overflow: hidden;
-  overflow-y: auto;
-
+  overflow:scroll;
+  overflow-y: hidden;
+   position: fixed;
+   z-index: 10;
+   border-radius: 15px;
+   border-color: black;
 }
 
 .dataResult .dataItem {
   width: 100%;
   height: 50px;
-  display:flex;
   align-items: center;
   color: black;
 }

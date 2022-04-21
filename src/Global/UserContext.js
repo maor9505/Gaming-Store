@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
     useEffect(() => {
       
         auth.onAuthStateChanged(user => {

@@ -5,8 +5,6 @@ import { AddCatagory } from "./AddCatagory";
 import "react-pro-sidebar/dist/css/styles.css";
 import { HomeView } from "./HomeView";
 import { LoadingPage } from "../loading-page/LoadingPage";
-import { UserContext } from "../../Global/UserContext";
-import { useHistory } from "react-router-dom";
 import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import { ProductsView } from "./ProductsView";
 import { CatagoryView } from "./CatagoryView";

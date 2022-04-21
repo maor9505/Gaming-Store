@@ -1,6 +1,10 @@
-/* .top{
-    height: 700px;
-} */
+
+@media(min-width: 1024px) {
+    .main{
+    position: absolute;
+    }
+}
+
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
     padding-bottom: 1rem;
@@ -44,13 +48,4 @@
     font-size: .825rem;
     background: #ffffff;
     color: #2e323c;
-}
-
-.card {
-    background: #ffffff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 0;
-    margin-bottom: 1rem;
 }

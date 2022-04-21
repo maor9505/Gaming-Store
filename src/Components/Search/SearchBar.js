@@ -25,7 +25,7 @@ export const SearchBar = ({ placeholder, data }) => {
     };
 
     return (
-      <div className="search">
+      <div>
         <div className="searchInputs">
           <input
             type="text"
@@ -35,29 +35,33 @@ export const SearchBar = ({ placeholder, data }) => {
             onChange={handleFilter}
           />
 
-           <div className="searchIcon"> 
-           {filteredData.length === 0 ? (
+          <div className="searchIcon">
+            {filteredData.length === 0 ? (
               <i className=" bg-light fa fa-search fa-2x"></i>
             ) : (
-              <i onClick={clearInput} className=" bg-light fa fa-times-circle fa-2x"></i>
-            )} 
-           </div>
-          {filteredData.length !== 0 && (
-            <div className="dataResult ">
-              {filteredData.slice(0, 15).map((value) => {
-                return (
-                  <Link
-                    className=" dataItem nav-link text-dark"
-                    to={`/products/${value.ID}`}
-                    key={value.ID}
-                  >
-                    {value.ProductName}
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+              <i
+                onClick={clearInput}
+                className=" bg-light fa fa-times-circle fa-2x"
+              ></i>
+            )}
+          </div>
         </div>
+
+        {filteredData.length !== 0 && (
+          <div className="dataResult ">
+            {filteredData.slice(0, 15).map((value) => {
+              return (
+                <Link
+                  className=" dataItem nav-link text-dark"
+                  to={`/products/${value.ID}`}
+                  key={value.ID}
+                >
+                  {value.ProductName}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
 }

@@ -63,7 +63,6 @@ export const Navbar = () => {
               </Link>
             </li>
           </ul>
-
           <SearchBar placeholder="Enter a Product Name..." data={products} />
           {!user && (
             <div>
@@ -94,7 +93,7 @@ export const Navbar = () => {
                 to="/cart"
               >
                 <i className="fa fa-shopping-cart fa-3x "></i>
-                <span className="position-absolute  top-0 start-80 translate-middle badge rounded-pill bg-danger">
+                <span className="position-absolute   start-80 translate-middle badge rounded-pill bg-light text-dark fw-bold ">
                   {cartUser.length}
                 </span>
               </Link>

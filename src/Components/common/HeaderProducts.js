@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../Config/Config";
 import _ from "lodash";
 
-export const HeaderProducts = ({ data, setFilterProduct }) => {
+export const HeaderProducts = React.memo(({ data, setFilterProduct }) => {
   const [catagoryOption, setcatagoryOption] = useState([]);
   const [priceFilter, setpriceFilter] = useState(0);
   const [catagoryFilter, setCatagoryFilter] = useState("");
   const [catagoryAgeFilter, setCatagoryAgeFilter] = useState("");
   const [checkInput, setcheckInput] = useState("");
 
- useEffect(async () => {
-   const catagories = await db.collection("Catagories").get();
-   setcatagoryOption(
-     catagories.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
-   );
- }, []);
+  useEffect(async () => {
+    const catagories = await db.collection("Catagories").get();
+    setcatagoryOption(
+      catagories.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
+    );
+  }, []);
 
   useEffect(() => {
     var DataFilter = _.filter(
@@ -30,12 +30,12 @@ export const HeaderProducts = ({ data, setFilterProduct }) => {
           ? obj.ProductPrice <= priceFilter
           : obj.ProductPrice >= 0)
     );
-if(checkInput=='Views')
-DataFilter=_.orderBy(DataFilter,['Views'],['desc']);
-if (checkInput == "Sales") 
-DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
+    if (checkInput == "Views")
+      DataFilter = _.orderBy(DataFilter, ["Views"], ["desc"]);
+    if (checkInput == "Sales")
+      DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
     setFilterProduct([...DataFilter]);
-  }, [data,catagoryFilter, catagoryAgeFilter, priceFilter,checkInput]);
+  }, [data,catagoryFilter, catagoryAgeFilter, priceFilter, checkInput]);
 
   const hanldeChangeFilterOption = (type, value) => {
     switch (type) {
@@ -104,9 +104,7 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label className="form-check-label" >
-            By Views
-          </label>
+          <label className="form-check-label">By Views</label>
         </div>
         <div className="form-check m-2">
           <input
@@ -118,26 +116,21 @@ DataFilter = _.orderBy(DataFilter, ["Sales"], ["desc"]);
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label className="form-check-label" >
-            By Sales
-          </label>
+          <label className="form-check-label">By Sales</label>
         </div>
         <div className="form-check m-2">
           <input
             className="form-check-input"
             type="checkbox"
-            
             value=""
             checked={checkInput == ""}
             onChange={(e) =>
               hanldeChangeFilterOption("checkInput", e.target.value)
             }
           />
-          <label className="form-check-label" >
-            Non
-          </label>
+          <label className="form-check-label">Non</label>
         </div>
       </div>
     </>
   );
-};
+});

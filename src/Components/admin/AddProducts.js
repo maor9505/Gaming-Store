@@ -7,11 +7,9 @@ import { ToastAlert } from "../../Utils/Toast";
 toast.configure();
 
 export const AddProducts = () => {
-  const history = useHistory();
-
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState(0);
-  const [maxQty, setmaxQty] = useState(0);
+  const [maxQty, setMaxQty] = useState(0);
   const [productImg, setProductImg] = useState("");
   const [description, setDescription] = useState("");
   const [catagory, setCatagory] = useState("");
@@ -80,7 +78,7 @@ export const AddProducts = () => {
               .then(() => {
                 setProductName("");
                 setProductPrice(0);
-                setmaxQty(0);
+                setMaxQty(0);
                 setProductImg("");
                 setDescription("");
                 setCatagory("");
@@ -124,7 +122,7 @@ export const AddProducts = () => {
           type="number"
           className="form-control"
           required
-          onChange={(e) => maxQty(e.target.value)}
+          onChange={(e) => setMaxQty(e.target.value)}
           value={maxQty}
         />
         <br />
