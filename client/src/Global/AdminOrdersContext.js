@@ -15,11 +15,11 @@ export const AdminOrdersContextProvider = (props) => {
 useEffect(async()=> {
     if (user && user.type == "admin") {
        try {
-          // const result = await axios.get("/order/getAdminOrders");
-          // console.log('admin orders')
-          // console.log(result.data.adminOrders);
+          const result = await axios.get("/order/getAdminOrders");
+          console.log('admin orders')
+          console.log(result.data.adminOrders);
           //change set function
-          setAllOrdersUser([]);
+          setAllOrdersUser(result.data.adminOrders);
           setSpinner(false);
         } catch (err) {
           console.log(err);

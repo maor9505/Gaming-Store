@@ -7,39 +7,23 @@ import { ProductsContext } from "../../Global/ProductsContext";
 import { HeaderProducts } from "../common/HeaderProducts";
 import { ProductVbarChart } from "../../Chart/ProductVbarChar";
 import _ from "lodash";
+import { handelProductsDetails } from "./common/ProductDetailsFilter";
 
 export const ProductsView = () => {
   const { products} = useContext(ProductsContext);
   const [filterProduct, setFilterProduct] = useState([]);
-  const [productsTotal, setproductsTotal] = useState(0);
-  const [viewsTotal, setviewsTotal] = useState(0);
-  const [totalSales, setTotalSales] = useState(0);
-  const [mostViewProducts, setmostViewProducts] = useState("");
+  const [productsDetails, setProductsDetails] = useState({});
+
+  useEffect(() => {
+    const productsDetailsAfterFilter = handelProductsDetails(products);
+    console.log("Total Products..." + productsDetailsAfterFilter);
+    setProductsDetails(productsDetailsAfterFilter);
+  }, [products]);
 
   useEffect(() => {
     setFilterProduct([...products]);
   }, [products]);
 
-  // update  products details productsTotal/viewsTotal/mostViewProducts
-  useEffect(() => {
-    if (products.length != 0) {
-      setproductsTotal(products.length);
-      setTotalSales(
-        _.sumBy(products, (o) => {
-          return o.Sales;
-        })
-      );
-
-      setviewsTotal(
-        products.map((product) => product.Views).reduce((a, b) => a + b)
-      );
-      const mostViewProductsP = [...products];
-      const highestMaxView = _.maxBy(mostViewProductsP, (o) => {
-        return o.Views;
-      });
-      setmostViewProducts(highestMaxView.ProductName);
-    }
-  }, [products]);
 
   return (
     <div className="container">
@@ -49,13 +33,13 @@ export const ProductsView = () => {
         </span>
       </h3>
       <PanelView
-        cardOne={productsTotal}
+        cardOne={productsDetails.totalProducts}
         cardOneText={"Total Products..."}
-        cardTwo={totalSales}
+        cardTwo={productsDetails.totalSales}
         cardTwoText={"Total Products Sales..."}
-        cardThree={viewsTotal}
+        cardThree={productsDetails.totalViews}
         cardThreeText={"Total Views..."}
-        cardFor={mostViewProducts}
+        cardFor={productsDetails.highestMaxView}
         cardForText={"Most View Product..."}
       />
       <div className="container">

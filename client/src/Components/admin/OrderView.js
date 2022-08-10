@@ -8,35 +8,20 @@ import { AdminOrderContext } from "../../Global/AdminOrdersContext";
 import _, { orderBy } from "lodash";
 import { ProductDoughnutChart } from "../../Chart/ProductDoughnutChart";
 import { OrderMonthBarChar } from "../../Chart/OrderMonthBarChar";
+import { handelOrdersDetails } from "./common/OrderDetailsFilter";
 
 export const OrderView = () => {
   const { AllOrderUsers } = useContext(AdminOrderContext);
   const [filterOrders, setfilterOrders] = useState([]);
-  const [ordersTotal, setordersTotal] = useState(0);
-  const [incomeTotal, setIncomeTotal] = useState(0);
-  const [waitOrders, setWaitOrders] = useState(0);
-  const [cancleOrders, setCancleOrders] = useState(0);
   const [dateFilter, setdateFilter] = useState("");
+  const [ordersDetails, setOrdersDetails] = useState({});
 
   // update ordersTotal/incomeTotal/waitOrders/cancleOrders
   useEffect(() => {
-    if (AllOrderUsers.length != 0) {
-      setordersTotal(AllOrderUsers.length);
-      setIncomeTotal(
-        AllOrderUsers.map((order) => order.TotalPrice).reduce((a, b) => a + b)
-      );
-      const waitOrdersArr = [...AllOrderUsers];
-      const wait = waitOrdersArr.filter(
-        (item) => item.Status === "In Procces..."
-      );
-      setWaitOrders(wait.length);
-      const cancleOrderArr = [...AllOrderUsers];
-      const cancle = cancleOrderArr.filter(
-        (item) => item.Status === "Order Cancled"
-      );
-      setCancleOrders(cancle.length);
-    }
-    setfilterOrders(filterOrderDesc());
+    const ordersDetailsFilter = handelOrdersDetails(AllOrderUsers);
+    console.log(ordersDetailsFilter);
+    setOrdersDetails(ordersDetailsFilter);
+     setfilterOrders(filterOrderDesc());
   }, [AllOrderUsers]);
 
   const filterOrderDesc = () => {
@@ -87,14 +72,14 @@ export const OrderView = () => {
       <div className="container  justify-content-center">
         <div className="container">
           <PanelView
-            cardOne={ordersTotal}
+            cardOne={ordersDetails.totalOrders}
             cardOneText={"Total Orders..."}
-            cardTwo={incomeTotal + "$"}
+            cardTwo={ordersDetails.incomeTotal + "$"}
             cardTwoText={"Total Income..."}
-            cardThree={waitOrders}
+            cardThree={ordersDetails.waitOrders}
             cardThreeText={"Waiting Orders..."}
-            cardFor={cancleOrders}
-            cardForText={"Cancled Orders..."}
+            cardFor={ordersDetails.cancelOrders}
+            cardForText={"Cancel Orders..."}
           />
         </div>
         <div className="row align-items-end">

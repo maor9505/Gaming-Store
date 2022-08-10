@@ -113,24 +113,33 @@ export const handleOrderPayment = async (req, res, next) => {
 };
 
 export const getAdminOrders = async (req, res, next) => {
-//   try {
-//   const data=[];
-//     const users = await db.collection("users").get();
-//  const t= users.docs.map(async (doc) => {
-//       let orders = await db
-//         .collection("Orders")
-//         .doc(doc.id)
-//         .collection("OrderList")
-//         .get();
-//   const orderuser= orders.docs.map((doc)=> getOrder(doc)); 
-// return orderuser
-//    });
-//            console.log(t);
-//           res.status(200).json({
-//             message: " get All  user orders success",
-//             adminOrders: data,
-//           });
-//   } catch (err) {
-//     next(err);
-//   }
+  try {
+  let data=[];
+    const users = await db.collection("users").get();
+    const getOrderByUsers= async(users)=>{
+      const promise = users.docs.map(async (doc) => {
+        await db
+          .collection("Orders")
+          .doc(doc.id)
+          .collection("OrderList")
+          .get()
+          .then((res) => {
+            console.log("data222=" + data);
+         data.push(...res.docs.map((doc) => getOrder(doc)));
+          });
+      });
+       // Wait for all requests, and then setState
+  return Promise.all(promise).then(() => {
+    return data;
+    })
+  }
+ const adminOrders = await getOrderByUsers(users);
+           console.log(adminOrders);
+          res.status(200).json({
+            message: " get All  user orders success",
+            adminOrders,
+          });
+  } catch (err) {
+    next(err);
+  }
 };
