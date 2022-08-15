@@ -31,7 +31,6 @@ export const MessagesView = () => {
   useEffect(() => {
     if (MessagesData.length !== 0) {
       setmessagesTotal(MessagesData.length);
-
       const unRead = [...MessagesData];
       const unRead2 = unRead.filter((item) => !item.IsRead);
       setmessagesUnread(unRead2.length);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { cancelOrder, getAdminOrders, getOrderById, getOrders, handleOrderPayment } from "../controllers/order.js";
+import { adminUpdateStatusOrder, cancelOrder, getAdminOrders, getOrderById, getOrders, handleOrderPayment } from "../controllers/order.js";
 
 
 const orderRouter = Router();
@@ -14,6 +14,8 @@ orderRouter.get("/getOrder",getOrderById);
 orderRouter.post('/orderPayment',handleOrderPayment)
 //get admin orders
 orderRouter.get("/getAdminOrders", getAdminOrders);
+// admin update status  orders
+orderRouter.post("/updateAdminOrders", adminUpdateStatusOrder);
 
 
 export default orderRouter;

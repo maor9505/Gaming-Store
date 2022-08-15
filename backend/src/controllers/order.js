@@ -114,9 +114,9 @@ export const handleOrderPayment = async (req, res, next) => {
 
 export const getAdminOrders = async (req, res, next) => {
   try {
-  let data=[];
+    let data = [];
     const users = await db.collection("users").get();
-    const getOrderByUsers= async(users)=>{
+    const getOrderByUsers = async (users) => {
       const promise = users.docs.map(async (doc) => {
         await db
           .collection("Orders")
@@ -124,21 +124,42 @@ export const getAdminOrders = async (req, res, next) => {
           .collection("OrderList")
           .get()
           .then((res) => {
-            console.log("data222=" + data);
-         data.push(...res.docs.map((doc) => getOrder(doc)));
+            data.push(...res.docs.map((doc) => getOrder(doc)));
           });
       });
-       // Wait for all requests, and then setState
-  return Promise.all(promise).then(() => {
-    return data;
-    })
+      return Promise.all(promise).then(() => {
+        return data;
+      });
+    };
+    const adminOrders = await getOrderByUsers(users);
+    console.log('admin orders')
+    console.log(adminOrders)
+    res.status(200).json({
+      message: " get All  user orders success",
+      adminOrders,
+    });
+  } catch (err) {
+    next(err);
   }
- const adminOrders = await getOrderByUsers(users);
-           console.log(adminOrders);
-          res.status(200).json({
-            message: " get All  user orders success",
-            adminOrders,
-          });
+};
+export const adminUpdateStatusOrder = async (req, res, next) => {
+  try {
+    await db
+      .collection("Orders")
+      .doc(req.body.UserID)
+      .collection("OrderList")
+      .doc(req.body.ID)
+      .update({
+        Status: "Order Was accepted and delivered",
+      })
+      .then(() => {
+        res.status(200).json({
+          message: "  admin update order success",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (err) {
     next(err);
   }

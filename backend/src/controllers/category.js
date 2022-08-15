@@ -38,12 +38,11 @@ export const addCategory = async (req, res, next) => {
   }
 };
 export const deleteCategory = async (req, res, next) => {
-  const data = [];
   try {
-    await db.collection("Catagories").doc(catagory.ID).delete();
+    await db.collection("Catagories").doc(req.body.categoryID).delete();
     res
       .status(200)
-      .json({ message: " delete category success", orders: data });
+      .json();
   } catch (err) {
     next(err);
   }

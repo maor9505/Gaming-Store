@@ -13,7 +13,8 @@ export const TableHeader = ({ columns, sortColumn, onSort }) => {
     }
     onSort(newColumn);
   };
-
+console.log('columns')
+console.log(columns)
   return (
     <thead className="">
       <tr>

@@ -28,6 +28,7 @@ export const ProductsContextProvider = (props) => {
       <ProductsContext.Provider
         value={{
           products: [...products],
+          setProducts:setProducts,
           spinner: spinner,
         }}
         

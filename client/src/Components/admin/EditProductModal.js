@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { storage, db } from "../../Config/Config";
 import { useHistory } from "react-router-dom";
 import { ToastAlert } from "../../Utils/Toast";
+import axios from 'axios'
 export  const EditProductModal= ({product}) => {
       const [show, setShow] = useState(false);
 
@@ -35,31 +36,32 @@ export  const EditProductModal= ({product}) => {
 };
 // edit product from Modal and update in db 
 const EditProducts = ({ product }) => {
-  const history = useHistory();
+  console.log('product')
+  console.log(product)
   const [productName, setProductName] = useState(product.ProductName);
   const [productPrice, setProductPrice] = useState(product.ProductPrice);
-    const [maxQty, setmaxQty] = useState(product.MaxQty);
+    const [maxQty, setMaxQty] = useState(product.MaxQty);
   const [productImg, setProductImg] = useState(product.ProductImg);
   const [description, setDescription] = useState(product.Description);
-  const [catagory, setCatagory] = useState(product.Catagory);
-  const [catagoryAge, setCatagoryAge] = useState(product.CatagoryAge);
-  const [catagoryOption, setcatagoryOption] = useState([]);
-    const [exisImg, setexisImg] = useState(true);
+  const [category, setCategory] = useState(product.Catagory);
+  const [categoryAge, setCategoryAge] = useState(product.CatagoryAge);
+  const [categoryOption, setCategoryOption] = useState([]);
+    const [existImg, setExistImg] = useState(true);
   const [error, setError] = useState("");
   const types = ["image/png", "image/jpeg"]; // image types
 
-  useEffect(() => {
-    db.collection("Catagories").onSnapshot((snapshot) => {
-      setcatagoryOption(
-        snapshot.docs.map((doc) => ({ name: doc.data().Catagory_Name }))
-      );
-    });
+  useEffect(async () => {
+    const res = await axios.get("/category/getCategories");
+    console.log("catagories");
+    console.log(res.data.categories);
+    setCategoryOption([...res.data.categories]);
   }, []);
+
   const productImgHandler = (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile && types.includes(selectedFile.type)) {
       setProductImg(selectedFile);
-      setexisImg(false);
+      setExistImg(false);
       setError("");
     } else {
       setProductImg(null);
@@ -68,79 +70,39 @@ const EditProducts = ({ product }) => {
   };
 
   // edit product
-  const EditProduct = (e) => {
+  const EditProduct = async(e) => {
     e.preventDefault();
-    const date = new Date();
-
-    if(!exisImg){
-
-    const uploadTask = storage
-      .ref(`product-images/${productImg.name}`)
-      .put(productImg);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(progress);
-      },
-      (err) => setError(err.message),
-      () => {
-        storage
-          .ref("product-images")
-          .child(productImg.name)
-          .getDownloadURL()
-          .then((url) => {
-            db.collection("Products")
-              .doc(product.ID)
-              .update({
-                ProductName: productName,
-                ProductPrice: Number(productPrice),
-                ProductImg: url,
-                Description: description,
-                Catagory: catagory,
-                CatagoryAge: catagoryAge,
-                MaxQty: maxQty,
-                Views: product.Views,
-                Sales: product.Sales,
-                DateCreate: date,
-                UplodeDate: date.getTime(),
-              })
-              .then(() => {
-               ToastAlert("this product is Update");
-                document.getElementById("file").value = "";
-              })
-              .catch((err) => setError(err.message));
-          });
-      }
-    );
+ const productForm=  new FormData();
+     productForm.append("productName", productName);
+     productForm.append("productPrice", productPrice);
+     productForm.append("maxQty", maxQty);
+     productForm.append("productImg", productImg);
+     productForm.append("description", description); 
+    productForm.append("category", category);
+    productForm.append("categoryAge", categoryAge);
+    productForm.append("existImg", existImg);
+    productForm.append("productID", product.ID);
+   try{
+      const res = await axios.post("/products/editProducts",productForm);
+       setProductName("");
+       setProductPrice(0);
+       setMaxQty(0);
+       setProductImg("");
+       setDescription("");
+       setCategory("");
+       setCategoryAge("");
+       setError("");
+       setExistImg(true);
+       ToastAlert("Edit product success ");
+       document.getElementById("file").value = "";
+    }catch(err){
+      setError(err);
     }
-    else{
-        db.collection("Products")
-          .doc(product.ID)
-          .update({
-            ProductName: productName,
-            ProductPrice: Number(productPrice),
-            ProductImg: productImg,
-            Description: description,
-            Catagory: catagory,
-            CatagoryAge: catagoryAge,
-            Views: product.Views,
-            Sales: product.Sales,
-            DateCreate: date,
-            UplodeDate: date.getTime(),
-          })
-          .then(() => {
-            ToastAlert("this product is Update ");
-          })
-          .catch((err) => setError(err.message));
-            }
   };
 
   return (
     <div className="container">
       <br />
-      {/* <button onClick={getCatgories}>????</button> */}
       <hr />
       <form autoComplete="off" className="form-group" onSubmit={EditProduct}>
         <label htmlFor="product-name">Product Name:</label>
@@ -166,7 +128,7 @@ const EditProducts = ({ product }) => {
           type="number"
           className="form-control"
           required
-          onChange={(e) => setmaxQty(e.target.value)}
+          onChange={(e) => setMaxQty(e.target.value)}
           value={maxQty}
         />
         <br />
@@ -182,13 +144,13 @@ const EditProducts = ({ product }) => {
         <select
           className="form-select"
           aria-label="Default select example"
-          onChange={(e) => setCatagory(e.target.value)}
-          value={catagory}
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
         >
-          <option>Choose Catagory</option>
-          {catagoryOption.map((ca) => (
-            <option key={ca.name} value={ca.name}>
-              {ca.name}
+          <option>Choose Category</option>
+          {categoryOption.map((ca) => (
+            <option key={ca.name} value={ca.Catagory_Name}>
+              {ca.Catagory_Name}
             </option>
           ))}
         </select>
@@ -196,8 +158,8 @@ const EditProducts = ({ product }) => {
         <select
           className="form-select"
           aria-label="Default select example"
-          onChange={(e) => setCatagoryAge(e.target.value)}
-          value={catagoryAge}
+          onChange={(e) => setCategoryAge(e.target.value)}
+          value={categoryAge}
         >
           <option>Choose Catagory age</option>
           <option value="1">3-16</option>
@@ -208,14 +170,13 @@ const EditProducts = ({ product }) => {
           type="file"
           className="form-control"
           id="file"
-          // value={productImg}
+          
           onChange={productImgHandler}
         />
         <br />
         <button type="submit" className="btn btn-success btn-md ">
           Edit
         </button>
-
       </form>
       {error && <span className="error-msg">{error}</span>}
     </div>

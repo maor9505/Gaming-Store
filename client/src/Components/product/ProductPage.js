@@ -5,10 +5,12 @@ import { CartContext } from "../../Global/CartContext";
 import { HomeProducts } from "./HomeProducts";
 import { UserContext } from "../../Global/UserContext";
 import { db } from "../../Config/Config";
-
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastAlert } from "../../Utils/Toast";
 export const ProductPage = () => {
   const { user } = useContext(UserContext);
-  const { dispatch } = useContext(CartContext);
+  const { cart,dispatch } = useContext(CartContext);
   const { products } = useContext(ProductsContext);
   const [product, setProduct] = useState();
   const history = useHistory();
@@ -22,6 +24,30 @@ export const ProductPage = () => {
       setProduct(p);
     }
   }, [id]);
+  const addProductInCart = async (product) => {
+    const isFind = cart.items.find((pro) => pro.ID == product.ID);
+    if (product.MaxQty > 0 && !isFind) {
+      product["qty"] = 1;
+   try {
+     const res = await axios.post("/cart/addProductToCart", {
+       uid: user.uid,
+       product: product,
+     });
+     dispatch({
+       type: "ADD_TO_CART",
+       id: product.ProductID,
+       product,
+     });
+   } catch (err) {
+     console.log(err);
+   }
+    } else {
+      ToastAlert(
+        isFind ? "already in your cart..." : "This Product Is Out Of Stock"
+      );
+    }
+   
+  };
 
   const handlePage = () => {
     history.push("/login");
@@ -65,13 +91,7 @@ export const ProductPage = () => {
                   {user && (
                     <button
                       className="btn btn-outline-success  btn-lg mt-3 float-left"
-                      onClick={() =>
-                        dispatch({
-                          type: "ADD_TO_CART",
-                          id: product.ProductID,
-                          product,
-                        })
-                      }
+                      onClick={() => addProductInCart(product)}
                     >
                       ADD TO CART
                     </button>

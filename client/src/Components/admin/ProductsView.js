@@ -8,9 +8,10 @@ import { HeaderProducts } from "../common/HeaderProducts";
 import { ProductVbarChart } from "../../Chart/ProductVbarChar";
 import _ from "lodash";
 import { handelProductsDetails } from "./common/ProductDetailsFilter";
-
+import axios from "axios";
+import { ToastAlert } from "../../Utils/Toast";
 export const ProductsView = () => {
-  const { products} = useContext(ProductsContext);
+  const { products, setProducts } = useContext(ProductsContext);
   const [filterProduct, setFilterProduct] = useState([]);
   const [productsDetails, setProductsDetails] = useState({});
 
@@ -25,6 +26,18 @@ export const ProductsView = () => {
   }, [products]);
 
 
+   const DeleteProduct = async (product) => {
+     try {
+       const res = await axios.post("/products/deleteProduct", product);
+        const newProducts = [...products];
+         let tempProducts = newProducts.filter((pro) => pro.ID !== product.ID);
+         setProducts(tempProducts);
+        ToastAlert("Product delete");
+     } catch (err) {
+       console.log(err);
+     }
+   };
+   
   return (
     <div className="container">
       <h3>
@@ -55,7 +68,10 @@ export const ProductsView = () => {
           setFilterProduct={setFilterProduct}
         ></HeaderProducts>
 
-        <Table data={filterProduct} Columns={ProductColumn}></Table>
+        <Table
+          data={filterProduct}
+          Columns={ProductColumn({ DeleteProduct: DeleteProduct })}
+        ></Table>
       </div>
     </div>
   );

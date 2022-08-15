@@ -9,9 +9,10 @@ export const UserContextProvider = (props) => {
 
     const [user, setUser] = useState(null)
     useEffect(() => {
-      
         auth.onAuthStateChanged(user => {
             if (user) {
+                console.log('useruid')
+                console.log(user.uid)
                db.collection("users")
                  .doc(user.uid)
                  .get()

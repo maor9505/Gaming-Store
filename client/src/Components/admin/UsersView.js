@@ -1,33 +1,43 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "../../Utils/Table";
 import { UsersColumn } from "../../Utils/TableColumn";
 import "react-pro-sidebar/dist/css/styles.css";
 import { db } from "../../Config/Config";
-import _ from 'lodash'
+import _ from "lodash";
+import axios from "axios";
+import { ToastAlert } from "../../Utils/Toast";
 export const UsersView = () => {
   const [usersData, setUsersData] = useState([]);
   const [filterUsers, setFilterUsers] = useState([]);
   //get users from db
-  useEffect(() => {
-    db.collection("users").onSnapshot((snapshot) => {
-      let prevUsers = [];
-      snapshot.forEach((doc) => {
-        prevUsers.push({
-          ID: doc.id,
-          ...doc.data(),
-        });
-        setUsersData([...prevUsers]);
-        setFilterUsers([...prevUsers]);
-      });
-    });
+  useEffect(async () => {
+    const res = await axios.get("/user/getUsers");
+    console.log('users')
+    console.log(res.data.users)
+    setUsersData(res.data.users);
+    setFilterUsers(res.data.users);
   }, []);
 
+const DeleteUser = async (user) => {
+  try {
+    console.log('user');
+    console.log(user)
+    const res = await axios.post("/user/deleteUser", user);
+      const newUsers = [...usersData];
+      let tempUsers = newUsers.filter((us) => us.uid !== user.uid);
+      setUsersData(tempUsers)
+      setFilterUsers(tempUsers);
+    ToastAlert("Delete user success");
+  } catch (err) {
+    console.log(err);
+  }
+};
   //filter array by ID User
   const filterUserByID = (value) => {
-    console.log(usersData)
-    console.log(value)
+    console.log(usersData);
+    console.log(value);
     let user = _.find(usersData, { ID: value });
-    console.log(user)
+    console.log(user);
     setFilterUsers(user ? [user] : []);
   };
   const handleResetButton = () => {
@@ -57,7 +67,7 @@ export const UsersView = () => {
         </button>
       </div>
       <div className="">
-        <Table data={filterUsers} Columns={UsersColumn}></Table>
+        <Table data={filterUsers} Columns={UsersColumn({DeleteUser:DeleteUser})}></Table>
       </div>
     </div>
   );

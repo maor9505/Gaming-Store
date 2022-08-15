@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addUser, signInWithGoogle, updateUser } from "../controllers/user.js";
+import { addUser, deleteUser, getAllUsers, signInWithGoogle, updateUser } from "../controllers/user.js";
 
 
 const userRouter = Router();
@@ -12,6 +12,11 @@ userRouter.post("/signInWithGoogle",signInWithGoogle);
 userRouter.post("/updateUser", updateUser);
 // add new user to db
 userRouter.post("/addUser", addUser);
+//get All users
+userRouter.get("/getUsers", getAllUsers);
+//delete user
+userRouter.post("/deleteUser",deleteUser);
+
 
 
 export default userRouter;

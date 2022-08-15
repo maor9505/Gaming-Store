@@ -9,9 +9,11 @@ import _, { orderBy } from "lodash";
 import { ProductDoughnutChart } from "../../Chart/ProductDoughnutChart";
 import { OrderMonthBarChar } from "../../Chart/OrderMonthBarChar";
 import { handelOrdersDetails } from "./common/OrderDetailsFilter";
+import axios from "axios";
+import { ToastAlert } from "../../Utils/Toast";
 
 export const OrderView = () => {
-  const { AllOrderUsers } = useContext(AdminOrderContext);
+  const { AllOrderUsers, setAllOrdersUser } = useContext(AdminOrderContext);
   const [filterOrders, setfilterOrders] = useState([]);
   const [dateFilter, setdateFilter] = useState("");
   const [ordersDetails, setOrdersDetails] = useState({});
@@ -21,15 +23,27 @@ export const OrderView = () => {
     const ordersDetailsFilter = handelOrdersDetails(AllOrderUsers);
     console.log(ordersDetailsFilter);
     setOrdersDetails(ordersDetailsFilter);
-     setfilterOrders(filterOrderDesc());
+    setfilterOrders(filterOrderDesc());
   }, [AllOrderUsers]);
 
+  //update Status Order in db
+  const updateStatusOrder = async(order) => {
+    if (order.Status != "Order Cancled") {
+     const res = await axios.post("/order/updateAdminOrders",order);
+      const newOrders = [...AllOrderUsers];
+     const tempOrder = AllOrderUsers.findIndex((ord) => ord.ID === order.ID);
+     order.Status= "Order Was accepted and delivered"
+     newOrders[tempOrder] = { ...order};
+     setAllOrdersUser(newOrders);
+     ToastAlert("order updated");
+    }
+  };
   const filterOrderDesc = () => {
     return orderBy(AllOrderUsers, "DateCreate", "desc");
   };
   //filter array by  User ID Order
   const filterOrderByUserID = (value) => {
-    let order = _.filter([...AllOrderUsers], ['UserID', value]);
+    let order = _.filter([...AllOrderUsers], ["UserID", value]);
     setfilterOrders(order ? [...order] : []);
   };
   //filter array by ID Order
@@ -126,7 +140,10 @@ export const OrderView = () => {
         </button>
       </div>
       <br />
-      <Table data={filterOrders} Columns={OrdersAdminColumn}></Table>
+      <Table
+        data={filterOrders}
+        Columns={OrdersAdminColumn({ updateStatusOrder: updateStatusOrder })}
+      ></Table>
     </div>
   );
 };

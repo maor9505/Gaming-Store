@@ -18,10 +18,14 @@ export const AddProducts = () => {
   const [error, setError] = useState("");
   const types = ["image/png", "image/jpeg"]; // image types
 
+  console.log('categoris option')
+  console.log(categoryOption);
   // get catagories from db
   useEffect(async () => {
     const res = await axios.get("/category/getCategories");
-    setCategoryOption(res.data.categories);
+    console.log('catagories')
+    console.log(res.data.categories);
+    setCategoryOption([...res.data.categories]);
   }, []);
 
   // image handler check if photo uplode is success
@@ -36,57 +40,32 @@ export const AddProducts = () => {
     }
   };
 
-   const addProductDB = (e) => {
+   const addProductDB = async(e) => {
      e.preventDefault();
-     const date = new Date();
-     const uploadTask = storage
-       .ref(`product-images/${productImg.name}`)
-       .put(productImg);
-     uploadTask.on(
-       "state_changed",
-       (snapshot) => {
-         const progress =
-           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-         console.log(progress);
-         ToastAlert("Uplode...");
-       },
-       (err) => setError(err.message),
-       () => {
-         storage
-           .ref("product-images")
-           .child(productImg.name)
-           .getDownloadURL()
-           .then((url) => {
-             db.collection("Products")
-               .add({
-                 ProductName: productName,
-                 ProductPrice: Number(productPrice),
-                 ProductImg: url,
-                 Description: description,
-                 Catagory: category,
-                 CatagoryAge: categoryAge,
-                 Views: 0,
-                 Sales: 0,
-                 MaxQty: maxQty,
-                 DateCreate: date,
-                 UplodeDate: date.getTime(),
-               })
-               .then(() => {
-                 setProductName("");
-                 setProductPrice(0);
-                 setMaxQty(0);
-                 setProductImg("");
-                 setDescription("");
-                 setCategory("");
-                 setCategoryAge("");
-                 setError("");
-                 ToastAlert("this product is Add ");
-                 document.getElementById("file").value = "";
-               })
-               .catch((err) => setError(err.message));
-           });
-       }
-     );
+     const productForm=  new FormData();
+     productForm.append("productName", productName);
+     productForm.append("productPrice", productPrice);
+     productForm.append("maxQty", maxQty);
+     productForm.append("productImg", productImg);
+     productForm.append("description", description); 
+    productForm.append("category", category);
+    productForm.append("categoryAge", categoryAge);
+   try{
+      const res = await axios.post("/products/addProducts",productForm);
+
+       setProductName("");
+       setProductPrice(0);
+       setMaxQty(0);
+       setProductImg("");
+       setDescription("");
+       setCategory("");
+       setCategoryAge("");
+       setError("");
+       ToastAlert("this product is Add ");
+       document.getElementById("file").value = "";
+    }catch(err){
+      setError(err);
+    }
    };
 
   return (
@@ -139,8 +118,8 @@ export const AddProducts = () => {
         >
           <option>Choose Category</option>
           {categoryOption.map((ca) => (
-            <option key={ca.name} value={ca.name}>
-              {ca.name}
+            <option key={ca.Catagory_Name} value={ca.Catagory_Name}>
+              {ca.Catagory_Name}
             </option>
           ))}
         </select>
@@ -161,6 +140,7 @@ export const AddProducts = () => {
           className="form-control"
           id="file"
           required
+          name="productImg"
           onChange={productImgHandler}
         />
         <br />

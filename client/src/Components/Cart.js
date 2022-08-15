@@ -1,24 +1,22 @@
-import React, { useContext, useEffect, useMemo } from 'react'
-import { CartContext } from '../Global/CartContext'
-import { Icon } from 'react-icons-kit'
-import { ic_add } from 'react-icons-kit/md/ic_add'
-import { ic_remove } from 'react-icons-kit/md/ic_remove'
-import { iosTrashOutline } from 'react-icons-kit/ionicons/iosTrashOutline'
-import { useHistory,Link } from 'react-router-dom'
-import {db} from '../Config/Config'
-import '../styles/Cart.css'
-import { GooglePay } from './common/GooglePay'
-import 'react-toastify/dist/ReactToastify.css';
-import { UserContext } from '../Global/UserContext'
-import { ToastAlert } from '../Utils/Toast';
-import axios from 'axios'
-
+import React, { useContext, useEffect, useMemo } from "react";
+import { CartContext } from "../Global/CartContext";
+import { Icon } from "react-icons-kit";
+import { ic_add } from "react-icons-kit/md/ic_add";
+import { ic_remove } from "react-icons-kit/md/ic_remove";
+import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline";
+import { useHistory, Link } from "react-router-dom";
+import { db } from "../Config/Config";
+import "../styles/Cart.css";
+import { GooglePay } from "./common/GooglePay";
+import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../Global/UserContext";
+import { ToastAlert } from "../Utils/Toast";
+import axios from "axios";
 
 export const Cart = () => {
   const { user } = useContext(UserContext);
-  const {cart, dispatch } = useContext(CartContext);
+  const { cart, dispatch } = useContext(CartContext);
   const history = useHistory();
-
   // calc sum of products price
   const calcTotalSum = useMemo(() => {
     let sum = 0;
@@ -33,11 +31,53 @@ export const Cart = () => {
     return sum;
   }, [cart]);
 
-
+  const incProductInCart = async (product) => {
+    try {
+       if (product.qty < product.MaxQty) {
+         product.qty = product.qty+1;
+         const res = await axios.post("/cart/incProductToCart", {
+           uid: user.uid,
+           product: product,
+         });
+         dispatch({ type: "INC", id: product.ID, product });
+       } else
+         ToastAlert(
+           `There is no more in Quantity try again later! \n Quantity: ${product.MaxQty}`
+         );
+    } catch (err) {
+      ToastAlert("Internet problems may not be implemented");
+    }
+  };
+  const decProductInCart = async (product) => {
+     if (product.qty > 1) {
+        product.qty = product.qty-1;
+    try {
+      const res =  await axios.post("/cart/decProductToCart", {
+        uid: user.uid,
+        product: product,
+      });
+      dispatch({ type: "DEC", id: product.ID, product });
+    } catch (err) {
+      ToastAlert("Internet problems may not be implemented");
+    }
+  }
+  };
+   const deleteProductInCart = async (product) => {
+      try {
+        const res = axios.post("/cart/deleteProductToCart", {
+          uid: user.uid,
+          product: product,
+        });
+        dispatch({ type: "DELETE", id: product.ID, product });
+      } catch (err) {
+        ToastAlert("Internet problems may not be implemented");
+      }
+    }
   // after user complete the order and payment accepted uplode to db
-  const handleOrderToDb = async(paymentRequest) => {
+  const handleOrderToDb = async (paymentRequest) => {
     const date = new Date();
-    const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    const time =
+      date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     const orderDetails = {
       UserID: user.uid,
       Products: cart.items,
@@ -48,12 +88,16 @@ export const Cart = () => {
       DateTime: time,
       Status: "In Process...",
     };
-    try{
-      const res=  await axios.post('/order/orderPayment',{uid:user.uid, orderDetails:orderDetails,cart:cart});
-         dispatch({ type: "Set_Data", data: [] });
-       ToastAlert("Order Success");
-         history.push("/orders");
-    }catch (err){
+    try {
+      const res = await axios.post("/order/orderPayment", {
+        uid: user.uid,
+        orderDetails: orderDetails,
+        cart: cart,
+      });
+      dispatch({ type: "Set_Data", data: [] });
+      ToastAlert("Order Success");
+      history.push("/orders");
+    } catch (err) {
       ToastAlert(err);
     }
   };
@@ -61,9 +105,9 @@ export const Cart = () => {
   return (
     <>
       <div className="cart-container">
-        {cart.length !== 0 && <h1 className="text-success">Cart</h1>}
+        {cart.items.length !== 0 && <h1 className="text-success">Cart</h1>}
 
-        {cart.length === 0 && (
+        {cart.items.length === 0 && (
           <>
             <div>
               no items in your cart or slow internet causing trouble (Refresh
@@ -96,7 +140,7 @@ export const Cart = () => {
               <div
                 className="inc"
                 onClick={() =>
-                  dispatch({ type: "INC", id: product.ID, product })
+                  incProductInCart(product)
                 }
               >
                 <Icon icon={ic_add} size={24} />
@@ -107,7 +151,7 @@ export const Cart = () => {
               <div
                 className="dec"
                 onClick={() =>
-                  dispatch({ type: "DEC", id: product.ID, product })
+                  decProductInCart(product)
                 }
               >
                 <Icon icon={ic_remove} size={24} />
@@ -120,7 +164,7 @@ export const Cart = () => {
               <button
                 className="delete-btn"
                 onClick={() =>
-                  dispatch({ type: "DELETE", id: product.ID, product })
+                  deleteProductInCart(product)
                 }
               >
                 <Icon icon={iosTrashOutline} size={24} />
@@ -149,4 +193,4 @@ export const Cart = () => {
       </div>
     </>
   );
-}
+};

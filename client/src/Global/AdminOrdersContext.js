@@ -14,6 +14,8 @@ export const AdminOrdersContextProvider = (props) => {
   
 useEffect(async()=> {
     if (user && user.type == "admin") {
+      console.log('user admin')
+      console.log(user)
        try {
           const result = await axios.get("/order/getAdminOrders");
           console.log('admin orders')
@@ -29,7 +31,7 @@ useEffect(async()=> {
 );
   return (
     <AdminOrderContext.Provider
-      value={{ AllOrderUsers: [...AllOrderUsers], spinner: spinner }}
+      value={{ AllOrderUsers: [...AllOrderUsers],setAllOrdersUser:setAllOrdersUser, spinner: spinner }}
     >
       {props.children}
     </AdminOrderContext.Provider>

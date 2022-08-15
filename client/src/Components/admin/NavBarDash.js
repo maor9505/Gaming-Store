@@ -60,7 +60,7 @@ export const NavBarDash = () => {
           </li>
           <li className="nav-item">
             <a href="#submenu2" data-bs-toggle="collapse" className="nav-link ">
-              Catagoris
+              Categories
             </a>
             <ul className="collapse  ms-1" id="submenu2" data-bs-parent="#menu">
               <li>
@@ -79,7 +79,7 @@ export const NavBarDash = () => {
                     to="/dashboard/add-catagory"
                     style={{ textDecoration: "none" }}
                   >
-                    Add-Catagory
+                    Add-Category
                   </NavLink>
                 </a>
               </li>

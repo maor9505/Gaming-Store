@@ -6,20 +6,11 @@ import { iosTrashOutline } from "react-icons-kit/ionicons/iosTrashOutline"
 import { db} from "../Config/Config";
 import { Icon } from "react-icons-kit"
 import { EditProductModal } from "../Components/admin/EditProductModal";
-import { ToastAlert } from "./Toast";
-import axios from "axios";
 
 
-export const ProductColumn = () => {
-   const DeleteProduct = (product) => {
-     db.collection("Products")
-       .doc(product.ID)
-       .delete().then(()=>{
-         ToastAlert("Product Delete")
-       })
-       
-   };
-   
+
+export const ProductColumn = (actions) => {
+
   return [
     {
       path: "ProductImg",
@@ -98,7 +89,10 @@ export const ProductColumn = () => {
       path: "Delete",
       label: "",
       content: (product) => (
-        <button className="delete-btn" onClick={() => DeleteProduct(product)}>
+        <button
+          className="delete-btn"
+          onClick={() => actions.DeleteProduct(product)}
+        >
           <Icon icon={iosTrashOutline} size={24} />
         </button>
       ),
@@ -159,16 +153,7 @@ export const OrdersColumn = () => {
     },
   ];
 };
-export const CatagoryColumn =async () => {
-   const DeleteCatagory = async(catagory) => {
-    try{
-      const res= await axios.post('/category/deleteCategory',{categoryId:catagory.ID})
-    }
-    catch(err){
-      console.log(err)
-    }
-   };
-   
+export const CatagoryColumn = (actions) => {
 
   return [
     {
@@ -182,21 +167,22 @@ export const CatagoryColumn =async () => {
       content: (catagory) => <span>{catagory.Catagory_Name}</span>,
     },
     {
-      path: "",
+      path: "Edit",
       label: "",
       content: (catagory) => (
-        <button className="delete-btn" onClick={() => DeleteCatagory(catagory)}>
+        <button
+          className="delete-btn"
+          onClick={() => actions.DeleteCatagory(catagory)}
+        >
           <Icon icon={iosTrashOutline} size={24} />
         </button>
       ),
     },
   ];
 };
-export const UsersColumn = () => {
+export const UsersColumn = (actions) => {
   
-  const DeleteUser = (user) => {
-    db.collection("users").doc(user.ID).delete()
-  };
+  
 
   return [
     {
@@ -223,7 +209,7 @@ export const UsersColumn = () => {
       path: "",
       label: "",
       content: (user) => (
-        <button className="delete-btn" onClick={() => DeleteUser(user)}>
+        <button className="delete-btn" onClick={() => actions.DeleteUser(user)}>
           <Icon icon={iosTrashOutline} size={24} />
         </button>
       ),
@@ -231,19 +217,8 @@ export const UsersColumn = () => {
   ];
 };
 
-export const OrdersAdminColumn = () => {
-  //update Status Order in db
-  const updateStatusOrder = (order) => {
-    if (order.Status != "Order Cancled") {
-      db.collection("Orders")
-        .doc(order.UserID)
-        .collection("OrderList")
-        .doc(order.ID)
-        .update({
-          Status: "Order Was accepted and delivered",
-        });
-    }
-  };
+export const OrdersAdminColumn = (actions) => {
+  
   return [
     {
       path: "UserID",
@@ -297,12 +272,12 @@ export const OrdersAdminColumn = () => {
         order.Status == "Order Was accepted and delivered" ? (
           <button
             className="fa fa-list-alt btn-outline-success"
-            onClick={() => updateStatusOrder(order)}
+           
           ></button>
         ) : (
           <button
             className="fa fa-list-alt btn-outline-danger"
-            onClick={() => updateStatusOrder(order)}
+            onClick={() => actions.updateStatusOrder(order)}
           ></button>
         ),
     },
